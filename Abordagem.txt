@@ -1,0 +1,62 @@
+Estrutura do pseudocodigo:
+Inicio
+	<Declaração de variáveis>
+	<Comandos>
+Fim
+
+
+
+Nome das variaveis: 
+Pode ter letras ou numeros nele, mas nao deve começar com numero, logo
+
+"letra->(letra|numero)*"                  * para incluir o simbolo de vazio (fim do nome da variavel)
+
+
+
+Declaracao de variaveis:
+
+Tipo: [inteiro, logico, real, caracter] 
+"Tipo -> :-> (nome_variavel|(nome_variavel -> , -> nome_variavel)*) -> ; -> \n"	podem ser varias variaveis a serem declaradas
+
+
+Ter em atencao que nao pode ser repetido o nome de uma variavel e nao pode ser declarada 2 variaveis de tipos diferentes no mesmo identificador (int valor, nome;)
+
+
+
+
+Constante:
+
+...
+
+
+Comentarios:
+
+...
+
+
+Comandos:
+	Atribuir valores a variaveis:
+
+	variavel -> '<-' -> (valor ou expressao) -> ;
+
+
+
+	
+	Leitura:
+
+	leia -> ( -> (nome_variavel|(nome_variavel -> , -> nome_variavel)*) -> ) -> ;
+
+	escreva -> ( -> (nome_variavel|(nome_variavel -> , -> nome_variavel)*) -> ) -> ;
+
+
+
+
+	Estruturas de decisão:
+
+	se -> ( -> condição -> ) -> entao -> \n
+	-> \t -> comandos -> \n
+	senão -> \n
+	-> \t -> comandos -> \n
+	fim_se
+
+	
