@@ -16,7 +16,7 @@ Pode ter letras ou numeros nele, mas nao deve começar com numero, logo
 Declaracao de variaveis:
 
 Tipo: [inteiro, logico, real, caracter] 
-"Tipo -> :-> (nome_variavel|(nome_variavel -> , -> nome_variavel)*) -> ; -> \n"	podem ser varias variaveis a serem declaradas
+"Tipo -> : -> (nome_variavel|(nome_variavel -> , -> nome_variavel)+)* -> ; -> \n"			podem ser varias variaveis a serem declaradas
 
 
 Ter em atencao que nao pode ser repetido o nome de uma variavel e nao pode ser declarada 2 variaveis de tipos diferentes no mesmo identificador (int valor, nome;)
