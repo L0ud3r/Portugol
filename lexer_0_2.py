@@ -8,7 +8,6 @@ class PortugolLexer:
 
     # Por fazer tokens específicas
     estruturas = ("enquanto", "logico", "caracter", "inteiro", "real", "para", "se")
-    variavel = ("inteiro", "caracter", "real", "logico")
 
     # Copiado do exemplo stor, ver porquê
     t_ignore = " \t\n"
@@ -22,27 +21,22 @@ class PortugolLexer:
         r"\#.*"
         pass
 
-    def headers(self, t):
-        r"Inicio|Fim"
-        pass
-
-    # Função com expressão regular capaz de ler o símbolo de atruibuição de valor
     def t_atribuir(self, t):
         r"<-"
         return t
 
-    # Função com expressão regular capaz de ler estruturas ciclicas, de decisao e declaracao de variaveis
-    # Criar um def t_algo(self, t) para for, outro para if, etc? (Versão mais hardcoded)
-    def t_estruturas(self, t):
-        r"[a-z]+"
+    def t_identificador(self, t):
+        r"([A-Z]|[a-z])(([a-z]|[0-9])+)?"
         return t
 
-    # Função com expressão regular capaz de ler o valor dado a um variavel tipo char
+    def t_declaracao(self, t):
+        r"inteiro|caracter|real|logico"
+        return t
+
     def t_valor_string(self, t):
         r'"[^"]*"'
         return t
 
-    # Função com expressão regular capaz de ler o valor de uma variavel tipo int, float, etc
     def t_valor_num(self, t):
         r"[0-9]+(\.[0-9]+)?"
         return t
