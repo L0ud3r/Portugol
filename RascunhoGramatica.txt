@@ -1,6 +1,6 @@
 PORTUGOL: INICIO
 INICIO: DECLARACAO | Fim
-DECLARACAO: varType ':' nomeVariavel CODE
+DECLARACAO: varType ':' nomeVariavel CODE		//poder declarar varias variaveis!
 
 -----
 
