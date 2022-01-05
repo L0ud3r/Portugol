@@ -1,17 +1,46 @@
 PORTUGOL: INICIO
 INICIO: DECLARACAO | Fim
-DECLARACAO: varType':'varName CODE
-CODE: CONDICAO | CICLO | ATRIBUICAO | IO | VAZIO | Fim
-CONDICAO: se exp CODE GATE_SENAO
+DECLARACAO: varType ':' nomeVariavel CODE
+
+-----
+
+CODE: CONDICAO | CICLO | ATRIBUICAO | IO | € | Fim
+ATRIBUICAO: varType assign VALUE ';' CODE
+
+CONDICAO: se VALUE_LOG CODE GATE_SENAO
 GATE_SENAO: fim_se CODE | SENAO
 SENAO: senao CODE fim_se CODE
-CICLO: ciclo CODE fim_ciclo CODE
-ATRIBUICAO: varType assign varValue CODE
-IO: escreva(variable) CODE | leia (variable) CODE
-VAZIO: €
+
+CICLO: FOR | WHILE
+FOR: para ATRIBUICAO ate valorNumero faca CODE fim_para 
+WHILE: enquanto VALUE_LOG entao CODE fim_enquanto
+I/O: ...
+
+----
+
+VALUE_NUM: VALUE_NUM_AUX | VALUE_NUM_AUX SINAL VALUE_NUM
+VALUE_NUM_AUX: valorNumero | nomeVariavel
+
+VALUE_STR: VALUE_STR_AUX | VALUE_STR_AUX SINAL VALUE_STR
+VALUE_STR_AUX: valorString | nomeVariavel
+
+VALUE_LOG: VALUE_LOG_AUX | nomeVariavel 
+VALUE_LOG_AUX: '<' | '>' | dif | '=' | maiorIgual | menorIgual
 
 
 
+
+
+
+
+
+
+
+TO DO:
+VALUE_NUM
+VALUE_STR
+VALUE_LOG
+I/O
 
 
 
