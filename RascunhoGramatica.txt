@@ -7,7 +7,7 @@ DECLARACAO: varType ':' nomeVariavel CODE		//poder declarar varias variaveis!
 CODE: CONDICAO | CICLO | ATRIBUICAO | IO | € | Fim
 ATRIBUICAO: varType assign VALUE ';' CODE
 
-CONDICAO: se VALUE_LOG CODE GATE_SENAO
+CONDICAO: se VALUE_LOG CODE GATE_SENAO 	//ATENÇAO! permite que user insira o fim dentro do if, corrigir (talvez com CODE2)
 GATE_SENAO: fim_se CODE | SENAO
 SENAO: senao CODE fim_se CODE
 
