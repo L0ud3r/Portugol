@@ -3,12 +3,17 @@
 
 import ply.lex as lex
 
+
 # Dados feitos da classe a partir do exercício aula:    2021.12.17 - PL
 class PortugolLexer:
 
-    # Por fazer tokens específicas
-    estruturas = ("enquanto", "logico", "caracter", "inteiro", "real", "para", "se")
-    variavel = ("inteiro", "caracter", "real", "logico")
+    # keys por dividir
+    keywords = ("Inicio", "Fim", "inteiro", "real", "logico", "caracter", "se", "para", "de", "passo", "enquanto", "fim_se", "fim_para", "fim_enquanto",
+                "escreva", "leia")
+    # tokens a parte de keywords tendo em conta os acentos + operacoes com mais de 1 caracter de simbolo
+    tokens = ("entao" ,"senao", "ate", "faca", "nao", "dif", "maiorIgual", "menorIgual", "nomeVariavel",
+              "assign", "valorString", "valorNumero") + keywords
+    literals = "()+/-*<>;,[]="
 
     # Copiado do exemplo stor, ver porquê
     t_ignore = " \t\n"
@@ -17,34 +22,62 @@ class PortugolLexer:
     def __init__(self):
         self.lex = lex.lex(module=self)
 
-    # Função com expressão regular capaz de ler comentários
-    def t_comentario(self, t):
-        r"\#.*"
-        pass
-
-    def headers(self, t):
-        r"Inicio|Fim"
-        pass
-
-    # Função com expressão regular capaz de ler o símbolo de atruibuição de valor
-    def t_atribuir(self, t):
-        r"<-"
+    def t_entao(self, t):
+        r"""então"""
         return t
 
-    # Função com expressão regular capaz de ler estruturas ciclicas, de decisao e declaracao de variaveis
-    # Criar um def t_algo(self, t) para for, outro para if, etc? (Versão mais hardcoded)
-    def t_estruturas(self, t):
-        r"[a-z]+"
+    def t_senao(self, t):
+        r"""senão"""
         return t
 
-    # Função com expressão regular capaz de ler o valor dado a um variavel tipo char
-    def t_valor_string(self, t):
-        r'"[^"]*"'
+    def t_ate(self, t):
+        r"""até"""
         return t
 
-    # Função com expressão regular capaz de ler o valor de uma variavel tipo int, float, etc
-    def t_valor_num(self, t):
-        r"[0-9]+(\.[0-9]+)?"
+    def t_faca(self, t):
+        r"""faça"""
+        return t
+
+    def t_nao(self, t):
+        r"""não"""
+        return t
+
+    def t_dif(self, t):
+        r"""!="""
+        return t
+
+    def t_maiorIgual(self, t):
+        r""">="""
+        return t
+
+    def t_menorIgual(self, t):
+        r"""<="""
+        return t
+
+    def t_assign(self, t):
+        r"""<-"""
+        return t
+
+    def t_valorString(self, t):
+        r'''"[^"]+"'''
+        # Retirar as aspas da string lida
+        t.value = t.value[1:-1]
+        return t
+
+    def t_valorNumero(self, t):
+        r"""\-?[0-9]+(\.[0-9]+)?"""
+        t.value = float(t.value)
+        return t
+
+    def t_keywords(self, t):
+        # POR TESTAR
+        r"""[^\s]+"""
+
+        if t.value in self.keywords:
+            t.type = t.value
+        else:
+            t.type = "nomeVariavel"
+
         return t
 
     # Função para controlo de erros
