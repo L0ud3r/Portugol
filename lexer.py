@@ -8,11 +8,12 @@ import ply.lex as lex
 class PortugolLexer:
 
     # keys por dividir
-    keywords = ("Inicio", "Fim", "inteiro", "real", "logico", "caracter", "se", "para", "de", "passo", "enquanto", "fim_se", "fim_para", "fim_enquanto",
+    keywords = ("Inicio", "Fim", "se", "para", "de", "passo", "enquanto", "fim_se", "fim_para", "fim_enquanto",
                 "escreva", "leia")
+    tipoVariavel = ( "inteiro", "real", "logico", "caracter")
     # tokens a parte de keywords tendo em conta os acentos + operacoes com mais de 1 caracter de simbolo
     tokens = ("entao" ,"senao", "ate", "faca", "nao", "dif", "maiorIgual", "menorIgual", "nomeVariavel",
-              "assign", "valorString", "valorNumero") + keywords
+              "assign", "valorString", "valorNumero") + keywords + tipoVariavel
     literals = "()+/-*<>;,[]="
 
     # Copiado do exemplo stor, ver porquê

@@ -1,13 +1,14 @@
-PORTUGOL: INICIO
-INICIO: DECLARACAO | Fim
-DECLARACAO: varType ':' nomeVariavel CODE		//poder declarar varias variaveis!
+PORTUGOL: Inicio INICIO 									(citado)
+INICIO: DECLARACAO | Fim									(citado)
+DECLARACAO: varType ':' DECLARACAO_GATE ';' CODE						(citado)
+DECLARACAO_GATE: nomeVariavel | nomeVariavel ',' DECLARACAO_GATE 				(citado)
 
 -----
 
-CODE: CONDICAO | CICLO | ATRIBUICAO | IO | € | Fim
-ATRIBUICAO: varType assign VALUE ';' CODE
+CODE: CONDICAO | CICLO | ATRIBUICAO | IO | € | Fim						(citado)
+ATRIBUICAO: varName assign VALUE ';' CODE							(citado)
 
-CONDICAO: se VALUE_LOG CODE GATE_SENAO 	//ATENÇAO! permite que user insira o fim dentro do if, corrigir (talvez com CODE2)
+CONDICAO: se VALUE_LOG CODE GATE_SENAO
 GATE_SENAO: fim_se CODE | SENAO
 SENAO: senao CODE fim_se CODE
 
@@ -18,6 +19,17 @@ I/O: ...
 
 ----
 
+VALUE: EXP | STR | BOOL
+
+EXP: valorNumerico | VALUE '+' VALUE | VALUE '-' VALUE | VALUE '/' VALUE | VALUE '*' VALUE | VALUE '<' VALUE
+             | VALUE '>' VALUE | VALUE menorIgual VALUE | VALUE maiorIgual VALUE | VALUE dif VALUE | VALUE '=' VALUE 
+               
+               
+                
+            
+
+---
+
 VALUE_NUM: VALUE_NUM_AUX | VALUE_NUM_AUX SINAL VALUE_NUM
 VALUE_NUM_AUX: valorNumero | nomeVariavel
 
@@ -25,24 +37,9 @@ VALUE_STR: VALUE_STR_AUX | VALUE_STR_AUX SINAL VALUE_STR
 VALUE_STR_AUX: valorString | nomeVariavel
 
 VALUE_LOG_BOOL: VALUE_LOG_BOOL_AUX | VALUE_LOG_BOOL_AUX SINAL_BOOL_LOG VALUE_LOG_BOOL		//checkar se esta tudo bem!
-VALUE_LOG_BOOL_AUX: VALUE_LOG_BOOL_AUX2 | not VALUE_LOG_BOOL_AUX2 | nomeVariavel		//checkar se esta tudo bem!
-VALUE_LOG_BOOL_AUX2: true | false		//checkar se esta tudo bem!
-SINAL_BOOL_LOG: = | and | or | xor		//checkar se esta tudo bem!
-
-
-
-
-
-
-
-
-
-TO DO:
-VALUE_NUM
-VALUE_STR
-VALUE_LOG
-I/O
-
+VALUE_LOG_BOOL_AUX: VALUE_LOG_BOOL_AUX2 | not VALUE_LOG_BOOL_AUX2			        //checkar se esta tudo bem!
+VALUE_LOG_BOOL_AUX2: true | false | nomeVariavel						//checkar se esta tudo bem!
+SINAL_BOOL_LOG: = | and | or | xor								//checkar se esta tudo bem!
 
 
 
