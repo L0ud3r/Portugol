@@ -9,10 +9,10 @@ class PortugolLexer:
 
     # keys por dividir
     keywords = ("Inicio", "Fim", "se", "para", "de", "passo", "enquanto", "fim_se", "fim_para", "fim_enquanto",
-                "escreva", "leia")
+                "escreva", "leia", "e", "ou", "verdadeiro", "falso")
     tipoVariavel = ( "inteiro", "real", "logico", "caracter")
     # tokens a parte de keywords tendo em conta os acentos + operacoes com mais de 1 caracter de simbolo
-    tokens = ("entao" ,"senao", "ate", "faca", "nao", "dif", "maiorIgual", "menorIgual", "nomeVariavel",
+    tokens = ("entao" ,"senao", "ate", "faca", "nao", "diferente", "maiorIgual", "menorIgual", "nomeVariavel",
               "assign", "valorString", "valorNumero") + keywords + tipoVariavel
     literals = "()+/-*<>;,[]="
 
@@ -43,7 +43,7 @@ class PortugolLexer:
         r"""não"""
         return t
 
-    def t_dif(self, t):
+    def t_diferente(self, t):
         r"""!="""
         return t
 

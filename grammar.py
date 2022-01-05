@@ -28,31 +28,39 @@ class PortugolGrammar:
 
     def p_PORTUGOL(self, p):
         """ PORTUGOL : Inicio INICIO """
-        ...
+        p[0] = p[1] + p[2]
 
     def p_INICIO(self, p):
         """ INICIO : DECLARACAO | Fim """
-        ...
+        p[0] = p[1]
 
     def p_DECLARACAO(self, p):
         """ DECLARACAO : tipoVariavel ':' DECLARACAO2 ';' CODE """
-        ...
+        p[0] = p[1] + p[3] + p[5]
 
-    def p_DECLARACAO2(self, p):
-        """ DECLARACAO2 : nomeVariavel | nomeVariavel ',' DECLARACAO2 """
-        ...
+    def p_DECLARACAO2v1(self, p):
+        """ DECLARACAO2 : nomeVariavel """
+        p[0] = p[1]
+
+    def p_DECLARACAO2v2(self, p):
+        """ DECLARACAO2 : nomeVariavel ',' DECLARACAO2 """
+        p[0] = p[1] + p[3]
 
     def p_CODE(self, p):
-        """ CODE : CODE2 | Fim"""
-        ...
+        """ CODE : CODE2
+                 | Fim"""
+        p[0] = p[1]
 
     def p_CODE2(self, p):
-        """ CODE2 : ATRIBUICAO | CONDICAO | CICLO | IO """
-        ...
+        """ CODE2 : ATRIBUICAO
+                  | CONDICAO
+                  | CICLO
+                  | IO """
+        p[0] = p[1]
 
     def p_ATRIBUICAO(self, p):
         """ ATRIBUICAO : nomeVariavel assign VALUE ';' CODE """
-        ...
+        p[0] = dict(op = "assign", args = [p[1], p[3], p[4]])
 
 
     def p_VALUE(self, p):
@@ -76,7 +84,7 @@ class PortugolGrammar:
                | VALUE maiorIgual VALUE
                | VALUE dif VALUE
                | VALUE '=' VALUE"""
-        p[0] = dict(op=p[2], agrs=[p[1], p[3]])
+        p[0] = dict(op=p[2], args=[p[1], p[3]])
 
     def p_STR(self, p):
         """ STR : valorString """
@@ -89,7 +97,7 @@ class PortugolGrammar:
         if len(p) == 2:
             p[0] = p[1]
         else:
-            p[0] = dict(op = p[2], agrs = [p[1] ,p[3]])
+            p[0] = dict(op = p[2], args = [p[1] ,p[3]])
 
     def p_TNF(self, p):
         """ TNF : True
@@ -97,16 +105,20 @@ class PortugolGrammar:
         p[0] = p[1]
 
     def p_TNF2(self, p):
-        """ TNF : not TNF """
-        
+        """ TNF : nao TNF """
+        p[0] = dict(op = "nao", args = [p[2]])
 
     def p_CONDICAO(self, p):
         """ CONDICAO : se VALUE CODE CODICAO2 """
-        ...
+        p[0] = dict(op = "se", args = [p[2], p[3], [4]])
 
     def p_CODICAO2(self, p):
-        """ CODICAO2 : fim_se CODE | SENAO """
-        ...
+        """ CODICAO2 : fim_se CODE """
+        p[0] = p[1] + p[2]
+
+    def p_CONDICAO2v1(self, p):
+        """ CONDICAO2 : SENAO"""
+        p[0] = p[1]
 
     def p_SENAO(self, p):
         """ senao CODE fim_se CODE """

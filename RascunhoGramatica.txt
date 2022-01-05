@@ -24,7 +24,7 @@ VALUE: EXP | STR | BOOL
 EXP: valorNumerico | VALUE '+' VALUE | VALUE '-' VALUE | VALUE '/' VALUE | VALUE '*' VALUE | VALUE '<' VALUE
              | VALUE '>' VALUE | VALUE menorIgual VALUE | VALUE maiorIgual VALUE | VALUE dif VALUE | VALUE '=' VALUE 
                
-               
+STR               
                 
             
 
