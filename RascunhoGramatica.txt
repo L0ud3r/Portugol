@@ -1,0 +1,62 @@
+PORTUGOL: INICIO
+INICIO: DECLARACAO | Fim
+DECLARACAO: varType':'varName CODE
+CODE: CONDICAO | CICLO | ATRIBUICAO | IO | VAZIO | Fim
+CONDICAO: se exp CODE GATE_SENAO
+GATE_SENAO: fim_se CODE | SENAO
+SENAO: senao CODE fim_se CODE
+CICLO: ciclo CODE fim_ciclo CODE
+ATRIBUICAO: varType assign varValue CODE
+IO: escreva(variable) CODE | leia (variable) CODE
+VAZIO: €
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CODE: code2 | fim
+
+CODE2 : atribuiçao | condiçao | ciclo | I_O
+
+CONDICAO: se exp entao: code3 fim_se
+
+CODE3 : code2 | code2 code4 | code4 
+
+CODE4 : senao: code2 fim_se | senao_se exp: code2 fim_se
+
+
+
+
+
+
+
+
+
+
+
+
+
+
