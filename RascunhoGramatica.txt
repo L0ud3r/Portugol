@@ -24,9 +24,10 @@ VALUE_NUM_AUX: valorNumero | nomeVariavel
 VALUE_STR: VALUE_STR_AUX | VALUE_STR_AUX SINAL VALUE_STR
 VALUE_STR_AUX: valorString | nomeVariavel
 
-VALUE_LOG: VALUE_LOG_AUX | nomeVariavel 
-VALUE_LOG_AUX: '<' | '>' | dif | '=' | maiorIgual | menorIgual
-
+VALUE_LOG_BOOL: VALUE_LOG_BOOL_AUX | VALUE_LOG_BOOL_AUX SINAL_BOOL_LOG VALUE_LOG_BOOL		//checkar se esta tudo bem!
+VALUE_LOG_BOOL_AUX: VALUE_LOG_BOOL_AUX2 | not VALUE_LOG_BOOL_AUX2 | nomeVariavel		//checkar se esta tudo bem!
+VALUE_LOG_BOOL_AUX2: true | false		//checkar se esta tudo bem!
+SINAL_BOOL_LOG: = | and | or | xor		//checkar se esta tudo bem!
 
 
 
