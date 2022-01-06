@@ -1,6 +1,7 @@
-# logic_grammar.py
-import ply.yacc as yacc
+# grammar.py
+import ply.yacc as pyacc
 from lexer import PortugolLexer
+from eval import LogicEval
 # fazer import ao eval
 
 
@@ -9,14 +10,21 @@ class PortugolGrammar:
 
     # adicionar precedentes?
 
+    precedence = (
+        ("left", "+", "-"), #menos prioridade
+        ("left", "*", "/"),
+        ("left", "ou"),
+        ("left", "e"), #mais prioridade
+    )
+
     def __init__(self):
         self.lexer = PortugolLexer()
         self.tokens = self.lexer.tokens
-        # self.yacc = pyacc.yacc(module=self)
+        self.yacc = pyacc.yacc(module=self)
 
     def parse(self, expression):
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
-        # return LogicEval.eval(ans)
+        return LogicEval.eval(ans)
 
     # Fazer recursividades descendentes
 
@@ -31,12 +39,20 @@ class PortugolGrammar:
         p[0] = p[1] + p[2]
 
     def p_INICIO(self, p):
-        """ INICIO : DECLARACAO | Fim """
+        """ INICIO : DECLARACAO
+                    | Fim """
         p[0] = p[1]
 
     def p_DECLARACAO(self, p):
-        """ DECLARACAO : tipoVariavel ':' DECLARACAO2 ';' CODE """
+        """ DECLARACAO : TIPOVARIAVEL ':' DECLARACAO2 ';' CODE """
         p[0] = p[1] + p[3] + p[5]
+
+    def p_TIPOVARIAVEL(self, p):
+        """TIPOVARIAVEL : inteiro
+                        | real
+                        | logico
+                        | caracter"""
+        p[0] = p[1]
 
     def p_DECLARACAO2v1(self, p):
         """ DECLARACAO2 : nomeVariavel """
@@ -49,6 +65,7 @@ class PortugolGrammar:
     def p_CODE(self, p):
         """ CODE : CODE2
                  | Fim"""
+
         p[0] = p[1]
 
     def p_CODE2(self, p):
@@ -83,7 +100,7 @@ class PortugolGrammar:
                | VALUE '>' VALUE
                | VALUE menorIgual VALUE
                | VALUE maiorIgual VALUE
-               | VALUE dif VALUE
+               | VALUE diferente VALUE
                | VALUE '=' VALUE"""
         p[0] = dict(op=p[2], args=[p[1], p[3]])
 
@@ -101,8 +118,8 @@ class PortugolGrammar:
             p[0] = dict(op = p[2], args = [p[1] ,p[3]])
 
     def p_TNF(self, p):
-        """ TNF : True
-                | False """
+        """ TNF : verdadeiro
+                | falso """
         p[0] = p[1]
 
     def p_TNF2(self, p):
@@ -110,11 +127,11 @@ class PortugolGrammar:
         p[0] = dict(op = "nao", args = [p[2]])
 
     def p_CONDICAO(self, p):
-        """ CONDICAO : se VALUE CODE2 CODICAO2 """
+        """ CONDICAO : se VALUE CODE2 CONDICAO2 """
         p[0] = dict(op = "se", args = [p[2], p[3], [4]])
 
     def p_CODICAO2v1(self, p):
-        """ CODICAO2 : fim_se CODE """
+        """ CONDICAO2 : fim_se CODE """
         p[0] = p[1] + p[2]
 
     def p_CONDICAO2v2(self, p):
@@ -122,11 +139,12 @@ class PortugolGrammar:
         p[0] = p[1]
 
     def p_SENAO(self, p):
-        """ SENAO: senao CODE2 fim_se CODE """
+        """ SENAO : senao CODE2 fim_se CODE """
         p[0] = dict(op = "senao", args = [p[2], p[4]])
 
     def p_CICLO(self, p):
-        """ CICLO : FOR | WHILE """
+        """ CICLO : FOR
+                    | WHILE """
         p[0] = p[1]
 
     def p_FOR(self, p):
@@ -138,14 +156,15 @@ class PortugolGrammar:
         p[0] = dict(op="enquanto", args = [p[2], p[4], p[6]])
 
     def p_IO(self, p):
-        """ IO : LEIA | ESCREVA"""
+        """ IO : LEIA """
+    #            | ESCREVA"""
         p[0] = p[1]
 
     def p_LEIA(self,p): #HANDLE THIS!
-        """LEIA: leia '('nomeVariavel')'';' CODE"""
+        """LEIA : leia '(' nomeVariavel ')' ';' CODE"""
         p[0] = dict(op="leia", args=[p[3], p[6]])
 
-    def p_ESCREVA(self, p):
+    #def p_ESCREVA(self, p):
         #"""ESCREVA: escreva '('nomeVariavel')'';' CODE""" FIX!!
         #p[0]
         ...

@@ -17,10 +17,11 @@ class PortugolLexer:
     logicos = ("verdadeiro", "falso")
     io = ("escreva", "leia")
 
+    keywords = tipoVariavel + inicio_fim + condicoes + ciclos + comparadores + logicos + io
     # tokens a parte de keywords tendo em conta os acentos + operacoes com mais de 1 caracter de simbolo
     tokens = ("entao" ,"senao", "ate", "faca", "nao", "diferente", "maiorIgual", "menorIgual", "nomeVariavel",
-              "assign", "valorString", "valorNumero") + tipoVariavel + inicio_fim + condicoes + ciclos + comparadores + logicos + io
-    literals = "()+/-*<>;,[]="
+              "assign", "valorString", "valorNumero") + keywords
+    literals = "()+/-*<>;:,[]="
 
     # Copiado do exemplo stor, ver porquê
     t_ignore = " \t\n"
@@ -78,7 +79,7 @@ class PortugolLexer:
 
     def t_keywords(self, t):
         # POR TESTAR
-        r"""[^\s]+"""
+        r"""[\w]+"""
 
         if t.value in self.keywords:
             t.type = t.value
