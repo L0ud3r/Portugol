@@ -8,25 +8,52 @@ DECLARACAO_GATE: nomeVariavel | nomeVariavel ',' DECLARACAO_GATE 				(citado)
 CODE: CONDICAO | CICLO | ATRIBUICAO | IO | € | Fim						(citado)
 ATRIBUICAO: varName assign VALUE ';' CODE							(citado)
 
-CONDICAO: se VALUE_LOG CODE GATE_SENAO
-GATE_SENAO: fim_se CODE | SENAO
-SENAO: senao CODE fim_se CODE
+CONDICAO: se VALUE CODE2 GATE_SENAO
+GATE_SENAO: fim_se CODE2 | SENAO
+SENAO: senao CODE2 fim_se CODE
 
 CICLO: FOR | WHILE
-FOR: para ATRIBUICAO ate valorNumero faca CODE fim_para 
-WHILE: enquanto VALUE_LOG entao CODE fim_enquanto
+FOR: para ATRIBUICAO ate valorNumero faca CODE2 fim_para CODE
+WHILE: enquanto EXPRESSAO entao CODE2 fim_enquanto CODE
 I/O: ...
 
 ----
 
 VALUE: EXP | STR | BOOL
 
-EXP: valorNumerico | VALUE '+' VALUE | VALUE '-' VALUE | VALUE '/' VALUE | VALUE '*' VALUE | VALUE '<' VALUE
-             | VALUE '>' VALUE | VALUE menorIgual VALUE | VALUE maiorIgual VALUE | VALUE dif VALUE | VALUE '=' VALUE 
+EXP: valorNumerico | VALUE '+' VALUE | VALUE '-' VALUE | VALUE '/' VALUE | VALUE '*' VALUE | VALUE '<' VALUE | VALUE '>' VALUE | VALUE menorIgual VALUE | VALUE maiorIgual VALUE | VALUE dif VALUE | VALUE '=' VALUE 
                
-STR               
+STR: valorString            
+
+
+BOOL: True | False
                 
             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
