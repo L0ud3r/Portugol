@@ -15,11 +15,35 @@
 
  s -> func | comando                                          # check
  ciclo -> FOR var '[' e ELLIPSIS e ']' com_list ';' ENDFOR    # check
- comando -> e | ciclo | VAR assign e | SAY e_list | READ var
+ comando -> e | ciclo | VAR assign e | SAY e_list | READ var  #check
  com_list -> comando | com_list ';' comando                   # check
  func -> FUN var '(' args ')' com_list ';' ENDFUN             # check
  args -> € | var_list                                         # check
  var_list -> var | var_list ',' var                           # check
+
+
+ Passagens para Portugol:
+
+ FOR
+ ANTIGO: FOR var [ e ELLIPSIS e ] com_list ; ENDFOR
+ NOVO: PARA var DE e ATE e FACA com_list ; FIM_PARA
+
+DECLARAÇÃO DE VARIAVEIS! (ainda nao existe)
+
+SAY
+ANTIGO: SAY e_list
+NOVO: ESCREVA(e_list)
+
+READ
+ANTIGO: READ var
+NOVO: LEIA(var)
+
+FUN
+ANTIGO: FUN var '(' args ')' com_list ';' ENDFUN
+NOVO: ???
+
+
+
 
 
 
