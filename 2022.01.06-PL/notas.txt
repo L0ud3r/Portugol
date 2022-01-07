@@ -34,7 +34,7 @@ SAY             #DONE!
 ANTIGO: SAY e_list
 NOVO: ESCREVA(e_list)
 
-READ
+READ            #DONE!
 ANTIGO: READ var
 NOVO: LEIA(var)
 

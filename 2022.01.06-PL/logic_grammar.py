@@ -79,10 +79,15 @@ class LogicGrammar:
         p[0] = {"op": "escreva", "args": p[3]}
 
 
-    def p_comando4(self,p):
-        """ comando : read var_list """
-        p[0] = {"op": "read", "args":  p[2]}
+    #antigo read
+    #def p_comando4(self,p):
+    #    """ comando : read var_list """
+    #    p[0] = {"op": "read", "args":  p[2]}
 
+    #novo read (leia Portugol)
+    def p_comando4(self,p):
+        """ comando : leia '(' var_list ')' """
+        p[0] = {"op": "leia", "args":  p[3]}
 
     #
 

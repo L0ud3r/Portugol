@@ -18,7 +18,7 @@ class LogicEval:
 
         "assign": lambda a: LogicEval._assign(*a),
         "escreva": lambda a: print(*a),
-        "read": lambda args: LogicEval._read(*args),
+        "leia": lambda args: LogicEval._leia(*args),
         "para": lambda args: LogicEval._para(*args),
         "fun": lambda args: LogicEval._fun(args),
         "call": lambda args: LogicEval._call(args)
@@ -73,7 +73,7 @@ class LogicEval:
         LogicEval.symbols[var] = value
 
     @staticmethod
-    def _read(*args):
+    def _leia(*args):
         for var in args:
             if var in LogicEval.symbols:
                 value = input("Escreva valor: ")
@@ -87,7 +87,7 @@ class LogicEval:
 
                 #declara automaticamente
                 #LogicEval._assign(var, None)
-                #LogicEval._read(var)
+                #LogicEval._leia(var)
 
 
 
