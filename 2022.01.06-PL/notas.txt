@@ -13,11 +13,11 @@
  e_list -> e | e_list ',' e
 
 
- s -> func | comando                                          # check
- ciclo -> FOR var '[' e ELLIPSIS e ']' com_list ';' ENDFOR    # check
- condicao_se -> SE e com_list ';' FIMSE
- condicao_senao -> SENAO com_list ';' FIMSE | SENAO condicao_se ';' FIMSE     #not sure
- comando -> e | ciclo | VAR assign e | SAY e_list | READ var | condicao_se | condicao_senao      #isto permite que possa ler um senao mesmo fora de um se! fazer o eval disso e dar raise exception!
+s -> func | comando                                          # check
+ciclo -> FOR var '[' e ELLIPSIS e ']' com_list ';' ENDFOR    # check
+condicao_se -> SE e com_list ';' FIMSE
+condicao_senao -> SENAO com_list ';' FIMSE
+comando -> e | ciclo | VAR assign e | SAY e_list | READ var | condicao_se | condicao_senao      #isto permite que possa ler um senao mesmo fora de um se! fazer o eval disso e dar raise exception!
  com_list -> comando | com_list ';' comando                   # check
  func -> FUN var '(' args ')' com_list ';' ENDFUN             # check
  args -> € | var_list                                         # check
