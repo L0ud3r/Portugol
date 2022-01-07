@@ -1,0 +1,25 @@
+
+ code -> s | code ';' s
+
+
+ e -> VAR | '(' e ')' | b | n | string | VAR '(' e_list ')' | VAR '(' ')'
+
+ b -> f | e OR e | e AND e | e XOR e
+
+ f -> TRUE | FALSE | NOT f
+
+ n -> NR | '-' e | e '+' e | e '-' e | e '*' e | e '/' e
+
+ e_list -> e | e_list ',' e
+
+
+ s -> func | comando                                          # check
+ ciclo -> FOR var '[' e ELLIPSIS e ']' com_list ';' ENDFOR    # check
+ comando -> e | ciclo | VAR assign e | SAY e_list | READ var
+ com_list -> comando | com_list ';' comando                   # check
+ func -> FUN var '(' args ')' com_list ';' ENDFUN             # check
+ args -> € | var_list                                         # check
+ var_list -> var | var_list ',' var                           # check
+
+
+

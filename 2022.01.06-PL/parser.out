@@ -1,0 +1,1899 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> code
+Rule 1     code -> s
+Rule 2     code -> code ; s
+Rule 3     ciclo -> for var [ e ellipsis e ] com_list ; endfor
+Rule 4     func -> fun var ( args ) com_list ; endfun
+Rule 5     comando -> e
+Rule 6     comando -> ciclo
+Rule 7     comando -> var assign e
+Rule 8     comando -> say e_list
+Rule 9     comando -> read var_list
+Rule 10    s -> func
+Rule 11    s -> comando
+Rule 12    e_list -> e
+Rule 13    e_list -> e_list , e
+Rule 14    n -> nr
+Rule 15    n -> - e
+Rule 16    n -> e + e
+Rule 17    n -> e - e
+Rule 18    n -> e * e
+Rule 19    n -> e / e
+Rule 20    b -> f
+Rule 21    b -> e or e
+Rule 22    b -> e and e
+Rule 23    b -> e xor e
+Rule 24    f -> true
+Rule 25    f -> false
+Rule 26    f -> not f
+Rule 27    e -> var
+Rule 28    e -> ( e )
+Rule 29    e -> b
+Rule 30    e -> n
+Rule 31    e -> string
+Rule 32    e -> var ( e_list )
+Rule 33    e -> var ( )
+Rule 34    com_list -> comando
+Rule 35    com_list -> com_list ; comando
+Rule 36    var_list -> var
+Rule 37    var_list -> var_list , var
+Rule 38    args -> <empty>
+Rule 39    args -> var_list
+
+Terminals, with rules where they appear
+
+(                    : 4 28 32 33
+)                    : 4 28 32 33
+*                    : 18
++                    : 16
+,                    : 13 37
+-                    : 15 17
+/                    : 19
+;                    : 2 3 4 35
+[                    : 3
+]                    : 3
+and                  : 22
+assign               : 7
+ellipsis             : 3
+endfor               : 3
+endfun               : 4
+error                : 
+false                : 25
+for                  : 3
+fun                  : 4
+not                  : 26
+nr                   : 14
+or                   : 21
+read                 : 9
+say                  : 8
+string               : 31
+true                 : 24
+var                  : 3 4 7 27 32 33 36 37
+xor                  : 23
+
+Nonterminals, with rules where they appear
+
+args                 : 4
+b                    : 29
+ciclo                : 6
+code                 : 2 0
+com_list             : 3 4 35
+comando              : 11 34 35
+e                    : 3 3 5 7 12 13 15 16 16 17 17 18 18 19 19 21 21 22 22 23 23 28
+e_list               : 8 13 32
+f                    : 20 26
+func                 : 10
+n                    : 30
+s                    : 1 2
+var_list             : 9 37 39
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . code
+    (1) code -> . s
+    (2) code -> . code ; s
+    (10) s -> . func
+    (11) s -> . comando
+    (4) func -> . fun var ( args ) com_list ; endfun
+    (5) comando -> . e
+    (6) comando -> . ciclo
+    (7) comando -> . var assign e
+    (8) comando -> . say e_list
+    (9) comando -> . read var_list
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (3) ciclo -> . for var [ e ellipsis e ] com_list ; endfor
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    fun             shift and go to state 5
+    var             shift and go to state 6
+    say             shift and go to state 10
+    read            shift and go to state 11
+    (               shift and go to state 7
+    string          shift and go to state 14
+    for             shift and go to state 15
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    code                           shift and go to state 1
+    s                              shift and go to state 2
+    func                           shift and go to state 3
+    comando                        shift and go to state 4
+    e                              shift and go to state 8
+    ciclo                          shift and go to state 9
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 1
+
+    (0) S' -> code .
+    (2) code -> code . ; s
+
+    ;               shift and go to state 22
+
+
+state 2
+
+    (1) code -> s .
+
+    ;               reduce using rule 1 (code -> s .)
+    $end            reduce using rule 1 (code -> s .)
+
+
+state 3
+
+    (10) s -> func .
+
+    ;               reduce using rule 10 (s -> func .)
+    $end            reduce using rule 10 (s -> func .)
+
+
+state 4
+
+    (11) s -> comando .
+
+    ;               reduce using rule 11 (s -> comando .)
+    $end            reduce using rule 11 (s -> comando .)
+
+
+state 5
+
+    (4) func -> fun . var ( args ) com_list ; endfun
+
+    var             shift and go to state 23
+
+
+state 6
+
+    (7) comando -> var . assign e
+    (27) e -> var .
+    (32) e -> var . ( e_list )
+    (33) e -> var . ( )
+
+    assign          shift and go to state 24
+    or              reduce using rule 27 (e -> var .)
+    and             reduce using rule 27 (e -> var .)
+    xor             reduce using rule 27 (e -> var .)
+    +               reduce using rule 27 (e -> var .)
+    -               reduce using rule 27 (e -> var .)
+    *               reduce using rule 27 (e -> var .)
+    /               reduce using rule 27 (e -> var .)
+    ;               reduce using rule 27 (e -> var .)
+    $end            reduce using rule 27 (e -> var .)
+    (               shift and go to state 25
+
+
+state 7
+
+    (28) e -> ( . e )
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 26
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 8
+
+    (5) comando -> e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    ;               reduce using rule 5 (comando -> e .)
+    $end            reduce using rule 5 (comando -> e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    +               shift and go to state 31
+    -               shift and go to state 32
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+
+state 9
+
+    (6) comando -> ciclo .
+
+    ;               reduce using rule 6 (comando -> ciclo .)
+    $end            reduce using rule 6 (comando -> ciclo .)
+
+
+state 10
+
+    (8) comando -> say . e_list
+    (12) e_list -> . e
+    (13) e_list -> . e_list , e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e_list                         shift and go to state 35
+    e                              shift and go to state 36
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 11
+
+    (9) comando -> read . var_list
+    (36) var_list -> . var
+    (37) var_list -> . var_list , var
+
+    var             shift and go to state 38
+
+    var_list                       shift and go to state 37
+
+state 12
+
+    (29) e -> b .
+
+    or              reduce using rule 29 (e -> b .)
+    and             reduce using rule 29 (e -> b .)
+    xor             reduce using rule 29 (e -> b .)
+    +               reduce using rule 29 (e -> b .)
+    -               reduce using rule 29 (e -> b .)
+    *               reduce using rule 29 (e -> b .)
+    /               reduce using rule 29 (e -> b .)
+    ;               reduce using rule 29 (e -> b .)
+    $end            reduce using rule 29 (e -> b .)
+    )               reduce using rule 29 (e -> b .)
+    ,               reduce using rule 29 (e -> b .)
+    ellipsis        reduce using rule 29 (e -> b .)
+    ]               reduce using rule 29 (e -> b .)
+
+
+state 13
+
+    (30) e -> n .
+
+    or              reduce using rule 30 (e -> n .)
+    and             reduce using rule 30 (e -> n .)
+    xor             reduce using rule 30 (e -> n .)
+    +               reduce using rule 30 (e -> n .)
+    -               reduce using rule 30 (e -> n .)
+    *               reduce using rule 30 (e -> n .)
+    /               reduce using rule 30 (e -> n .)
+    ;               reduce using rule 30 (e -> n .)
+    $end            reduce using rule 30 (e -> n .)
+    )               reduce using rule 30 (e -> n .)
+    ,               reduce using rule 30 (e -> n .)
+    ellipsis        reduce using rule 30 (e -> n .)
+    ]               reduce using rule 30 (e -> n .)
+
+
+state 14
+
+    (31) e -> string .
+
+    or              reduce using rule 31 (e -> string .)
+    and             reduce using rule 31 (e -> string .)
+    xor             reduce using rule 31 (e -> string .)
+    +               reduce using rule 31 (e -> string .)
+    -               reduce using rule 31 (e -> string .)
+    *               reduce using rule 31 (e -> string .)
+    /               reduce using rule 31 (e -> string .)
+    ;               reduce using rule 31 (e -> string .)
+    $end            reduce using rule 31 (e -> string .)
+    )               reduce using rule 31 (e -> string .)
+    ,               reduce using rule 31 (e -> string .)
+    ellipsis        reduce using rule 31 (e -> string .)
+    ]               reduce using rule 31 (e -> string .)
+
+
+state 15
+
+    (3) ciclo -> for . var [ e ellipsis e ] com_list ; endfor
+
+    var             shift and go to state 39
+
+
+state 16
+
+    (20) b -> f .
+
+    or              reduce using rule 20 (b -> f .)
+    and             reduce using rule 20 (b -> f .)
+    xor             reduce using rule 20 (b -> f .)
+    +               reduce using rule 20 (b -> f .)
+    -               reduce using rule 20 (b -> f .)
+    *               reduce using rule 20 (b -> f .)
+    /               reduce using rule 20 (b -> f .)
+    ;               reduce using rule 20 (b -> f .)
+    $end            reduce using rule 20 (b -> f .)
+    )               reduce using rule 20 (b -> f .)
+    ,               reduce using rule 20 (b -> f .)
+    ellipsis        reduce using rule 20 (b -> f .)
+    ]               reduce using rule 20 (b -> f .)
+
+
+state 17
+
+    (14) n -> nr .
+
+    or              reduce using rule 14 (n -> nr .)
+    and             reduce using rule 14 (n -> nr .)
+    xor             reduce using rule 14 (n -> nr .)
+    +               reduce using rule 14 (n -> nr .)
+    -               reduce using rule 14 (n -> nr .)
+    *               reduce using rule 14 (n -> nr .)
+    /               reduce using rule 14 (n -> nr .)
+    ;               reduce using rule 14 (n -> nr .)
+    $end            reduce using rule 14 (n -> nr .)
+    )               reduce using rule 14 (n -> nr .)
+    ,               reduce using rule 14 (n -> nr .)
+    ellipsis        reduce using rule 14 (n -> nr .)
+    ]               reduce using rule 14 (n -> nr .)
+
+
+state 18
+
+    (15) n -> - . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 40
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 19
+
+    (24) f -> true .
+
+    or              reduce using rule 24 (f -> true .)
+    and             reduce using rule 24 (f -> true .)
+    xor             reduce using rule 24 (f -> true .)
+    +               reduce using rule 24 (f -> true .)
+    -               reduce using rule 24 (f -> true .)
+    *               reduce using rule 24 (f -> true .)
+    /               reduce using rule 24 (f -> true .)
+    ;               reduce using rule 24 (f -> true .)
+    $end            reduce using rule 24 (f -> true .)
+    )               reduce using rule 24 (f -> true .)
+    ,               reduce using rule 24 (f -> true .)
+    ellipsis        reduce using rule 24 (f -> true .)
+    ]               reduce using rule 24 (f -> true .)
+
+
+state 20
+
+    (25) f -> false .
+
+    or              reduce using rule 25 (f -> false .)
+    and             reduce using rule 25 (f -> false .)
+    xor             reduce using rule 25 (f -> false .)
+    +               reduce using rule 25 (f -> false .)
+    -               reduce using rule 25 (f -> false .)
+    *               reduce using rule 25 (f -> false .)
+    /               reduce using rule 25 (f -> false .)
+    ;               reduce using rule 25 (f -> false .)
+    $end            reduce using rule 25 (f -> false .)
+    )               reduce using rule 25 (f -> false .)
+    ,               reduce using rule 25 (f -> false .)
+    ellipsis        reduce using rule 25 (f -> false .)
+    ]               reduce using rule 25 (f -> false .)
+
+
+state 21
+
+    (26) f -> not . f
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    f                              shift and go to state 41
+
+state 22
+
+    (2) code -> code ; . s
+    (10) s -> . func
+    (11) s -> . comando
+    (4) func -> . fun var ( args ) com_list ; endfun
+    (5) comando -> . e
+    (6) comando -> . ciclo
+    (7) comando -> . var assign e
+    (8) comando -> . say e_list
+    (9) comando -> . read var_list
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (3) ciclo -> . for var [ e ellipsis e ] com_list ; endfor
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    fun             shift and go to state 5
+    var             shift and go to state 6
+    say             shift and go to state 10
+    read            shift and go to state 11
+    (               shift and go to state 7
+    string          shift and go to state 14
+    for             shift and go to state 15
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    s                              shift and go to state 42
+    func                           shift and go to state 3
+    comando                        shift and go to state 4
+    e                              shift and go to state 8
+    ciclo                          shift and go to state 9
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 23
+
+    (4) func -> fun var . ( args ) com_list ; endfun
+
+    (               shift and go to state 43
+
+
+state 24
+
+    (7) comando -> var assign . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 44
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 25
+
+    (32) e -> var ( . e_list )
+    (33) e -> var ( . )
+    (12) e_list -> . e
+    (13) e_list -> . e_list , e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    )               shift and go to state 46
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e_list                         shift and go to state 45
+    e                              shift and go to state 36
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 26
+
+    (28) e -> ( e . )
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    )               shift and go to state 47
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    +               shift and go to state 31
+    -               shift and go to state 32
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+
+state 27
+
+    (27) e -> var .
+    (32) e -> var . ( e_list )
+    (33) e -> var . ( )
+
+    )               reduce using rule 27 (e -> var .)
+    or              reduce using rule 27 (e -> var .)
+    and             reduce using rule 27 (e -> var .)
+    xor             reduce using rule 27 (e -> var .)
+    +               reduce using rule 27 (e -> var .)
+    -               reduce using rule 27 (e -> var .)
+    *               reduce using rule 27 (e -> var .)
+    /               reduce using rule 27 (e -> var .)
+    ,               reduce using rule 27 (e -> var .)
+    ;               reduce using rule 27 (e -> var .)
+    $end            reduce using rule 27 (e -> var .)
+    ellipsis        reduce using rule 27 (e -> var .)
+    ]               reduce using rule 27 (e -> var .)
+    (               shift and go to state 25
+
+
+state 28
+
+    (21) b -> e or . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 48
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 29
+
+    (22) b -> e and . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 49
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 30
+
+    (23) b -> e xor . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 50
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 31
+
+    (16) n -> e + . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 51
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 32
+
+    (17) n -> e - . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 52
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 33
+
+    (18) n -> e * . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 53
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 34
+
+    (19) n -> e / . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 54
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 35
+
+    (8) comando -> say e_list .
+    (13) e_list -> e_list . , e
+
+    ;               reduce using rule 8 (comando -> say e_list .)
+    $end            reduce using rule 8 (comando -> say e_list .)
+    ,               shift and go to state 55
+
+
+state 36
+
+    (12) e_list -> e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    ,               reduce using rule 12 (e_list -> e .)
+    ;               reduce using rule 12 (e_list -> e .)
+    $end            reduce using rule 12 (e_list -> e .)
+    )               reduce using rule 12 (e_list -> e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    +               shift and go to state 31
+    -               shift and go to state 32
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+
+state 37
+
+    (9) comando -> read var_list .
+    (37) var_list -> var_list . , var
+
+    ;               reduce using rule 9 (comando -> read var_list .)
+    $end            reduce using rule 9 (comando -> read var_list .)
+    ,               shift and go to state 56
+
+
+state 38
+
+    (36) var_list -> var .
+
+    ,               reduce using rule 36 (var_list -> var .)
+    ;               reduce using rule 36 (var_list -> var .)
+    $end            reduce using rule 36 (var_list -> var .)
+    )               reduce using rule 36 (var_list -> var .)
+
+
+state 39
+
+    (3) ciclo -> for var . [ e ellipsis e ] com_list ; endfor
+
+    [               shift and go to state 57
+
+
+state 40
+
+    (15) n -> - e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    +               reduce using rule 15 (n -> - e .)
+    -               reduce using rule 15 (n -> - e .)
+    *               reduce using rule 15 (n -> - e .)
+    /               reduce using rule 15 (n -> - e .)
+    ;               reduce using rule 15 (n -> - e .)
+    $end            reduce using rule 15 (n -> - e .)
+    )               reduce using rule 15 (n -> - e .)
+    ,               reduce using rule 15 (n -> - e .)
+    ellipsis        reduce using rule 15 (n -> - e .)
+    ]               reduce using rule 15 (n -> - e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+
+  ! or              [ reduce using rule 15 (n -> - e .) ]
+  ! and             [ reduce using rule 15 (n -> - e .) ]
+  ! xor             [ reduce using rule 15 (n -> - e .) ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+  ! *               [ shift and go to state 33 ]
+  ! /               [ shift and go to state 34 ]
+
+
+state 41
+
+    (26) f -> not f .
+
+    or              reduce using rule 26 (f -> not f .)
+    and             reduce using rule 26 (f -> not f .)
+    xor             reduce using rule 26 (f -> not f .)
+    +               reduce using rule 26 (f -> not f .)
+    -               reduce using rule 26 (f -> not f .)
+    *               reduce using rule 26 (f -> not f .)
+    /               reduce using rule 26 (f -> not f .)
+    ;               reduce using rule 26 (f -> not f .)
+    $end            reduce using rule 26 (f -> not f .)
+    )               reduce using rule 26 (f -> not f .)
+    ,               reduce using rule 26 (f -> not f .)
+    ellipsis        reduce using rule 26 (f -> not f .)
+    ]               reduce using rule 26 (f -> not f .)
+
+
+state 42
+
+    (2) code -> code ; s .
+
+    ;               reduce using rule 2 (code -> code ; s .)
+    $end            reduce using rule 2 (code -> code ; s .)
+
+
+state 43
+
+    (4) func -> fun var ( . args ) com_list ; endfun
+    (38) args -> .
+    (39) args -> . var_list
+    (36) var_list -> . var
+    (37) var_list -> . var_list , var
+
+    )               reduce using rule 38 (args -> .)
+    var             shift and go to state 38
+
+    args                           shift and go to state 58
+    var_list                       shift and go to state 59
+
+state 44
+
+    (7) comando -> var assign e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    ;               reduce using rule 7 (comando -> var assign e .)
+    $end            reduce using rule 7 (comando -> var assign e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    +               shift and go to state 31
+    -               shift and go to state 32
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+
+state 45
+
+    (32) e -> var ( e_list . )
+    (13) e_list -> e_list . , e
+
+    )               shift and go to state 60
+    ,               shift and go to state 55
+
+
+state 46
+
+    (33) e -> var ( ) .
+
+    or              reduce using rule 33 (e -> var ( ) .)
+    and             reduce using rule 33 (e -> var ( ) .)
+    xor             reduce using rule 33 (e -> var ( ) .)
+    +               reduce using rule 33 (e -> var ( ) .)
+    -               reduce using rule 33 (e -> var ( ) .)
+    *               reduce using rule 33 (e -> var ( ) .)
+    /               reduce using rule 33 (e -> var ( ) .)
+    ;               reduce using rule 33 (e -> var ( ) .)
+    $end            reduce using rule 33 (e -> var ( ) .)
+    )               reduce using rule 33 (e -> var ( ) .)
+    ,               reduce using rule 33 (e -> var ( ) .)
+    ellipsis        reduce using rule 33 (e -> var ( ) .)
+    ]               reduce using rule 33 (e -> var ( ) .)
+
+
+state 47
+
+    (28) e -> ( e ) .
+
+    or              reduce using rule 28 (e -> ( e ) .)
+    and             reduce using rule 28 (e -> ( e ) .)
+    xor             reduce using rule 28 (e -> ( e ) .)
+    +               reduce using rule 28 (e -> ( e ) .)
+    -               reduce using rule 28 (e -> ( e ) .)
+    *               reduce using rule 28 (e -> ( e ) .)
+    /               reduce using rule 28 (e -> ( e ) .)
+    ;               reduce using rule 28 (e -> ( e ) .)
+    $end            reduce using rule 28 (e -> ( e ) .)
+    )               reduce using rule 28 (e -> ( e ) .)
+    ,               reduce using rule 28 (e -> ( e ) .)
+    ellipsis        reduce using rule 28 (e -> ( e ) .)
+    ]               reduce using rule 28 (e -> ( e ) .)
+
+
+state 48
+
+    (21) b -> e or e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    or              reduce using rule 21 (b -> e or e .)
+    xor             reduce using rule 21 (b -> e or e .)
+    +               reduce using rule 21 (b -> e or e .)
+    -               reduce using rule 21 (b -> e or e .)
+    *               reduce using rule 21 (b -> e or e .)
+    /               reduce using rule 21 (b -> e or e .)
+    ;               reduce using rule 21 (b -> e or e .)
+    $end            reduce using rule 21 (b -> e or e .)
+    )               reduce using rule 21 (b -> e or e .)
+    ,               reduce using rule 21 (b -> e or e .)
+    ellipsis        reduce using rule 21 (b -> e or e .)
+    ]               reduce using rule 21 (b -> e or e .)
+    and             shift and go to state 29
+
+  ! and             [ reduce using rule 21 (b -> e or e .) ]
+  ! or              [ shift and go to state 28 ]
+  ! xor             [ shift and go to state 30 ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+  ! *               [ shift and go to state 33 ]
+  ! /               [ shift and go to state 34 ]
+
+
+state 49
+
+    (22) b -> e and e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    or              reduce using rule 22 (b -> e and e .)
+    and             reduce using rule 22 (b -> e and e .)
+    xor             reduce using rule 22 (b -> e and e .)
+    +               reduce using rule 22 (b -> e and e .)
+    -               reduce using rule 22 (b -> e and e .)
+    *               reduce using rule 22 (b -> e and e .)
+    /               reduce using rule 22 (b -> e and e .)
+    ;               reduce using rule 22 (b -> e and e .)
+    $end            reduce using rule 22 (b -> e and e .)
+    )               reduce using rule 22 (b -> e and e .)
+    ,               reduce using rule 22 (b -> e and e .)
+    ellipsis        reduce using rule 22 (b -> e and e .)
+    ]               reduce using rule 22 (b -> e and e .)
+
+  ! or              [ shift and go to state 28 ]
+  ! and             [ shift and go to state 29 ]
+  ! xor             [ shift and go to state 30 ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+  ! *               [ shift and go to state 33 ]
+  ! /               [ shift and go to state 34 ]
+
+
+state 50
+
+    (23) b -> e xor e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    or              reduce using rule 23 (b -> e xor e .)
+    xor             reduce using rule 23 (b -> e xor e .)
+    +               reduce using rule 23 (b -> e xor e .)
+    -               reduce using rule 23 (b -> e xor e .)
+    *               reduce using rule 23 (b -> e xor e .)
+    /               reduce using rule 23 (b -> e xor e .)
+    ;               reduce using rule 23 (b -> e xor e .)
+    $end            reduce using rule 23 (b -> e xor e .)
+    )               reduce using rule 23 (b -> e xor e .)
+    ,               reduce using rule 23 (b -> e xor e .)
+    ellipsis        reduce using rule 23 (b -> e xor e .)
+    ]               reduce using rule 23 (b -> e xor e .)
+    and             shift and go to state 29
+
+  ! and             [ reduce using rule 23 (b -> e xor e .) ]
+  ! or              [ shift and go to state 28 ]
+  ! xor             [ shift and go to state 30 ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+  ! *               [ shift and go to state 33 ]
+  ! /               [ shift and go to state 34 ]
+
+
+state 51
+
+    (16) n -> e + e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    +               reduce using rule 16 (n -> e + e .)
+    -               reduce using rule 16 (n -> e + e .)
+    ;               reduce using rule 16 (n -> e + e .)
+    $end            reduce using rule 16 (n -> e + e .)
+    )               reduce using rule 16 (n -> e + e .)
+    ,               reduce using rule 16 (n -> e + e .)
+    ellipsis        reduce using rule 16 (n -> e + e .)
+    ]               reduce using rule 16 (n -> e + e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+  ! or              [ reduce using rule 16 (n -> e + e .) ]
+  ! and             [ reduce using rule 16 (n -> e + e .) ]
+  ! xor             [ reduce using rule 16 (n -> e + e .) ]
+  ! *               [ reduce using rule 16 (n -> e + e .) ]
+  ! /               [ reduce using rule 16 (n -> e + e .) ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+
+
+state 52
+
+    (17) n -> e - e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    +               reduce using rule 17 (n -> e - e .)
+    -               reduce using rule 17 (n -> e - e .)
+    ;               reduce using rule 17 (n -> e - e .)
+    $end            reduce using rule 17 (n -> e - e .)
+    )               reduce using rule 17 (n -> e - e .)
+    ,               reduce using rule 17 (n -> e - e .)
+    ellipsis        reduce using rule 17 (n -> e - e .)
+    ]               reduce using rule 17 (n -> e - e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+  ! or              [ reduce using rule 17 (n -> e - e .) ]
+  ! and             [ reduce using rule 17 (n -> e - e .) ]
+  ! xor             [ reduce using rule 17 (n -> e - e .) ]
+  ! *               [ reduce using rule 17 (n -> e - e .) ]
+  ! /               [ reduce using rule 17 (n -> e - e .) ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+
+
+state 53
+
+    (18) n -> e * e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    +               reduce using rule 18 (n -> e * e .)
+    -               reduce using rule 18 (n -> e * e .)
+    *               reduce using rule 18 (n -> e * e .)
+    /               reduce using rule 18 (n -> e * e .)
+    ;               reduce using rule 18 (n -> e * e .)
+    $end            reduce using rule 18 (n -> e * e .)
+    )               reduce using rule 18 (n -> e * e .)
+    ,               reduce using rule 18 (n -> e * e .)
+    ellipsis        reduce using rule 18 (n -> e * e .)
+    ]               reduce using rule 18 (n -> e * e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+
+  ! or              [ reduce using rule 18 (n -> e * e .) ]
+  ! and             [ reduce using rule 18 (n -> e * e .) ]
+  ! xor             [ reduce using rule 18 (n -> e * e .) ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+  ! *               [ shift and go to state 33 ]
+  ! /               [ shift and go to state 34 ]
+
+
+state 54
+
+    (19) n -> e / e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    +               reduce using rule 19 (n -> e / e .)
+    -               reduce using rule 19 (n -> e / e .)
+    *               reduce using rule 19 (n -> e / e .)
+    /               reduce using rule 19 (n -> e / e .)
+    ;               reduce using rule 19 (n -> e / e .)
+    $end            reduce using rule 19 (n -> e / e .)
+    )               reduce using rule 19 (n -> e / e .)
+    ,               reduce using rule 19 (n -> e / e .)
+    ellipsis        reduce using rule 19 (n -> e / e .)
+    ]               reduce using rule 19 (n -> e / e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+
+  ! or              [ reduce using rule 19 (n -> e / e .) ]
+  ! and             [ reduce using rule 19 (n -> e / e .) ]
+  ! xor             [ reduce using rule 19 (n -> e / e .) ]
+  ! +               [ shift and go to state 31 ]
+  ! -               [ shift and go to state 32 ]
+  ! *               [ shift and go to state 33 ]
+  ! /               [ shift and go to state 34 ]
+
+
+state 55
+
+    (13) e_list -> e_list , . e
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 61
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 56
+
+    (37) var_list -> var_list , . var
+
+    var             shift and go to state 62
+
+
+state 57
+
+    (3) ciclo -> for var [ . e ellipsis e ] com_list ; endfor
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 63
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 58
+
+    (4) func -> fun var ( args . ) com_list ; endfun
+
+    )               shift and go to state 64
+
+
+state 59
+
+    (39) args -> var_list .
+    (37) var_list -> var_list . , var
+
+    )               reduce using rule 39 (args -> var_list .)
+    ,               shift and go to state 56
+
+
+state 60
+
+    (32) e -> var ( e_list ) .
+
+    or              reduce using rule 32 (e -> var ( e_list ) .)
+    and             reduce using rule 32 (e -> var ( e_list ) .)
+    xor             reduce using rule 32 (e -> var ( e_list ) .)
+    +               reduce using rule 32 (e -> var ( e_list ) .)
+    -               reduce using rule 32 (e -> var ( e_list ) .)
+    *               reduce using rule 32 (e -> var ( e_list ) .)
+    /               reduce using rule 32 (e -> var ( e_list ) .)
+    ;               reduce using rule 32 (e -> var ( e_list ) .)
+    $end            reduce using rule 32 (e -> var ( e_list ) .)
+    )               reduce using rule 32 (e -> var ( e_list ) .)
+    ,               reduce using rule 32 (e -> var ( e_list ) .)
+    ellipsis        reduce using rule 32 (e -> var ( e_list ) .)
+    ]               reduce using rule 32 (e -> var ( e_list ) .)
+
+
+state 61
+
+    (13) e_list -> e_list , e .
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    ,               reduce using rule 13 (e_list -> e_list , e .)
+    ;               reduce using rule 13 (e_list -> e_list , e .)
+    $end            reduce using rule 13 (e_list -> e_list , e .)
+    )               reduce using rule 13 (e_list -> e_list , e .)
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    +               shift and go to state 31
+    -               shift and go to state 32
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+
+state 62
+
+    (37) var_list -> var_list , var .
+
+    ,               reduce using rule 37 (var_list -> var_list , var .)
+    ;               reduce using rule 37 (var_list -> var_list , var .)
+    $end            reduce using rule 37 (var_list -> var_list , var .)
+    )               reduce using rule 37 (var_list -> var_list , var .)
+
+
+state 63
+
+    (3) ciclo -> for var [ e . ellipsis e ] com_list ; endfor
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    ellipsis        shift and go to state 65
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    +               shift and go to state 31
+    -               shift and go to state 32
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+
+state 64
+
+    (4) func -> fun var ( args ) . com_list ; endfun
+    (34) com_list -> . comando
+    (35) com_list -> . com_list ; comando
+    (5) comando -> . e
+    (6) comando -> . ciclo
+    (7) comando -> . var assign e
+    (8) comando -> . say e_list
+    (9) comando -> . read var_list
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (3) ciclo -> . for var [ e ellipsis e ] com_list ; endfor
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 6
+    say             shift and go to state 10
+    read            shift and go to state 11
+    (               shift and go to state 7
+    string          shift and go to state 14
+    for             shift and go to state 15
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    com_list                       shift and go to state 66
+    comando                        shift and go to state 67
+    e                              shift and go to state 8
+    ciclo                          shift and go to state 9
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 65
+
+    (3) ciclo -> for var [ e ellipsis . e ] com_list ; endfor
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 27
+    (               shift and go to state 7
+    string          shift and go to state 14
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 68
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 66
+
+    (4) func -> fun var ( args ) com_list . ; endfun
+    (35) com_list -> com_list . ; comando
+
+    ;               shift and go to state 69
+
+
+state 67
+
+    (34) com_list -> comando .
+
+    ;               reduce using rule 34 (com_list -> comando .)
+
+
+state 68
+
+    (3) ciclo -> for var [ e ellipsis e . ] com_list ; endfor
+    (21) b -> e . or e
+    (22) b -> e . and e
+    (23) b -> e . xor e
+    (16) n -> e . + e
+    (17) n -> e . - e
+    (18) n -> e . * e
+    (19) n -> e . / e
+
+    ]               shift and go to state 70
+    or              shift and go to state 28
+    and             shift and go to state 29
+    xor             shift and go to state 30
+    +               shift and go to state 31
+    -               shift and go to state 32
+    *               shift and go to state 33
+    /               shift and go to state 34
+
+
+state 69
+
+    (4) func -> fun var ( args ) com_list ; . endfun
+    (35) com_list -> com_list ; . comando
+    (5) comando -> . e
+    (6) comando -> . ciclo
+    (7) comando -> . var assign e
+    (8) comando -> . say e_list
+    (9) comando -> . read var_list
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (3) ciclo -> . for var [ e ellipsis e ] com_list ; endfor
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    endfun          shift and go to state 71
+    var             shift and go to state 6
+    say             shift and go to state 10
+    read            shift and go to state 11
+    (               shift and go to state 7
+    string          shift and go to state 14
+    for             shift and go to state 15
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    comando                        shift and go to state 72
+    e                              shift and go to state 8
+    ciclo                          shift and go to state 9
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 70
+
+    (3) ciclo -> for var [ e ellipsis e ] . com_list ; endfor
+    (34) com_list -> . comando
+    (35) com_list -> . com_list ; comando
+    (5) comando -> . e
+    (6) comando -> . ciclo
+    (7) comando -> . var assign e
+    (8) comando -> . say e_list
+    (9) comando -> . read var_list
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (3) ciclo -> . for var [ e ellipsis e ] com_list ; endfor
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    var             shift and go to state 6
+    say             shift and go to state 10
+    read            shift and go to state 11
+    (               shift and go to state 7
+    string          shift and go to state 14
+    for             shift and go to state 15
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 8
+    com_list                       shift and go to state 73
+    comando                        shift and go to state 67
+    ciclo                          shift and go to state 9
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 71
+
+    (4) func -> fun var ( args ) com_list ; endfun .
+
+    ;               reduce using rule 4 (func -> fun var ( args ) com_list ; endfun .)
+    $end            reduce using rule 4 (func -> fun var ( args ) com_list ; endfun .)
+
+
+state 72
+
+    (35) com_list -> com_list ; comando .
+
+    ;               reduce using rule 35 (com_list -> com_list ; comando .)
+
+
+state 73
+
+    (3) ciclo -> for var [ e ellipsis e ] com_list . ; endfor
+    (35) com_list -> com_list . ; comando
+
+    ;               shift and go to state 74
+
+
+state 74
+
+    (3) ciclo -> for var [ e ellipsis e ] com_list ; . endfor
+    (35) com_list -> com_list ; . comando
+    (5) comando -> . e
+    (6) comando -> . ciclo
+    (7) comando -> . var assign e
+    (8) comando -> . say e_list
+    (9) comando -> . read var_list
+    (27) e -> . var
+    (28) e -> . ( e )
+    (29) e -> . b
+    (30) e -> . n
+    (31) e -> . string
+    (32) e -> . var ( e_list )
+    (33) e -> . var ( )
+    (3) ciclo -> . for var [ e ellipsis e ] com_list ; endfor
+    (20) b -> . f
+    (21) b -> . e or e
+    (22) b -> . e and e
+    (23) b -> . e xor e
+    (14) n -> . nr
+    (15) n -> . - e
+    (16) n -> . e + e
+    (17) n -> . e - e
+    (18) n -> . e * e
+    (19) n -> . e / e
+    (24) f -> . true
+    (25) f -> . false
+    (26) f -> . not f
+
+    endfor          shift and go to state 75
+    var             shift and go to state 6
+    say             shift and go to state 10
+    read            shift and go to state 11
+    (               shift and go to state 7
+    string          shift and go to state 14
+    for             shift and go to state 15
+    nr              shift and go to state 17
+    -               shift and go to state 18
+    true            shift and go to state 19
+    false           shift and go to state 20
+    not             shift and go to state 21
+
+    e                              shift and go to state 8
+    comando                        shift and go to state 72
+    ciclo                          shift and go to state 9
+    b                              shift and go to state 12
+    n                              shift and go to state 13
+    f                              shift and go to state 16
+
+state 75
+
+    (3) ciclo -> for var [ e ellipsis e ] com_list ; endfor .
+
+    ;               reduce using rule 3 (ciclo -> for var [ e ellipsis e ] com_list ; endfor .)
+    $end            reduce using rule 3 (ciclo -> for var [ e ellipsis e ] com_list ; endfor .)
+

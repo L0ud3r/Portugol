@@ -1,0 +1,20 @@
+
+fun factorial(min, max)
+    res <- min;
+    for i [min+1 ... max]
+        res <- res * i;
+    endfor;
+    res;
+endfun;
+
+fun factorial(x)
+    factorial(1, x);
+endfun ;
+
+f <- factorial(4+3);
+say f
+
+
+
+
+
