@@ -1,9 +1,9 @@
 
 fun factorial(min, max)
     res <- min;
-    for i [min+1 ... max]
+    para i de min+1 ate max faca
         res <- res * i;
-    endfor;
+    fimpara;
     res;
 endfun;
 

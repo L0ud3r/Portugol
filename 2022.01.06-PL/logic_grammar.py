@@ -30,10 +30,20 @@ class LogicGrammar:
         p[0] = p[1] + [p[3]]  # concatenate!
     #
 
+    #antigo for
+    #def p_ciclo(self, p):
+    #    """ ciclo : for var '[' e ellipsis e ']' com_list ';' endfor """
+    #    p[0] = {
+    #        "op": "for",
+    #        "args": [p[2], p[4], p[6]],
+    #        "data": [p[8]],
+    #    }
+
+    #novo for (para)
     def p_ciclo(self, p):
-        """ ciclo : for var '[' e ellipsis e ']' com_list ';' endfor """
+        """ ciclo : para var de e ate e faca com_list ';' fimpara """
         p[0] = {
-            "op": "for",
+            "op": "para",
             "args": [p[2], p[4], p[6]],
             "data": [p[8]],
         }

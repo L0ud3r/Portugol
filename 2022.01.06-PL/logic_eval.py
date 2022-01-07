@@ -19,7 +19,7 @@ class LogicEval:
         "assign": lambda a: LogicEval._assign(*a),
         "say": lambda a: print(*a),
         "read": lambda args: LogicEval._read(*args),
-        "for": lambda args: LogicEval._for(*args),
+        "para": lambda args: LogicEval._para(*args),
         "fun": lambda args: LogicEval._fun(args),
         "call": lambda args: LogicEval._call(args)
     }
@@ -58,7 +58,7 @@ class LogicEval:
         LogicEval.symbols[name] = {"vars": var, "code": code}
 
     @staticmethod
-    def _for(var, lower, higher, code):
+    def _para(var, lower, higher, code):
         inc, comp = (1, lambda a, b: a <= b) \
             if lower < higher else (-1, lambda a, b: a >= b)
         value = lower

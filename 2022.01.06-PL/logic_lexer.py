@@ -3,8 +3,8 @@ import ply.lex as plex
 
 
 class LogicLexer:
-    keywords = ("true", "false", "not", "and", "or", "xor", "for", "endfor", "say", "read", "fun", "endfun")
-    tokens = keywords + ("var", "assign", "nr", "ellipsis", "string")
+    keywords = ("true", "false", "not", "and", "or", "xor", "para", "de", "ate", "faca", "fimpara", "say", "read", "fun", "endfun")
+    tokens = keywords + ("var", "assign", "nr", "string")
     literals = "()+-/*;[],"
     t_ignore = " \t\n"
 
@@ -12,9 +12,9 @@ class LogicLexer:
         r"""\#.*"""
         pass
 
-    def t_ellipsis(self, t):
-        r"""\.{3}"""
-        return t
+    #def t_ellipsis(self, t):
+    #    r"""\.{3}"""
+    #    return t
 
     def t_string(self, t):
         r'"[^"]*"'
