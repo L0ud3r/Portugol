@@ -14,7 +14,7 @@ endfun ;
 a <- 1;
 read a;
 f <- factorial(a);
-say f
+escreva(f)
 
 
 

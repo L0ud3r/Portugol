@@ -30,7 +30,7 @@ NOVO: PARA var DE e ATE e FACA com_list ; FIMPARA
 
 DECLARAÇÃO DE VARIAVEIS! (ainda nao existe)
 
-SAY
+SAY             #DONE!
 ANTIGO: SAY e_list
 NOVO: ESCREVA(e_list)
 

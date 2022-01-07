@@ -68,8 +68,8 @@ class LogicGrammar:
         p[0] = {"op": "assign", "args": [p[1], p[3]]}
 
     def p_comando3(self, p):
-        """ comando : say e_list """
-        p[0] = {"op": "say", "args": p[2]}
+        """ comando : escreva '(' e_list ')' """
+        p[0] = {"op": "escreva", "args": p[3]}
 
     def p_comando4(self,p):
         """ comando : read var_list """

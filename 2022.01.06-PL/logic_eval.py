@@ -17,7 +17,7 @@ class LogicEval:
         "/": lambda args: args[0] / args[1],
 
         "assign": lambda a: LogicEval._assign(*a),
-        "say": lambda a: print(*a),
+        "escreva": lambda a: print(*a),
         "read": lambda args: LogicEval._read(*args),
         "para": lambda args: LogicEval._para(*args),
         "fun": lambda args: LogicEval._fun(args),
