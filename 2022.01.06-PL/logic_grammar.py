@@ -67,9 +67,17 @@ class LogicGrammar:
         """ comando : var assign e """
         p[0] = {"op": "assign", "args": [p[1], p[3]]}
 
+    # antigo say
+    #def p_comando3(self, p):
+    #    """ comando : say e_list """
+    #    p[0] = {"op": "say", "args": p[2]}
+
+
+    # novo say (escreva Portugol)
     def p_comando3(self, p):
         """ comando : escreva '(' e_list ')' """
         p[0] = {"op": "escreva", "args": p[3]}
+
 
     def p_comando4(self,p):
         """ comando : read var_list """
