@@ -32,8 +32,10 @@ parser.add_argument("--file",
                     type=str)
 args = parser.parse_args()
 
+#run_batch("exemplo.esi")
+
 if args.file is not None:
-    run_batch(args.file)
+   run_batch(args.file)
 else:
     run_interactively()
 

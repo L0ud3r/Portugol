@@ -77,6 +77,10 @@ class LogicEval:
         for var in args:
             if var in LogicEval.symbols:
                 value = input("Escreva valor: ")
+                try:
+                    value = float(value)
+                except:
+                    value = value
                 LogicEval._assign(var, value)
             else:
                 raise Exception(f"Variable {var} does not exist.") #caso nao queiramos que sejam declaradas variaveis automaticamente

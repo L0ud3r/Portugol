@@ -11,7 +11,9 @@ fun factorial(x)
     factorial(1, x);
 endfun ;
 
-f <- factorial(4+3);
+a <- 1;
+read a;
+f <- factorial(a);
 say f
 
 
