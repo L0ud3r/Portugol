@@ -1,5 +1,6 @@
 
 funcao factorial(min, max)
+    inteiro: res;
     res <- min;
     para i de min+1 ate max faca
         res <- res * i;
@@ -11,9 +12,10 @@ funcao factorial(x)
     factorial(1, x);
 fimfuncao;
 
-
+inteiro: a;
 a <- 1;
 leia(a);
+inteiro: f;
 f <- factorial(a);
 escreva(f)
 

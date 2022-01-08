@@ -7,9 +7,9 @@ class SymbolTable:
     # permitir que self._data[key] armazene mais que um valor (variáveis temporárias)
     def re_set(self, key, value):
         if key in self._data:
-            self._data[key].append(value)
+            self._data[key][-1].append(value)
         else:
-            self[key] = value  # reutiliza setitem
+            self[key][-1] = value  # reutiliza setitem
             # ou
              # self._data[key] = value
 

@@ -13,10 +13,10 @@ class LogicEval:
         "and": lambda args: args[0] and args[1],
         "xor": lambda a: a[0] ^ a[1],
         "not": lambda a: not a[0],
-        "+": lambda args: args[0] + args[1],
-        "-": lambda args: args[0] - args[1],
-        "*": lambda args: args[0] * args[1],
-        "/": lambda args: args[0] / args[1],
+        "+": lambda args: args[0][1] + args[1][1], #fix porque nao é possivel var+1
+        "-": lambda args: args[0][1] - args[1][1], #fix
+        "*": lambda args: args[0][1] * args[1][1], #fix
+        "/": lambda args: args[0][1] / args[1][1], #fix
 
         "declarar": lambda args: LogicEval._declarar(*args),
         "assign": lambda args: LogicEval._changeValue(*args),
@@ -53,7 +53,8 @@ class LogicEval:
             var_list = LogicEval.symbols[name]["vars"]
             # 1. Definir as variaveis recebidas  [[DANGER]]
             for var_name, value in zip(var_list, values):
-                LogicEval.symbols.re_set(var_name, LogicEval.eval(value))
+                LogicEval._assign(var_name, None, value) #fix
+                LogicEval.symbols.re_set(var_name, LogicEval.eval(value)) #fix
             # 2. Avaliar Codigo
             result = LogicEval.eval(code)
             # 3. Apagar as variaveis "locais"/recebidas
@@ -86,7 +87,8 @@ class LogicEval:
         while comp(value, higher):
             LogicEval.eval(code)
             value += inc
-            LogicEval._assign(var, None, value)
+            #LogicEval._assign(var, None, value)
+            LogicEval._changeValue(var, value)
 
     @staticmethod
     def _assign(var, vartype, value):
