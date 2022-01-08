@@ -13,10 +13,10 @@ class LogicEval:
         "and": lambda args: args[0] and args[1],
         "xor": lambda a: a[0] ^ a[1],
         "not": lambda a: not a[0],
-        "+": lambda args: args[0][1] + args[1][1], #fix porque nao é possivel var+1
-        "-": lambda args: args[0][1] - args[1][1], #fix
-        "*": lambda args: args[0][1] * args[1][1], #fix
-        "/": lambda args: args[0][1] / args[1][1], #fix
+        "+": lambda args: LogicEval._return_value_of_var(args[0]) + LogicEval._return_value_of_var(args[1]),
+        "-": lambda args: LogicEval._return_value_of_var(args[0]) - LogicEval._return_value_of_var(args[1]), #fix
+        "*": lambda args: LogicEval._return_value_of_var(args[0]) * LogicEval._return_value_of_var(args[1]), #fix
+        "/": lambda args: LogicEval._return_value_of_var(args[0]) / LogicEval._return_value_of_var(args[1]), #fix
 
         "declarar": lambda args: LogicEval._declarar(*args),
         "assign": lambda args: LogicEval._changeValue(*args),
@@ -33,6 +33,14 @@ class LogicEval:
     #def check_float(x):
     #    assert type(x) is float, "operando nao é float"
     #    return x
+
+    @staticmethod
+    def _return_value_of_var(value):
+        while isinstance(value, list):
+            value = value[-1]
+        return value
+
+
 
     @staticmethod
     def _declarar(*args):
@@ -71,19 +79,27 @@ class LogicEval:
         name = f"{name}/{len(var)}"    # factorial/1
         LogicEval.symbols[name] = {"vars": var, "code": code}
 
-    def _escreva(args):
-        i = 0
-        for arg in args:
-            if i == len(args)-1:
-                print(arg)
-            i+=1
+    def _escreva(*args):
+
+        for x in args: #multiple args
+            if type(x) != tuple and type(x) != list:
+                print(x)
+            else:
+                x_in_list = list(x)
+                while isinstance(x_in_list, list):
+                    x_in_list = x_in_list[-1]
+                print(x_in_list)
+
+
 
     @staticmethod
     def _para(var, lower, higher, code):
+        lower = LogicEval._return_value_of_var(lower)
+        higher = LogicEval._return_value_of_var(higher)
         inc, comp = (1, lambda a, b: a <= b) \
             if lower < higher else (-1, lambda a, b: a >= b)
         value = lower
-        LogicEval._assign(var, None, value)
+        LogicEval._assign(var, "real", value)
         while comp(value, higher):
             LogicEval.eval(code)
             value += inc
@@ -98,9 +114,9 @@ class LogicEval:
         if var in LogicEval.symbols:
             var_type = LogicEval.symbols[var][0]
             if (type(value) == str) and (var_type == "caracter"):
-                LogicEval.symbols[var][1] = value
+                LogicEval.symbols[var][-1] = value #change cuz of multiple values in list (stack)
             elif (type(value) != str) and (var_type != "caracter"):
-                LogicEval.symbols[var][1] = value
+                LogicEval.symbols[var][-1] = value #change cuz of multiple values in list (stack)
             else:
                 raise Exception(f"Variável {var} é do tipo {var_type}. Esse não é suportado.")
         else:
@@ -110,12 +126,12 @@ class LogicEval:
     def _leia(*args):
         for var in args:
             if var in LogicEval.symbols:
-                value = input("Escreva valor: ")
+                value = input()
                 try:
                     value = float(value)
                 except:
                     value = value
-                LogicEval._assign(var, None, value)
+                LogicEval._changeValue(var, value)
             else:
                 raise Exception(f"Variable {var} does not exist.") #caso nao queiramos que sejam declaradas variaveis automaticamente
 
