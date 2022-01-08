@@ -1,21 +1,21 @@
 
-fun factorial(min, max)
+funcao factorial(min, max)
     res <- min;
     para i de min+1 ate max faca
         res <- res * i;
     fimpara;
     res;
-endfun;
+fimfuncao;
 
-fun factorial(x)
+funcao factorial(x)
     factorial(1, x);
-endfun ;
+fimfuncao;
+
 
 a <- 1;
-read a;
+leia(a);
 f <- factorial(a);
 escreva(f)
-
 
 
 

@@ -17,20 +17,18 @@ s -> func | comando                                          # check
 ciclo -> FOR var '[' e ELLIPSIS e ']' com_list ';' ENDFOR    # check
 condicao_se -> SE e com_list ';' FIMSE
 condicao_senao -> SENAO com_list ';' FIMSE
-comando -> e | ciclo | VAR assign e | SAY e_list | READ var | condicao_se | condicao_senao      #isto permite que possa ler um senao mesmo fora de um se! fazer o eval disso e dar raise exception!
+comando -> e | ciclo | VAR assign e | VARTYPE ':' var_list| SAY e_list | READ var | condicao_se | condicao_senao      #isto permite que possa ler um senao mesmo fora de um se! fazer o eval disso e dar raise exception!
  com_list -> comando | com_list ';' comando                   # check
  func -> FUN var '(' args ')' com_list ';' ENDFUN             # check
  args -> € | var_list                                         # check
  var_list -> var | var_list ',' var                           # check
 
 
- Passagens para Portugol:
+Passagens para Portugol:
 
 FOR            #DONE!
 ANTIGO: FOR var [ e ELLIPSIS e ] com_list ; ENDFOR
 NOVO: PARA var DE e ATE e FACA com_list ; FIMPARA
-
-DECLARAÇÃO DE VARIAVEIS! (ainda nao existe)
 
 SAY             #DONE!
 ANTIGO: SAY e_list
@@ -40,9 +38,11 @@ READ            #DONE!
 ANTIGO: READ var
 NOVO: LEIA(var)
 
-FUN
+FUN         #DONE!
 ANTIGO: FUN var '(' args ')' com_list ';' ENDFUN
-NOVO: ???
+NOVO: FUNCAO var '(' args ')' com_list ';' FIMFUNCAO
+
+DECLARAÇÃO DE VARIÁVEIS         #DONE!
 
 
 

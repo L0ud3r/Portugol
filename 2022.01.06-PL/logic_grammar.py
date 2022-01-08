@@ -27,7 +27,7 @@ class LogicGrammar:
 
     def p_code2(self, p):
         """ code : code ';' s """
-        p[0] = p[1] + [p[3]]  # concatenate!
+        p[0] = p[1] + [p[3]]
     #
 
     #antigo for
@@ -48,14 +48,23 @@ class LogicGrammar:
             "data": [p[8]],
         }
 
+    #antiga funcao
+    #def p_func(self, p):
+    #    """ func : fun var '(' args ')' com_list ';' endfun """
+    #    p[0] = {
+    #        "op": "fun",
+    #        "args": [],
+    #        "data": [p[2], p[4], p[6]]
+    #    }
+
+    #novo fun (funcao)
     def p_func(self, p):
-        """ func : fun var '(' args ')' com_list ';' endfun """
+        """ func : funcao var '(' args ')' com_list ';' fimfuncao """
         p[0] = {
-            "op": "fun",
+            "op": "funcao",
             "args": [],
             "data": [p[2], p[4], p[6]]
         }
-
     #
 
     def p_comando1(self, p):
@@ -88,6 +97,12 @@ class LogicGrammar:
     def p_comando4(self,p):
         """ comando : leia '(' var_list ')' """
         p[0] = {"op": "leia", "args":  p[3]}
+
+    def p_comando5(self,p):
+        """ comando : vartype ':' var_list """
+        p[0] = {"op": "declarar",
+                "args": p[3],
+                "data": [p[1]]}
 
     #
 

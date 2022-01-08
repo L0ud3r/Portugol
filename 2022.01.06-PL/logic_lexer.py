@@ -3,9 +3,9 @@ import ply.lex as plex
 
 
 class LogicLexer:
-    keywords = ("true", "false", "not", "and", "or", "xor", "para", "de", "ate", "faca", "fimpara", "escreva", "leia", "fun", "endfun")
-    tokens = keywords + ("var", "assign", "nr", "string")
-    literals = "()+-/*;[],"
+    keywords = ("true", "false", "not", "and", "or", "xor", "para", "de", "ate", "faca", "fimpara", "escreva", "leia", "funcao", "fimfuncao")
+    tokens = keywords + ("var", "vartype", "assign", "nr", "string")
+    literals = "()+-/*;[],:"
     t_ignore = " \t\n"
 
     def t_comment(self, t):
@@ -24,6 +24,13 @@ class LogicLexer:
     def t_nr(self, t):
         r"""[0-9]+(\.[0-9]+)?"""
         t.value = float(t.value)
+        return t
+
+    def t_vartype(self, t):
+        r"""inteiro
+            |caracter
+            |logico
+            |real"""
         return t
 
     def t_assign(self, t):
