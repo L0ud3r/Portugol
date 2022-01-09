@@ -1,6 +1,6 @@
 # logic_eval
 
-from pprint import PrettyPrinter as pp
+from pprint import PrettyPrinter
 from copy import deepcopy
 from symbol_table import SymbolTable
 
