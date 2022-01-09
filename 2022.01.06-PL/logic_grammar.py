@@ -104,15 +104,22 @@ class LogicGrammar:
     #    p[0] = {"op": "read", "args":  p[2]}
 
     #novo read (leia Portugol)
-    def p_comando4(self,p):
+    def p_comando4(self, p):
         """ comando : leia '(' var_list ')' """
         p[0] = {"op": "leia", "args":  p[3]}
 
-    def p_comando5(self,p):
+    def p_comando5(self, p):
         """ comando : vartype ':' var_list """
         p[0] = {"op": "declarar",
                 "args": p[3],
                 "data": [p[1]]}
+
+    #comando if -> fim de if | else...
+    def p_comando6(self, p):
+        """ comando : se e entao com_list ';' fimse """
+        p[0] = {"op": "se",
+                "args": [p[2]],
+                "data": [p[4]]}
 
     #
 

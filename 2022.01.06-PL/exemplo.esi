@@ -14,20 +14,16 @@ fimfuncao;
 
 inteiro: a;
 a <- 1;
-leia(a);
-inteiro: f;
-f <- factorial(a);
-escreva(f);
+#leia(a);
+#inteiro: f;
+#f <- factorial(a);
+#escreva(f);
+se true entao
+    escreva("entrei no se");
+fimse;
 fim
 escreva(1)
-padskapokdapokedas
-daspdkaodjkaodjk
-adsapdkjsaodjasdoajs
-dsa
-sdoajdosajdoajd
-aojda
-jd
-aojdsajdoaj
+
 
 
 

@@ -23,6 +23,7 @@ class LogicEval:
         "escreva": lambda args: LogicEval._escreva(*args),
         "leia": lambda args: LogicEval._leia(*args),
         "para": lambda args: LogicEval._para(*args),
+        "se": lambda args: LogicEval._se(*args),
         "funcao": lambda args: LogicEval._funcao(args),
         "call": lambda args: LogicEval._call(args),
 
@@ -108,6 +109,12 @@ class LogicEval:
             value += inc
             #LogicEval._assign(var, None, value)
             LogicEval._changeValue(var, value)
+
+    # por adicionar funcionalidade de else
+    @staticmethod
+    def _se(cond, codigo_ciclo):
+        if cond:
+            return LogicEval.eval(codigo_ciclo)
 
     @staticmethod
     def _assign(var, vartype, value):
