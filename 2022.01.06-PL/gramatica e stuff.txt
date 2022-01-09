@@ -2,7 +2,7 @@ code -> s | code ';' s
 s -> func | comando | fim                                                       # check
 ciclo -> PARA var DE e ATE e FACA com_list ';' FIMPARA                          # check
 func -> FUNCAO var '(' args ')' com_list ';' FIMFUNCAO                          # check
-comando -> e | ciclo | VAR assign e | ESCREVA '(' e_list ')' | LEIA  '(' var_list ')' | VARTYPE ':' var_list |  READ var | SE e ENTAO com_list ';' fimse | condicao_senao      #isto permite que possa ler um senao mesmo fora de um se! fazer o eval disso e dar raise exception!
+comando -> e | ciclo | VAR assign e | ESCREVA '(' e_list ')' | LEIA  '(' var_list ')' | VARTYPE ':' var_list |  READ var | SE e ENTAO com_list ';' fimse
 com_list -> comando | com_list ';' comando                                      # check
 e_list -> e | e_list ',' e                                                      # check
 n -> NR | '-' e | e '+' e | e '-' e | e '*' e | e '/' e                         # check
