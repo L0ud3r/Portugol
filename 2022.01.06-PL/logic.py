@@ -3,7 +3,7 @@ from logic_grammar import LogicGrammar
 import argparse
 
 
-def run_interactively():
+def run_interactively(): #TODO: fazer o mesmo do fim aqui dentro!
     lg = LogicGrammar()
     for e in iter(lambda: input(">> "), ""):
         try:

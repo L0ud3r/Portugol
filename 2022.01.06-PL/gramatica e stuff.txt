@@ -1,29 +1,16 @@
- #TODO: rearranjar gramatica
-
- code -> s | code ';' s
-
-
- e -> VAR | '(' e ')' | b | n | string | VAR '(' e_list ')' | VAR '(' ')'
-
- b -> f | e OR e | e AND e | e XOR e
-
- f -> TRUE | FALSE | NOT f
-
- n -> NR | '-' e | e '+' e | e '-' e | e '*' e | e '/' e
-
- e_list -> e | e_list ',' e
-
-
-
-s -> func | comando                                        # check
-ciclo -> FOR var '[' e ELLIPSIS e ']' com_list ';' ENDFOR    # check
-condicao_se -> SE e com_list ';' FIMSE
-condicao_senao -> SENAO com_list ';' FIMSE
-comando -> e | ciclo | VAR assign e | VARTYPE ':' var_list| SAY e_list | READ var | condicao_se | condicao_senao      #isto permite que possa ler um senao mesmo fora de um se! fazer o eval disso e dar raise exception!
- com_list -> comando | com_list ';' comando                   # check
- func -> FUN var '(' args ')' com_list ';' ENDFUN             # check
- args -> € | var_list                                         # check
- var_list -> var | var_list ',' var                           # check
+code -> s | code ';' s
+s -> func | comando | fim                                                       # check
+ciclo -> PARA var DE e ATE e FACA com_list ';' FIMPARA                          # check
+func -> FUNCAO var '(' args ')' com_list ';' FIMFUNCAO                          # check
+comando -> e | ciclo | VAR assign e | ESCREVA '(' e_list ')' | LEIA  '(' var_list ')' | VARTYPE ':' var_list |  READ var | SE e ENTAO com_list ';' fimse | condicao_senao      #isto permite que possa ler um senao mesmo fora de um se! fazer o eval disso e dar raise exception!
+com_list -> comando | com_list ';' comando                                      # check
+e_list -> e | e_list ',' e                                                      # check
+n -> NR | '-' e | e '+' e | e '-' e | e '*' e | e '/' e                         # check
+b -> f | e OR e | e AND e | e XOR e                                             # check
+f -> true | false | not f                                                       # check
+e -> var | '(' e ')' | b | n | string | var '(' e_list ')' | VAR '(' ')'        # check
+var_list -> var | var_list ',' var                                              # check
+args: € | var_list                                                              # check
 
 
 

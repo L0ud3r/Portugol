@@ -123,6 +123,17 @@ class LogicGrammar:
 
     #
 
+    def p_com_list(self, p):
+        """ com_list : comando
+                     | com_list ';' comando """
+        if len(p) == 2:
+            p[0] = [p[1]]
+        else:
+            p[0] = p[1]
+            p[0].append(p[3])
+
+    #
+
     def p_s(self, p):
         """ s : func
               | comando
@@ -200,18 +211,6 @@ class LogicGrammar:
         p[0] = {"op": "call",
                 "args": [],
                 "data": [p[1], [] if p[3] == ")" else p[3]]}
-                 ###  [ factorial, [4.0, 5.0, 6.0]]
-    #
-
-    def p_com_list(self, p):
-        """ com_list : comando
-                     | com_list ';' comando """
-        if len(p) == 2:
-            p[0] = [p[1]]
-        else:
-            p[0] = p[1]
-            p[0].append(p[3])
-
     #
 
     def p_var_list(self, p):

@@ -9,10 +9,12 @@ class LogicEval:
 
     # Dispatch Table (Design Pattern)
     operators = {
+        #TODO: return_value_of_var!
         "or": lambda args: args[0] or args[1],
         "and": lambda args: args[0] and args[1],
         "xor": lambda a: a[0] ^ a[1],
         "not": lambda a: not a[0],
+        #
         "+": lambda args: LogicEval._return_value_of_var(args[0]) + LogicEval._return_value_of_var(args[1]),
         "-": lambda args: LogicEval._return_value_of_var(args[0]) - LogicEval._return_value_of_var(args[1]), #fix
         "*": lambda args: LogicEval._return_value_of_var(args[0]) * LogicEval._return_value_of_var(args[1]), #fix
