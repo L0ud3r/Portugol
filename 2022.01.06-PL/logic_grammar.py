@@ -5,6 +5,16 @@ from pprint import PrettyPrinter
 from logic_lexer import LogicLexer
 from logic_eval import LogicEval
 
+#TODO: INICIO E FIM
+# Booleanos
+# Comparadores (<, >, <=, >=, =)
+# and, or, xor
+# Se e senao!
+# While
+# Remover comentários de funções antigas / comentários desnecessários (no fim)
+# Remover debug prints
+# Documentação
+
 
 class LogicGrammar:
     precedence = (
@@ -26,7 +36,7 @@ class LogicGrammar:
         p[0] = [p[1]]
 
     def p_code2(self, p):
-        """ code : code ';' s """
+        """ code : code ';' s  """
         p[0] = p[1] + [p[3]]
     #
 
@@ -108,7 +118,8 @@ class LogicGrammar:
 
     def p_s(self, p):
         """ s : func
-              | comando """
+              | comando
+              | fim"""
         p[0] = p[1]
 
     #
@@ -220,7 +231,7 @@ class LogicGrammar:
     def parse(self, expression):
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
         pp = PrettyPrinter()
-        pp.pprint(ans)  # debug rulez!
+        #pp.pprint(ans) #remover, apenas para debug!
         return LogicEval.eval(ans)
 
 

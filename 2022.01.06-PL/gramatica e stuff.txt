@@ -1,3 +1,4 @@
+ #TODO: rearranjar gramatica
 
  code -> s | code ';' s
 
@@ -13,7 +14,8 @@
  e_list -> e | e_list ',' e
 
 
-s -> func | comando                                          # check
+
+s -> func | comando                                        # check
 ciclo -> FOR var '[' e ELLIPSIS e ']' com_list ';' ENDFOR    # check
 condicao_se -> SE e com_list ';' FIMSE
 condicao_senao -> SENAO com_list ';' FIMSE

@@ -24,7 +24,8 @@ class LogicEval:
         "leia": lambda args: LogicEval._leia(*args),
         "para": lambda args: LogicEval._para(*args),
         "funcao": lambda args: LogicEval._funcao(args),
-        "call": lambda args: LogicEval._call(args)
+        "call": lambda args: LogicEval._call(args),
+
     }
     # Symbol Table (Tabela de Símbolos)
     symbols = SymbolTable()
@@ -80,15 +81,17 @@ class LogicEval:
         LogicEval.symbols[name] = {"vars": var, "code": code}
 
     def _escreva(*args):
-
-        for x in args: #multiple args
-            if type(x) != tuple and type(x) != list:
-                print(x)
-            else:
-                x_in_list = list(x)
-                while isinstance(x_in_list, list):
-                    x_in_list = x_in_list[-1]
-                print(x_in_list)
+        if type(args) == tuple or type(args) == list:
+            for x in args: #multiple args
+                if type(x) != tuple and type(x) != list:
+                    print(x)
+                else:
+                    x_in_list = list(x)
+                    while isinstance(x_in_list, list):
+                        x_in_list = x_in_list[-1]
+                    print(x_in_list)
+        else:
+            print(args)
 
 
 
@@ -150,6 +153,9 @@ class LogicEval:
         if type(ast) is list:
             ans = None
             for c in ast:
+
+                #if c == "fim":
+                #    return ans
                 ans = LogicEval.eval(c)
             return ans
         raise Exception(f"Eval called with weird type: {type(ast)}")
