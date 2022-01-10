@@ -6,10 +6,6 @@ from logic_lexer import LogicLexer
 from logic_eval import LogicEval
 
 #TODO: INICIO E FIM
-# Booleanos
-# Comparadores (<, >, <=, >=, =)
-# and, or, xor
-# Se e senao!
 # While
 # Remover comentários de funções antigas / comentários desnecessários (no fim)
 # Remover debug prints
@@ -39,6 +35,12 @@ class LogicGrammar:
         """ code : code ';' s  """
         p[0] = p[1] + [p[3]]
     #
+
+    def p_s(self, p):
+        """ s : func
+              | comando
+              | fim"""
+        p[0] = p[1]
 
     #antigo for
     #def p_ciclo(self, p):
@@ -114,13 +116,17 @@ class LogicGrammar:
                 "args": p[3],
                 "data": [p[1]]}
 
-    #comando if -> fim de if | else...
     def p_comando6(self, p):
-        """ comando : se e entao com_list ';' fimse """
+        """comando : se e entao com_list ';' senao com_list ';' fimse"""
+        p[0] = {"op": "se",
+                "args": [p[2]],
+                "data": [p[4], p[7]]}
+
+    def p_comando7(self, p):
+        """comando : se e entao com_list ';' fimse"""
         p[0] = {"op": "se",
                 "args": [p[2]],
                 "data": [p[4]]}
-
     #
 
     def p_com_list(self, p):
@@ -134,11 +140,7 @@ class LogicGrammar:
 
     #
 
-    def p_s(self, p):
-        """ s : func
-              | comando
-              | fim"""
-        p[0] = p[1]
+
 
     #
 
@@ -161,6 +163,15 @@ class LogicGrammar:
               | e '-' e
               | e '*' e
               | e '/' e """
+        p[0] = dict(op=p[2], args=[p[1], p[3]])
+
+    def p_n3(self, p):
+        """n : e '<' e
+              | e leq e
+              | e '>' e
+              | e geq e
+              | e '=' e
+              | e dif e"""
         p[0] = dict(op=p[2], args=[p[1], p[3]])
 
     #
@@ -237,7 +248,7 @@ class LogicGrammar:
     def parse(self, expression):
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
         pp = PrettyPrinter()
-        #pp.pprint(ans) #remover, apenas para debug!
+        pp.pprint(ans) #remover, apenas para debug!
         return LogicEval.eval(ans)
 
 

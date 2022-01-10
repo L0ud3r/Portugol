@@ -21,8 +21,8 @@ def run_batch(filename):
         lg = LogicGrammar()
         try:
             ans = lg.parse(content)
-            #if ans is not None: #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
-            #    print(ans) #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
+            if ans is not None: #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
+                print(ans) #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
         except Exception as exception:
             print(exception)
 

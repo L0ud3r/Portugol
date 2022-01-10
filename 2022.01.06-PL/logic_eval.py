@@ -9,16 +9,23 @@ class LogicEval:
 
     # Dispatch Table (Design Pattern)
     operators = {
-        #TODO: return_value_of_var!
-        "or": lambda args: args[0] or args[1],
-        "and": lambda args: args[0] and args[1],
-        "xor": lambda a: a[0] ^ a[1],
-        "not": lambda a: not a[0],
+        "or": lambda args: LogicEval._return_value_of_var(args[0]) or LogicEval._return_value_of_var(args[1]),
+        "and": lambda args: LogicEval._return_value_of_var(args[0]) and LogicEval._return_value_of_var(args[1]),
+        "xor": lambda a: LogicEval._return_value_of_var(a[0]) ^ LogicEval._return_value_of_var(a[1]),
+        "not": lambda a: not LogicEval._return_value_of_var(a[0]),
         #
         "+": lambda args: LogicEval._return_value_of_var(args[0]) + LogicEval._return_value_of_var(args[1]),
-        "-": lambda args: LogicEval._return_value_of_var(args[0]) - LogicEval._return_value_of_var(args[1]), #fix
-        "*": lambda args: LogicEval._return_value_of_var(args[0]) * LogicEval._return_value_of_var(args[1]), #fix
-        "/": lambda args: LogicEval._return_value_of_var(args[0]) / LogicEval._return_value_of_var(args[1]), #fix
+        "-": lambda args: LogicEval._return_value_of_var(args[0]) - LogicEval._return_value_of_var(args[1]), #
+        "*": lambda args: LogicEval._return_value_of_var(args[0]) * LogicEval._return_value_of_var(args[1]),
+        "/": lambda args: LogicEval._return_value_of_var(args[0]) / LogicEval._return_value_of_var(args[1]),
+
+        "<": lambda args: LogicEval._return_value_of_var(args[0]) < LogicEval._return_value_of_var(args[1]),
+        "<=": lambda args: LogicEval._return_value_of_var(args[0]) <= LogicEval._return_value_of_var(args[1]),
+        ">": lambda args: LogicEval._return_value_of_var(args[0]) > LogicEval._return_value_of_var(args[1]),
+        ">=": lambda args: LogicEval._return_value_of_var(args[0]) >= LogicEval._return_value_of_var(args[1]),
+
+        "=": lambda args: LogicEval._return_value_of_var(args[0]) == LogicEval._return_value_of_var(args[1]),
+        "!=": lambda args: LogicEval._return_value_of_var(args[0]) != LogicEval._return_value_of_var(args[1]),
 
         "declarar": lambda args: LogicEval._declarar(*args),
         "assign": lambda args: LogicEval._changeValue(*args),
@@ -114,9 +121,17 @@ class LogicEval:
 
     # por adicionar funcionalidade de else
     @staticmethod
-    def _se(cond, codigo_ciclo):
-        if cond:
-            return LogicEval.eval(codigo_ciclo)
+    def _se(*args):
+        if len(args) == 2:
+            if args[0]:
+                return LogicEval.eval(args[1])
+        if len(args) == 3:
+            if args[0]:
+                return LogicEval.eval(args[1])
+            else:
+                return LogicEval.eval(args[2])
+
+
 
     @staticmethod
     def _assign(var, vartype, value):

@@ -12,17 +12,16 @@ funcao factorial(x)
     factorial(1, x);
 fimfuncao;
 
-inteiro: a;
-a <- 1;
-#leia(a);
-#inteiro: f;
-#f <- factorial(a);
-#escreva(f);
-se true or false entao
+
+se 3 >= 4 entao
     escreva("entrei no se");
+    senao
+        escreva("entrei no senao");
 fimse;
+escreva(1);
 fim
-escreva(1)
+eunaosoulido.xptoz@34
+
 
 
 
