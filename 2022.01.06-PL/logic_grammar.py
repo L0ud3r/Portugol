@@ -7,9 +7,10 @@ from logic_eval import LogicEval
 
 #TODO:
 # Declarar variaveis apenas apos o inicio
-# Rearranjar gramatica (txt)
+# Verificação de vartypes correta a atribuir valores
 # Remover debug prints (ANTES DE APRESENTAR!)
 # Documentação
+# Relatório
 
 
 class LogicGrammar:
@@ -32,11 +33,17 @@ class LogicGrammar:
         else:
             raise Exception("Parse Error: Expecting token")
 
-
+    #
 
     def p_portugol(self, p):
         """portugol : func_list ';' inicio code"""
         p[0] = [p[1]] + [p[4]]
+
+    def p_portugol2(self, p):
+        """portugol : inicio code"""
+        p[0] = [p[2]]
+
+    #
 
     def p_func_list(self, p):
         """func_list : func
@@ -55,9 +62,7 @@ class LogicGrammar:
             "data": [p[2], p[4], p[6]]
         }
 
-    def p_portugol2(self,p):
-        """portugol : inicio code"""
-        p[0] = [p[2]]
+    #
 
     def p_code1(self, p):
         """ code : s """
@@ -66,6 +71,7 @@ class LogicGrammar:
     def p_code2(self, p):
         """ code : code ';' s  """
         p[0] = p[1] + [p[3]]
+
     #
 
     def p_s(self, p):
@@ -73,16 +79,8 @@ class LogicGrammar:
               | fim"""
         p[0] = p[1]
 
-    #antigo for
-    #def p_ciclo(self, p):
-    #    """ ciclo : for var '[' e ellipsis e ']' com_list ';' endfor """
-    #    p[0] = {
-    #        "op": "for",
-    #        "args": [p[2], p[4], p[6]],
-    #        "data": [p[8]],
-    #    }
+    #
 
-    #novo for (para)
     def p_ciclo(self, p):
         """ ciclo : para var de e ate e faca com_list ';' fimpara """
         p[0] = {
@@ -98,8 +96,6 @@ class LogicGrammar:
             "args": [],
             "data": [p[2], p[4]]
         }
-
-
 
     #
 
