@@ -3,7 +3,7 @@ import ply.lex as plex
 
 
 class LogicLexer:
-    keywords = ("true", "false", "not", "and", "or", "xor", "leq", "geq", "dif", "para", "de", "ate", "faca", "fimpara", "se", "senao", "entao", "fimse", "escreva", "leia", "funcao", "fimfuncao", "fim")
+    keywords = ("true", "false", "not", "and", "or", "xor", "leq", "geq", "dif", "para", "de", "ate", "faca", "fimpara", "enquanto", "fimenquanto", "se", "senao", "entao", "fimse", "escreva", "leia", "funcao", "fimfuncao", "fim")
     tokens = keywords + ("var", "vartype", "assign", "nr", "string")
     literals = "()+-<>!=/*;[],:"
     t_ignore = " \t\n"
@@ -11,10 +11,6 @@ class LogicLexer:
     def t_comment(self, t):
         r"""\#.*"""
         pass
-
-    #def t_ellipsis(self, t):
-    #    r"""\.{3}"""
-    #    return t
 
     def t_string(self, t):
         r'"[^"]*"'

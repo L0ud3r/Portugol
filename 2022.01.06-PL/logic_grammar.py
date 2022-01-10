@@ -5,8 +5,8 @@ from pprint import PrettyPrinter
 from logic_lexer import LogicLexer
 from logic_eval import LogicEval
 
-#TODO: INICIO E FIM
-# While
+#TODO:
+# Inicio
 # Remover comentários de funções antigas / comentários desnecessários (no fim)
 # Remover debug prints
 # Documentação
@@ -14,11 +14,16 @@ from logic_eval import LogicEval
 
 class LogicGrammar:
     precedence = (
+
+        ("left", "or", "xor"),  # menor prioridade
+        ("left", "and"),
+
+        ("left", "<", ">"),
+
         ("left", "+", "-"),
         ("left", "*", "/"),
-        ("right", "uminus"),
-        ("left", "or", "xor"),   # menor prioridade
-        ("left", "and"),
+        ("right", "uminus")
+
     )
 
     def p_error(self, p):
@@ -60,16 +65,15 @@ class LogicGrammar:
             "data": [p[8]],
         }
 
-    #antiga funcao
-    #def p_func(self, p):
-    #    """ func : fun var '(' args ')' com_list ';' endfun """
-    #    p[0] = {
-    #        "op": "fun",
-    #        "args": [],
-    #        "data": [p[2], p[4], p[6]]
-    #    }
+    def p_ciclo2(self,p):
+        """ciclo : enquanto n faca com_list ';' fimenquanto"""
+        p[0] = {
+            "op": "enquanto",
+            "args": [],
+            "data": [p[2], p[4]]
+        }
 
-    #novo fun (funcao)
+
     def p_func(self, p):
         """ func : funcao var '(' args ')' com_list ';' fimfuncao """
         p[0] = {
@@ -88,24 +92,12 @@ class LogicGrammar:
         """ comando : var assign e """
         p[0] = {"op": "assign", "args": [p[1], p[3]]}
 
-    # antigo say
-    #def p_comando3(self, p):
-    #    """ comando : say e_list """
-    #    p[0] = {"op": "say", "args": p[2]}
 
-
-    # novo say (escreva Portugol)
     def p_comando3(self, p):
         """ comando : escreva '(' e_list ')' """
         p[0] = {"op": "escreva", "args": p[3]}
 
 
-    #antigo read
-    #def p_comando4(self,p):
-    #    """ comando : read var_list """
-    #    p[0] = {"op": "read", "args":  p[2]}
-
-    #novo read (leia Portugol)
     def p_comando4(self, p):
         """ comando : leia '(' var_list ')' """
         p[0] = {"op": "leia", "args":  p[3]}
@@ -140,10 +132,6 @@ class LogicGrammar:
 
     #
 
-
-
-    #
-
     def p_e_list(self, p):
         """ e_list : e
                    | e_list ',' e """
@@ -151,6 +139,30 @@ class LogicGrammar:
             p[0] = [p[1]]
         else:
             p[0] = p[1] + [p[3]]
+
+    #
+
+    def p_e1(self, p):
+        """ e : var """
+        p[0] = {'var': p[1]}
+
+    def p_e2(self, p):
+        """ e : '(' e ')' """
+        p[0] = p[2]
+
+    def p_e3(self, p):
+        """ e : b
+              | n
+              | string """
+        p[0] = p[1]
+
+    def p_e4(self, p):
+        """ e : var '(' e_list ')'
+              | var '(' ')' """
+        p[0] = {"op": "call",
+                "args": [],
+                "data": [p[1], [] if p[3] == ")" else p[3]]}
+
     #
 
     def p_n1(self, p):
@@ -159,13 +171,17 @@ class LogicGrammar:
         p[0] = p[1] if len(p) == 2 else {"op": "-", "args": [0.0, p[2]]}
 
     def p_n2(self, p):
+        """ n : '(' n ')' """
+        p[0] = p[2]
+
+    def p_n3(self, p):
         """ n : e '+' e
               | e '-' e
               | e '*' e
               | e '/' e """
         p[0] = dict(op=p[2], args=[p[1], p[3]])
 
-    def p_n3(self, p):
+    def p_n4(self, p):
         """n : e '<' e
               | e leq e
               | e '>' e
@@ -202,28 +218,6 @@ class LogicGrammar:
 
     #
 
-    def p_e1(self, p):
-        """ e : var """
-        p[0] = {'var': p[1]}
-
-    def p_e2(self, p):
-        """ e : '(' e ')' """
-        p[0] = p[2]
-
-    def p_e3(self, p):
-        """ e : b
-              | n
-              | string """
-        p[0] = p[1]
-
-    def p_e4(self, p):
-        """ e : var '(' e_list ')'
-              | var '(' ')' """
-        p[0] = {"op": "call",
-                "args": [],
-                "data": [p[1], [] if p[3] == ")" else p[3]]}
-    #
-
     def p_var_list(self, p):
         """ var_list : var
                      | var_list ',' var """
@@ -248,7 +242,7 @@ class LogicGrammar:
     def parse(self, expression):
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
         pp = PrettyPrinter()
-        pp.pprint(ans) #remover, apenas para debug!
+        #pp.pprint(ans) #remover, apenas para debug!
         return LogicEval.eval(ans)
 
 

@@ -32,6 +32,7 @@ class LogicEval:
         "escreva": lambda args: LogicEval._escreva(*args),
         "leia": lambda args: LogicEval._leia(*args),
         "para": lambda args: LogicEval._para(*args),
+        "enquanto": lambda args: LogicEval._enquanto(*args),
         "se": lambda args: LogicEval._se(*args),
         "funcao": lambda args: LogicEval._funcao(args),
         "call": lambda args: LogicEval._call(args),
@@ -90,6 +91,7 @@ class LogicEval:
         name = f"{name}/{len(var)}"    # factorial/1
         LogicEval.symbols[name] = {"vars": var, "code": code}
 
+    @staticmethod
     def _escreva(*args):
         if type(args) == tuple or type(args) == list:
             for x in args: #multiple args
@@ -116,8 +118,13 @@ class LogicEval:
         while comp(value, higher):
             LogicEval.eval(code)
             value += inc
-            #LogicEval._assign(var, None, value)
             LogicEval._changeValue(var, value)
+
+    @staticmethod
+    def _enquanto(*args):
+        while (LogicEval.eval(args[0])):
+            LogicEval.eval(args[1])
+
 
     # por adicionar funcionalidade de else
     @staticmethod
@@ -160,13 +167,7 @@ class LogicEval:
                     value = value
                 LogicEval._changeValue(var, value)
             else:
-                raise Exception(f"Variable {var} does not exist.") #caso nao queiramos que sejam declaradas variaveis automaticamente
-
-                #declara automaticamente
-                #LogicEval._assign(var, None)
-                #LogicEval._leia(var)
-
-
+                raise Exception(f"Variável {var} não existe.") #caso nao queiramos que sejam declaradas variaveis automaticamente
 
     @staticmethod
     def eval(ast):
@@ -177,9 +178,6 @@ class LogicEval:
         if type(ast) is list:
             ans = None
             for c in ast:
-
-                #if c == "fim":
-                #    return ans
                 ans = LogicEval.eval(c)
             return ans
         raise Exception(f"Eval called with weird type: {type(ast)}")
@@ -188,7 +186,6 @@ class LogicEval:
     def _eval_dict(ast):
         if "op" in ast:
             op = ast["op"]
-            # args = [LogicEval.eval(x) for x in ast["args"]]
             args = list(map(LogicEval.eval, ast["args"]))
             if "data" in ast:
                 args += ast["data"]
@@ -197,7 +194,7 @@ class LogicEval:
                 func = LogicEval.operators[op]
                 return func(args)
             else:
-                raise Exception(f"Unknown operator: {op}")
+                raise Exception(f"Operador desconhecido: {op}")
         elif "var" in ast:
             if ast["var"] in LogicEval.symbols:
                 return LogicEval.symbols[ast["var"]]

@@ -12,13 +12,22 @@ funcao factorial(x)
     factorial(1, x);
 fimfuncao;
 
+inteiro: i;
+i <- 0;
 
-se 3 >= 4 entao
+se i < 4 entao
     escreva("entrei no se");
-    senao
-        escreva("entrei no senao");
+    enquanto (i < 4 and true = true) faca
+        escreva("entrei no enquanto");
+        escreva(i);
+        i <- i + 1;
+    fimenquanto;
 fimse;
-escreva(1);
+
+logico: a; #fix nisto!
+a <- 1; #fix nisto!
+
+
 fim
 eunaosoulido.xptoz@34
 
