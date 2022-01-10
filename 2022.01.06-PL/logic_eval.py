@@ -1,5 +1,5 @@
 # logic_eval
-
+import math
 from pprint import PrettyPrinter
 from copy import deepcopy
 from symbol_table import SymbolTable
@@ -144,17 +144,31 @@ class LogicEval:
     def _assign(var, vartype, value):
         LogicEval.symbols[var] = [vartype, value]
 
+    @staticmethod
     def _changeValue(var, value):
         if var in LogicEval.symbols:
             var_type = LogicEval.symbols[var][0]
-            if (type(value) == str) and (var_type == "caracter"):
-                LogicEval.symbols[var][-1] = value #change cuz of multiple values in list (stack)
-            elif (type(value) != str) and (var_type != "caracter"):
-                LogicEval.symbols[var][-1] = value #change cuz of multiple values in list (stack)
+            #var_type = inteiro, logico, caracter, real
+            if (type(value) == str and var_type == "caracter"):
+                LogicEval.symbols[var][-1] = value
+            elif (type(value) == bool and var_type == "logico"):
+                LogicEval.symbols[var][-1] = value
+
+            elif(type(value) == float and var_type == "real"):
+                LogicEval.symbols[var][-1] = value
+
+            elif (type(value) == float and var_type == "inteiro"):
+                if value.is_integer() == False:
+                    #2.5
+                    value = math.trunc(value)
+                    #2.0
+                LogicEval.symbols[var][-1] = value
+
             else:
-                raise Exception(f"Variável {var} é do tipo {var_type}. Esse não é suportado.")
+                raise Exception (f"Variável {var} é do tipo {var_type}. {type(value)} não é suportado.")
         else:
             raise Exception(f"Variável {var} não existe.")
+
 
     @staticmethod
     def _leia(*args):

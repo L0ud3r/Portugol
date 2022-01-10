@@ -14,13 +14,25 @@ fimfuncao;
 inicio
 
 inteiro: i;
-i <- 5;
+i <- 1;
 
-i <- fatorial(i);
-escreva(i);
+#i <- fatorial(i);
+#escreva(i);
 
-logico: a; #fix nisto!
-a <- 1; #fix nisto!
+inteiro: b;
+b <- 0;
+
+#enquanto b < 5 faca
+#    escreva(b);
+#    b <- b + 1;
+#fimenquanto;
+
+logico: a;
+a <- true;
+
+caracter: c;
+c <- "true";
+escreva(c);
 
 
 fim

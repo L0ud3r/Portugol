@@ -7,7 +7,6 @@ from logic_eval import LogicEval
 
 #TODO:
 # Declarar variaveis apenas apos o inicio
-# Verificação de vartypes correta a atribuir valores
 # Remover debug prints (ANTES DE APRESENTAR!)
 # Documentação
 # Relatório
