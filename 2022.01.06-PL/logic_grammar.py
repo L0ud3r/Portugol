@@ -6,11 +6,9 @@ from logic_lexer import LogicLexer
 from logic_eval import LogicEval
 
 #TODO:
-# Inicio
 # Declarar variaveis apenas apos o inicio
-# Remover comentários de funções antigas / comentários desnecessários (no fim)
-# Remover debug prints
 # Rearranjar gramatica (txt)
+# Remover debug prints (ANTES DE APRESENTAR!)
 # Documentação
 
 
