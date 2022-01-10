@@ -3,7 +3,8 @@ import ply.lex as plex
 
 
 class LogicLexer:
-    keywords = ("true", "false", "not", "and", "or", "xor", "leq", "geq", "dif", "para", "de", "ate", "faca", "fimpara", "enquanto", "fimenquanto", "se", "senao", "entao", "fimse", "escreva", "leia", "funcao", "fimfuncao", "fim")
+    #TODO organizar
+    keywords = ("inicio", "true", "false", "not", "and", "or", "xor", "leq", "geq", "dif", "para", "de", "ate", "faca", "fimpara", "enquanto", "fimenquanto", "se", "senao", "entao", "fimse", "escreva", "leia", "funcao", "fimfuncao", "fim")
     tokens = keywords + ("var", "vartype", "assign", "nr", "string")
     literals = "()+-<>!=/*;[],:"
     t_ignore = " \t\n"

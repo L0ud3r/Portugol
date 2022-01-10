@@ -7,8 +7,10 @@ from logic_eval import LogicEval
 
 #TODO:
 # Inicio
+# Declarar variaveis apenas apos o inicio
 # Remover comentários de funções antigas / comentários desnecessários (no fim)
 # Remover debug prints
+# Rearranjar gramatica (txt)
 # Documentação
 
 
@@ -32,6 +34,33 @@ class LogicGrammar:
         else:
             raise Exception("Parse Error: Expecting token")
 
+
+
+    def p_portugol(self, p):
+        """portugol : func_list ';' inicio code"""
+        p[0] = [p[1]] + [p[4]]
+
+    def p_func_list(self, p):
+        """func_list : func
+                    | func_list ';' func"""
+        if len(p) == 2:
+            p[0] = [p[1]]
+        else:
+            p[0] = p[1]
+            p[0].append(p[3])
+
+    def p_func(self, p):
+        """ func : funcao var '(' args ')' com_list ';' fimfuncao """
+        p[0] = {
+            "op": "funcao",
+            "args": [],
+            "data": [p[2], p[4], p[6]]
+        }
+
+    def p_portugol2(self,p):
+        """portugol : inicio code"""
+        p[0] = [p[2]]
+
     def p_code1(self, p):
         """ code : s """
         p[0] = [p[1]]
@@ -42,8 +71,7 @@ class LogicGrammar:
     #
 
     def p_s(self, p):
-        """ s : func
-              | comando
+        """ s : comando
               | fim"""
         p[0] = p[1]
 
@@ -74,13 +102,7 @@ class LogicGrammar:
         }
 
 
-    def p_func(self, p):
-        """ func : funcao var '(' args ')' com_list ';' fimfuncao """
-        p[0] = {
-            "op": "funcao",
-            "args": [],
-            "data": [p[2], p[4], p[6]]
-        }
+
     #
 
     def p_comando1(self, p):

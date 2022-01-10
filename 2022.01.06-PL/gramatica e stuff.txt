@@ -1,3 +1,10 @@
+func_list -> func | func_list ';' func
+portugol -> func_list inicio code
+
+
+
+
+
 code -> s | code ';' s
 s -> func | comando | fim                                                       # check
 ciclo -> PARA var DE e ATE e FACA com_list ';' FIMPARA                          # check

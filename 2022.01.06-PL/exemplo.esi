@@ -1,5 +1,4 @@
-
-funcao factorial(min, max)
+funcao fatorial(min, max)
     inteiro: res;
     res <- min;
     para i de min+1 ate max faca
@@ -8,21 +7,17 @@ funcao factorial(min, max)
     res;
 fimfuncao;
 
-funcao factorial(x)
-    factorial(1, x);
+funcao fatorial(x)
+    fatorial(1, x);
 fimfuncao;
 
-inteiro: i;
-i <- 0;
+inicio
 
-se i < 4 entao
-    escreva("entrei no se");
-    enquanto (i < 4 and true = true) faca
-        escreva("entrei no enquanto");
-        escreva(i);
-        i <- i + 1;
-    fimenquanto;
-fimse;
+inteiro: i;
+i <- 5;
+
+i <- fatorial(i);
+escreva(i);
 
 logico: a; #fix nisto!
 a <- 1; #fix nisto!
