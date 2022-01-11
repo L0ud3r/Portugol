@@ -15,7 +15,7 @@ class LogicEval:
         "not": lambda a: not LogicEval._return_value_of_var(a[0]),
         #
         "+": lambda args: LogicEval._return_value_of_var(args[0]) + LogicEval._return_value_of_var(args[1]),
-        "-": lambda args: LogicEval._return_value_of_var(args[0]) - LogicEval._return_value_of_var(args[1]), #
+        "-": lambda args: LogicEval._return_value_of_var(args[0]) - LogicEval._return_value_of_var(args[1]),
         "*": lambda args: LogicEval._return_value_of_var(args[0]) * LogicEval._return_value_of_var(args[1]),
         "/": lambda args: LogicEval._return_value_of_var(args[0]) / LogicEval._return_value_of_var(args[1]),
 
