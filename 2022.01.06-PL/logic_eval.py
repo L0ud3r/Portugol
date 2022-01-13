@@ -113,13 +113,11 @@ class LogicEval:
     def _para(var, lower, higher, code):
         lower = LogicEval._return_value_of_var(lower)
         higher = LogicEval._return_value_of_var(higher)
-        inc, comp = (1, lambda a, b: a <= b) \
-            if lower < higher else (-1, lambda a, b: a >= b)
         value = lower
         LogicEval._assign(var, "real", value)
-        while comp(value, higher):
+        while value <= higher:
             LogicEval.eval(code)
-            value += inc
+            value += 1
             LogicEval._changeValue(var, value)
 
     @staticmethod
