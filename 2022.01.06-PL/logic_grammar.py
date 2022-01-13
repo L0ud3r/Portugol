@@ -8,7 +8,7 @@ from logic_eval import LogicEval
 #TODO:
 # Declarar variaveis apenas apos o inicio (perguntar ao prof)
 # Remover debug prints (ANTES DE APRESENTAR!)
-# Documentação (In progress...) [VER LINHA, 255]
+# Documentação (In progress...)
 # Relatório
 # Mudar nome de certas classes e métodos
 
