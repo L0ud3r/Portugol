@@ -16,7 +16,7 @@ from logic_eval import LogicEval
 # Classe referente à gramática utilizada na interpretação do pseudocódigo em Portugol
 class LogicGrammar:
 
-    # Lista de com as operações por ordem de prioridade
+    # Lista de precedências com as operações por ordem de prioridade
     precedence = (
 
         ("left", "or", "xor"),  # menor prioridade
@@ -37,7 +37,7 @@ class LogicGrammar:
         else:
             raise Exception("Parse Error: Expecting token")
 
-    # Método com a regra inicial da gramática implementada, sendo que pode haver funções declaradas acima do "main"
+    # Método com a regra inicial da gramática implementada, sendo que pode haver funções declaradas acima do "main" (no caso do Portugol, é o início)
     def p_portugol(self, p):
         """portugol : func_list ';' inicio code"""
         p[0] = [p[1]] + [p[4]]
@@ -92,7 +92,7 @@ class LogicGrammar:
             "data": [p[8]],
         }
 
-    # Método com a regra de leitura do while() em Portugol
+    # Método com a regra de leitura do ciclo while() em Portugol
     def p_ciclo2(self,p):
         """ciclo : enquanto n faca com_list ';' fimenquanto"""
         p[0] = {
@@ -107,7 +107,7 @@ class LogicGrammar:
                     | ciclo """
         p[0] = p[1]
 
-    # Método com a regrad e leitura de declaração de variáveis
+    # Método com a regra de leitura de declaração de variáveis
     def p_comando2(self, p):
         """ comando : var assign e """
         p[0] = {"op": "assign", "args": [p[1], p[3]]}
@@ -153,7 +153,7 @@ class LogicGrammar:
             p[0] = p[1]
             p[0].append(p[3])
 
-    # Método com a regra de leitura de várias atribuições de valores ou apenas 1 atribuição
+    # Método com a regra de leitura de valores ou operações, ou conjuntos destes
     def p_e_list(self, p):
         """ e_list : e
                    | e_list ',' e """
@@ -162,17 +162,17 @@ class LogicGrammar:
         else:
             p[0] = p[1] + [p[3]]
 
-    #  Método com regra de leitura de atribuir como valor a uma variável outra variável
+    #  Método com regra de leitura de variável como um valor
     def p_e1(self, p):
         """ e : var """
         p[0] = {'var': p[1]}
 
-    #  Método com regra de leitura de atribuir como valor a uma variável, outra atribuição dentro de parenteses
+    #  Método com regra de leitura de valores, strings ou operações dentro de parêntesis
     def p_e2(self, p):
         """ e : '(' e ')' """
         p[0] = p[2]
 
-    #  Método com regra de leitura de atribuir como valor a uma variável um bool, uma string ou um número
+    #  Método com regra de leitura de valores como bool, número (ou operações) ou strings
     def p_e3(self, p):
         """ e : b
               | n
@@ -198,7 +198,7 @@ class LogicGrammar:
         """ n : '(' n ')' """
         p[0] = p[2]
 
-    # Método com regra de leitura de um número sendo o resultado de uma operação aritmética
+    # Método com regra de leitura de uma operação matemática
     def p_n3(self, p):
         """ n : e '+' e
               | e '-' e
@@ -206,7 +206,7 @@ class LogicGrammar:
               | e '/' e """
         p[0] = dict(op=p[2], args=[p[1], p[3]])
 
-    # Método com regra de leitura de um número sendo o resultado de uma operação lógica
+    # Método com regra de leitura de uma operação "comparadora"
     def p_n4(self, p):
         """n : e '<' e
               | e leq e
@@ -216,7 +216,7 @@ class LogicGrammar:
               | e dif e"""
         p[0] = dict(op=p[2], args=[p[1], p[3]])
 
-    # Método com regra de leitura de um boolean value com valor dele própria ou de uma expressão booleana
+    # Método com regra de leitura de um booleano ou expressão lógica booleana
     def p_b1(self, p):
         """ b : f
               | e or e
@@ -227,22 +227,22 @@ class LogicGrammar:
         else:
             p[0] = dict(op=p[2], args=[p[1], p[3]])
 
-    # Método com regra de leitura de um boolean value com valor dele como true
+    # Método com regra de leitura de um boolean true
     def p_f1(self, p):
         """ f : true """
         p[0] = True
 
-    # Método com regra de leitura de um boolean value com valor dele como false
+    # Método com regra de leitura de um boolean false
     def p_f2(self, p):
         """ f : false """
         p[0] = False
 
-    # Método com regra de leitura de um boolean value com valor inverso a ele mesmo
+    # Método com regra de leitura de um boolean not <boolean>
     def p_f3(self, p):
         """ f : not f """
         p[0] = dict(op="not", args=[p[2]])
 
-    # Método com regra de leitura de uma variável sozinha ou múltiplas variáveis
+    # Método com regra de leitura de uma variável ou várias
     def p_var_list(self, p):
         """ var_list : var
                      | var_list ',' var """
