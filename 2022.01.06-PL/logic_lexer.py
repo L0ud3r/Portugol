@@ -4,8 +4,19 @@ import ply.lex as plex
 
 # Classe referente ao lexer e às linguagens utilizadas para ler o ficheiro em pseudocódigo Portugol
 class LogicLexer:
-    #TODO organizar
-    keywords = ("inicio", "true", "false", "not", "and", "or", "xor", "leq", "geq", "dif", "para", "de", "ate", "faca", "fimpara", "enquanto", "fimenquanto", "se", "senao", "entao", "fimse", "escreva", "leia", "funcao", "fimfuncao", "fim")
+
+
+    start_end = ("inicio", "fim")
+    bools = ("true", "false")
+    comparators_logic = ("not", "and", "or", "xor")
+    comparators_numbers = ("leq", "geq", "dif")
+    cycles = ("para", "de", "ate", "faca","fimpara", "enquanto", "fimenquanto")
+    conditionals = ("se", "senao", "entao", "fimse")
+    io = ("escreva", "leia")
+    functions = ("funcao", "fimfuncao")
+
+    keywords = start_end + bools + comparators_logic + comparators_numbers + cycles + conditionals + io + functions
+
     tokens = keywords + ("var", "vartype", "assign", "nr", "string")
     literals = "()+-<>!=/*;[],:"
     t_ignore = " \t\n"
