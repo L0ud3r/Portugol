@@ -8,7 +8,7 @@ from logic_eval import LogicEval
 #TODO:
 # Declarar variaveis apenas apos o inicio
 # Remover debug prints (ANTES DE APRESENTAR!)
-# Documentação (In progress...) [VER LINHA 182, 196, 255]
+# Documentação (In progress...) [VER LINHA, 255]
 # Relatório
 # Mudar nome de certas classes e métodos
 
@@ -179,7 +179,7 @@ class LogicGrammar:
               | string """
         p[0] = p[1]
 
-    #  Método com regra de leitura de atribuir como valor a uma variável ... (??????????????????????????????????)
+    #  Método com regra de leitura de chamar uma função (com ou  sem parâmetros)
     def p_e4(self, p):
         """ e : var '(' e_list ')'
               | var '(' ')' """
@@ -193,7 +193,7 @@ class LogicGrammar:
               | '-' e  %prec uminus  """
         p[0] = p[1] if len(p) == 2 else {"op": "-", "args": [0.0, p[2]]}
 
-    #  Método com regra de leitura de um número sendo ... (??????????????????????????????????????)
+    #  Método com regra de leitura de um número ou operação entre parêntesis
     def p_n2(self, p):
         """ n : '(' n ')' """
         p[0] = p[2]
@@ -252,7 +252,7 @@ class LogicGrammar:
             p[0] = p[1]
             p[0].append(p[3])
 
-    # Método com regra de leitura de ... (????????????????????????????????????????) ESQUECI-ME xD
+    # Método com regra de leitura de args para serem utilizados numa função
     def p_args(self, p):
         """ args :
                  | var_list """
