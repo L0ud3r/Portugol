@@ -43,6 +43,9 @@ class LogicEval:
     # Symbol Table (Tabela de Símbolos)
     symbols = SymbolTable()
 
+    # Função para retornar o valor de uma variável
+    # Com a implementação da stack e dos vartypes, uma variável é guardada da seguinte forma
+    # key = "x", value = [inteiro, "1"] ou no caso de vários: key = "x", value = [inteiro, "1", "2"]
     @staticmethod
     def _return_value_of_var(value):
         while isinstance(value, list):
@@ -50,11 +53,14 @@ class LogicEval:
         return value
 
 
+    # Função para declarar uma variável
+    # Presume-se que declarar uma variável é criá-la na memória mas não atribuir um valor
     @staticmethod
     def _declarar(*args):
         i = 0
         for arg in args:
             if i < len(args)-1:
+                #args = varname, vartype, None
                 LogicEval._assign(arg, args[-1], None)
             i += 1
 
@@ -69,8 +75,8 @@ class LogicEval:
             var_list = LogicEval.symbols[name]["vars"]
             # 1. Definir as variaveis recebidas  [[DANGER]]
             for var_name, value in zip(var_list, values):
-                LogicEval._assign(var_name, None, value) #fix
-                LogicEval.symbols.re_set(var_name, LogicEval.eval(value)) #fix
+                LogicEval._assign(var_name, None, value)
+                LogicEval.symbols.re_set(var_name, LogicEval.eval(value))
             # 2. Avaliar Codigo
             result = LogicEval.eval(code)
             # 3. Apagar as variaveis "locais"/recebidas
@@ -142,6 +148,7 @@ class LogicEval:
 
     @staticmethod
     def _changeValue(var, value):
+        value = LogicEval._return_value_of_var(value) #se entrar uma lista (stack!)
         if var in LogicEval.symbols:
             var_type = LogicEval.symbols[var][0]
             #var_type = inteiro, logico, caracter, real
