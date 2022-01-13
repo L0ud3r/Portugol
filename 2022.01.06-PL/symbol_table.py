@@ -1,3 +1,5 @@
+# symbol_table.py
+
 class SymbolTable:
     def __init__(self):
         self._data = {} #dicionário de simbolos

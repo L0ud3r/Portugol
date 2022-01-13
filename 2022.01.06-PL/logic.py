@@ -3,13 +3,14 @@ from logic_grammar import LogicGrammar
 import argparse
 
 
-def run_interactively(): #TODO: fazer o mesmo do fim aqui dentro!
+
+def run_interactively():
     lg = LogicGrammar()
     for e in iter(lambda: input(">> "), ""):
         try:
             ans = lg.parse(e)
-            if ans is not None:
-                print(f"<< {ans}", end="\n\n")
+            if ans is not None: #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
+                print(f"<< {ans}", end="\n\n") #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
         except Exception as exception:
             print(exception)
 

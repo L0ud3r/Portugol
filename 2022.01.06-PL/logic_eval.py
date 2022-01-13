@@ -1,4 +1,5 @@
-# logic_eval
+# logic_eval.py
+
 import math
 from pprint import PrettyPrinter
 from copy import deepcopy
@@ -6,8 +7,6 @@ from symbol_table import SymbolTable
 
 
 class LogicEval:
-
-    #TODO: documentar
 
     # Tabela de operadores
     operators = {
@@ -53,7 +52,7 @@ class LogicEval:
         return value
 
 
-    # Função para declarar uma variável
+    # Procedimento para declarar uma variável
     # Presume-se que declarar uma variável é criá-la na memória mas não atribuir um valor
     @staticmethod
     def _declarar(*args):
@@ -65,50 +64,54 @@ class LogicEval:
             i += 1
 
 
-
+    # Função para chamar uma função
     @staticmethod
     def _call(args):
         name, values = args
-        name = f"{name}/{len(values)}"
+        name = f"{name}/{len(values)}" # funcao/0, funcao/1, etc. consoante numero de args
         if name in LogicEval.symbols:
             code = LogicEval.symbols[name]["code"]
             var_list = LogicEval.symbols[name]["vars"]
-            # 1. Definir as variaveis recebidas  [[DANGER]]
-            for var_name, value in zip(var_list, values):
+
+            for var_name, value in zip(var_list, values): # definir parâmetros recebidos
                 LogicEval._assign(var_name, None, value)
                 LogicEval.symbols.re_set(var_name, LogicEval.eval(value))
-            # 2. Avaliar Codigo
-            result = LogicEval.eval(code)
-            # 3. Apagar as variaveis "locais"/recebidas
-            for var in var_list:
+
+            result = LogicEval.eval(code) # avaliar código
+
+            for var in var_list: # apagar variáveis "locais" ("locais", pois apenas são apagadas as dos parâmetros)
                 del LogicEval.symbols[var]
             return result
 
         else:
-            raise Exception(f"Function {name} not defined")
+            raise Exception(f"Função {name} não está definida") # função não está definida
 
+
+    # Procedimento para declarar uma função
+    # (não é executada, apenas armazenada em memória para ser chamada futuramente)
     @staticmethod
     def _funcao(args):
         name, var, code = args
         name = f"{name}/{len(var)}"    # factorial/1
         LogicEval.symbols[name] = {"vars": var, "code": code}
 
+    # Procedimento para escrever no escrever dados (variáveis, números, strings, etc.) no ecrã
     @staticmethod
     def _escreva(*args):
-        if type(args) == tuple or type(args) == list:
-            for x in args: #multiple args
-                if type(x) != tuple and type(x) != list:
+        if type(args) == tuple or type(args) == list: # se tuplo ou lista
+            for x in args: # percorrer argumentos
+                if type(x) != tuple and type(x) != list: #caso já não seja tuplo nem lista
                     print(x)
-                else:
+                else: #caso ainda seja tuplo ou lista
                     x_in_list = list(x)
                     while isinstance(x_in_list, list):
                         x_in_list = x_in_list[-1]
                     print(x_in_list)
-        else:
+        else: # caso não seja nem tuplo nem lista
             print(args)
 
 
-
+    # Procedimento para interpretar o código do ciclo para (for)
     @staticmethod
     def _para(var, lower, higher, code):
         lower = LogicEval._return_value_of_var(lower)
@@ -120,36 +123,43 @@ class LogicEval:
             value += 1
             LogicEval._changeValue(var, value)
 
+
+    # Procedimento para interpretar o código do ciclo enquanto (while)
     @staticmethod
     def _enquanto(*args):
         while (LogicEval.eval(args[0])):
             LogicEval.eval(args[1])
 
 
-    # por adicionar funcionalidade de else
+    # Procedimento para interpretar o código da condição se (e senão)
     @staticmethod
     def _se(*args):
-        if len(args) == 2:
-            if args[0]:
+        if len(args) == 2: # caso não tenha senão
+            if args[0]: # caso exp = true
                 return LogicEval.eval(args[1])
-        if len(args) == 3:
-            if args[0]:
+        if len(args) == 3: # caso tenha senão
+            if args[0]: # caso exp = true
                 return LogicEval.eval(args[1])
-            else:
+            else: # correr código do senão
                 return LogicEval.eval(args[2])
 
 
-
+    # Procedimento para declarar variáveis
     @staticmethod
     def _assign(var, vartype, value):
         LogicEval.symbols[var] = [vartype, value]
 
+
+    # Procedimento para atribuir valores a variáveis
     @staticmethod
     def _changeValue(var, value):
-        value = LogicEval._return_value_of_var(value) #se entrar uma lista (stack!)
+        value = LogicEval._return_value_of_var(value) #se entrar uma lista em value (stack stuff)
         if var in LogicEval.symbols:
             var_type = LogicEval.symbols[var][0]
-            #var_type = inteiro, logico, caracter, real
+
+            # var_type pode ser inteiro, logico, caracter, real
+
+            # verificações!
             if (type(value) == str and var_type == "caracter"):
                 LogicEval.symbols[var][-1] = value
             elif (type(value) == bool and var_type == "logico"):
@@ -171,19 +181,22 @@ class LogicEval:
             raise Exception(f"Variável {var} não existe.")
 
 
+    # Procedimento para ler dados do input do utilizador para uma variável
     @staticmethod
     def _leia(*args):
-        for var in args:
-            if var in LogicEval.symbols:
+        for var in args: # Por cada variável em argumentos
+            if var in LogicEval.symbols: # Caso esteja em símbolos, lê o input
                 value = input()
                 try:
-                    value = float(value)
-                except:
-                    value = value
+                    value = float(value) # passa para float caso consiga
+                except: # pode ser retirado?
+                    value = value # pode ser retirado?
                 LogicEval._changeValue(var, value)
-            else:
+            else: # Não está em símbolos (não foi declarada)
                 raise Exception(f"Variável {var} não existe.") #caso nao queiramos que sejam declaradas variaveis automaticamente
 
+
+    #TODO: documentar
     @staticmethod
     def eval(ast):
         if type(ast) in (float, bool, str):
@@ -197,6 +210,7 @@ class LogicEval:
             return ans
         raise Exception(f"Eval called with weird type: {type(ast)}")
 
+    #TODO: documentar
     @staticmethod
     def _eval_dict(ast):
         if "op" in ast:
