@@ -51,17 +51,17 @@ class LogicLexer:
         r"""<-"""
         return t
 
-    # Método com expressão regular capaz de ler o simbolo de lower or equal (menor ou igual)
+    # Método com expressão regular capaz de ler o simbolo de lower or equal (leq) (menor ou igual)
     def t_leq(self,t ):
         r""""<="""
         return t
 
-    # Método com expressão regular capaz de ler o simbolo de greater or equal (maior ou igual)
+    # Método com expressão regular capaz de ler o simbolo de greater or equal (geq) (maior ou igual)
     def t_geq(self, t):
         r""">="""
         return t
 
-    # Método com expressão regular capaz de ler o simbolo de diferente
+    # Método com expressão regular capaz de ler o simbolo de diferente (dif)
     # (o símbolo de igual lógico ficou designado como '=', não sendo necessária uma expressão regular para o mesmo)
     def t_dif(self, t):
         r"""!="""
