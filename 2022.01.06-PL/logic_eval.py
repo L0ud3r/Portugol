@@ -7,7 +7,9 @@ from symbol_table import SymbolTable
 
 class LogicEval:
 
-    # Dispatch Table (Design Pattern)
+    #TODO: documentar
+
+    # Tabela de operadores
     operators = {
         "or": lambda args: LogicEval._return_value_of_var(args[0]) or LogicEval._return_value_of_var(args[1]),
         "and": lambda args: LogicEval._return_value_of_var(args[0]) and LogicEval._return_value_of_var(args[1]),
@@ -41,17 +43,11 @@ class LogicEval:
     # Symbol Table (Tabela de Símbolos)
     symbols = SymbolTable()
 
-    #@staticmethod
-    #def check_float(x):
-    #    assert type(x) is float, "operando nao é float"
-    #    return x
-
     @staticmethod
     def _return_value_of_var(value):
         while isinstance(value, list):
             value = value[-1]
         return value
-
 
 
     @staticmethod

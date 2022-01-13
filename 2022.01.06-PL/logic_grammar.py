@@ -272,5 +272,3 @@ class LogicGrammar:
         return LogicEval.eval(ans)
 
 
-
-
