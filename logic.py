@@ -4,16 +4,6 @@ import argparse
 
 
 
-def run_interactively():
-    lg = LogicGrammar()
-    for e in iter(lambda: input(">> "), ""):
-        try:
-            ans = lg.parse(e)
-            if ans is not None: #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
-                print(f"<< {ans}", end="\n\n") #remover para apenas interpretar o codigo! (funcionamento normal de um compilador)
-        except Exception as exception:
-            print(exception)
-
 
 def run_batch(filename):
     with open(filename, "r") as f:
@@ -28,18 +18,19 @@ def run_batch(filename):
             print(exception)
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--file",
-                    help="Executes interactively",
-                    type=str)
-args = parser.parse_args()
 
-run_batch("exemplo.esi")
 
-#if args.file is not None:
-#   run_batch(args.file)
-#else:
-#    run_interactively()
+
+opcao = 0
+while opcao != 1 and 2:
+    print("Selecione uma opcao")
+    opcao = int(input("Interpretar codigo: 1; \nGerar C: 2;\n>> "))
+    if opcao == 1:
+        file_path = input("Nome do ficheiro:\n>> ")
+        run_batch(file_path)
+    elif opcao == 2:
+        print("Never gonna give you up.")
+
 
 
 

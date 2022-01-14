@@ -4,12 +4,14 @@ import ply.yacc as pyacc
 from pprint import PrettyPrinter
 
 from logic_lexer import LogicLexer
-from logic_eval import LogicEval
+from logic_eval_interpreter import LogicEvalInterpreter
+from logic_eval_writer import LogicEvalWriter
 
 #TODO:
-# Declarar variaveis apenas apos o inicio (perguntar ao prof)
+# Gerar C
+# Menu opçao interpretar ou C
 # Remover debug prints (ANTES DE APRESENTAR!)
-# Relatório
+# Relatório com Árvore abstrata de sintaxe
 # Mudar nome de certas classes e métodos
 
 
@@ -40,12 +42,12 @@ class LogicGrammar:
     # Método com a regra inicial da gramática implementada, sendo que pode haver funções declaradas acima do "main" (no caso do Portugol, é o início)
     def p_portugol(self, p):
         """portugol : func_list ';' inicio code"""
-        p[0] = [p[1]] + [p[4]]
+        p[0] = [p[1]] + [p[3]] + [p[4]]
 
     # Método com outra via da regra inicial da gramática implementada, sem funções previamente declaradas
     def p_portugol2(self, p):
         """portugol : inicio code"""
-        p[0] = [p[2]]
+        p[0] =  [p[1]] + [p[2]]
 
     # Método com a regra de ler funções ou múltiplas funções
     def p_func_list(self, p):
@@ -269,6 +271,6 @@ class LogicGrammar:
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
         pp = PrettyPrinter()
         #pp.pprint(ans) #remover, apenas para debug!
-        return LogicEval.eval(ans)
+        return LogicEvalWriter.eval(ans)
 
 

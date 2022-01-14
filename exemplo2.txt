@@ -1,0 +1,26 @@
+inicio
+
+inteiro: a;
+inteiro: b;
+inteiro: c;
+a <- 3;
+b <- 10;
+c <- 15;
+escreva(a);
+
+inteiro: d;
+d <- 0;
+
+enquanto (d<b) faca
+    escreva(d);
+    d <- d + 1;
+fimenquanto;
+
+
+se (a<b) entao
+    escreva("ola");
+senao
+    escreva("adeus");
+fimse;
+
+fim
