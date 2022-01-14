@@ -270,7 +270,7 @@ class LogicGrammar:
     def parse(self, expression, output):
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
         pp = PrettyPrinter()
-        #pp.pprint(ans) #remover, apenas para debug!
+        pp.pprint(ans) #remover, apenas para debug!
         if output == "interpreter":
             return LogicEvalInterpreter.eval(ans)
         elif output == "writer":

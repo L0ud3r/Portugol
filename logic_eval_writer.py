@@ -29,14 +29,14 @@ class LogicEvalWriter:
         "!=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "!=" +  str(LogicEvalWriter._return_value_of_var(args[1])),
 
         "declarar": lambda args: LogicEvalWriter._declarar(*args), #done
-        "assign": lambda args: LogicEvalWriter._changeValue(*args), #done
+        "assign": lambda args: LogicEvalWriter._changeValue(*args), #fix funcoes
         "escreva": lambda args: LogicEvalWriter._escreva(*args), #done
         "leia": lambda args: LogicEvalWriter._leia(*args), #done
         "para": lambda args: LogicEvalWriter._para(*args), #done
         "enquanto": lambda args: LogicEvalWriter._enquanto(*args), #done
         "se": lambda args: LogicEvalWriter._se(*args), #done
         "funcao": lambda args: LogicEvalWriter._funcao(args), #done
-        "call": lambda args: LogicEvalWriter._call(args),
+        "call": lambda args: LogicEvalWriter._call(args), #done
 
     }
     # Symbol Table (Tabela de Símbolos)
@@ -96,17 +96,24 @@ class LogicEvalWriter:
 
     # Função para chamar uma função
     @staticmethod
-    def _call(args):
+    def _call(args): #TODO: fix
+        #print(args)
+
         name, values = args
-        LogicEvalWriter.c_code += f"{name}("
+        finalString = ""
+        #LogicEvalWriter.c_code += f"{name}("
+        finalString += f"{name}("
         i = 0
         for value in values:
             if i < len(values)-1:
-                LogicEvalWriter.c_code += f"{value},"
+                #LogicEvalWriter.c_code += f"{value},"
+                finalString += f"{value},"
             else:
-                LogicEvalWriter.c_code += f"{value});\n\t"
+                #LogicEvalWriter.c_code += f"{value});\n\t"
+                finalString += f"{value})"
             i+=1
 
+        return finalString
 
 
     # Procedimento para declarar uma função
@@ -202,12 +209,11 @@ class LogicEvalWriter:
     def _assign(var, vartype, value):
         LogicEvalWriter.symbols[var] = [vartype, value]
 
-
     # Procedimento para atribuir valores a variáveis
     @staticmethod
     def _changeValue(var, value):
 
-        LogicEvalWriter.c_code += f"{var} = {LogicEvalWriter._return_value_of_var(value)};\n\t"
+        LogicEvalWriter.c_code += f"{var} = {LogicEvalWriter.eval(value)};\n\t"
 
 
     # Procedimento para ler dados do input do utilizador para uma variável
@@ -234,7 +240,7 @@ class LogicEvalWriter:
             ast2 = str(ast)
             if ast2 == "inicio":
                 LogicEvalWriter.c_code += "int main(){" + "\n\t"
-            if ast2 == "fim":
+            elif ast2 == "fim":
                 LogicEvalWriter.c_code += "}"
                 LogicEvalWriter.f.write(LogicEvalWriter.c_code)
                 LogicEvalWriter.f.close()
