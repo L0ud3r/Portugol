@@ -36,7 +36,7 @@ class LogicEvalWriter:
         "enquanto": lambda args: LogicEvalWriter._enquanto(*args), #done
         "se": lambda args: LogicEvalWriter._se(*args), #done
         "funcao": lambda args: LogicEvalWriter._funcao(args), #done
-        "call": lambda args: LogicEvalWriter._call(args), #done
+        "call": lambda args: LogicEvalWriter._funcao2(*args), #done
 
     }
     # Symbol Table (Tabela de Símbolos)
@@ -97,7 +97,7 @@ class LogicEvalWriter:
     # Função para chamar uma função
     @staticmethod
     def _call(args): #TODO: fix
-        #print(args)
+        print(args)
 
         name, values = args
         finalString = ""
@@ -115,6 +115,10 @@ class LogicEvalWriter:
 
         return finalString
 
+    @staticmethod
+    def _funcao2(*args):
+        # print(args)
+        LogicEvalWriter.eval(LogicEvalWriter._call(args))
 
     # Procedimento para declarar uma função
     # (não é executada, apenas armazenada em memória para ser chamada futuramente)
