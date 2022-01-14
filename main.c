@@ -1,4 +1,12 @@
-int main(){
+int fatorial(int min,int max){
+	int res;
+	res = min;
+	for(i = min+1.0; i <= max; i++){
+res = res*i;
+	}
+return res;
+	}
+	int main(){
 	int a;
 	int b;
 	int c;
@@ -18,4 +26,5 @@ printf("ola");
 else {
 	printf("adeus");
 	}
+	fatorial(1.0,3.0);
 	}

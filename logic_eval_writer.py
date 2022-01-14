@@ -35,7 +35,7 @@ class LogicEvalWriter:
         "para": lambda args: LogicEvalWriter._para(*args), #done
         "enquanto": lambda args: LogicEvalWriter._enquanto(*args), #done
         "se": lambda args: LogicEvalWriter._se(*args), #done
-        "funcao": lambda args: LogicEvalWriter._funcao(args),
+        "funcao": lambda args: LogicEvalWriter._funcao(args), #done
         "call": lambda args: LogicEvalWriter._call(args),
 
     }
@@ -98,32 +98,40 @@ class LogicEvalWriter:
     @staticmethod
     def _call(args):
         name, values = args
-        name = f"{name}/{len(values)}" # funcao/0, funcao/1, etc. consoante numero de args
-        if name in LogicEvalWriter.symbols:
-            code = LogicEvalWriter.symbols[name]["code"]
-            var_list = LogicEvalWriter.symbols[name]["vars"]
+        LogicEvalWriter.c_code += f"{name}("
+        i = 0
+        for value in values:
+            if i < len(values)-1:
+                LogicEvalWriter.c_code += f"{value},"
+            else:
+                LogicEvalWriter.c_code += f"{value});\n\t"
+            i+=1
 
-            for var_name, value in zip(var_list, values): # definir parâmetros recebidos
-                LogicEvalWriter._assign(var_name, None, value)
-                LogicEvalWriter.symbols.re_set(var_name, LogicEvalWriter.eval(value))
-
-            result = LogicEvalWriter.eval(code) # avaliar código
-
-            for var in var_list: # apagar variáveis "locais" ("locais", pois apenas são apagadas as dos parâmetros)
-                del LogicEvalWriter.symbols[var]
-            return result
-
-        else:
-            raise Exception(f"Função {name} não está definida") # função não está definida
 
 
     # Procedimento para declarar uma função
     # (não é executada, apenas armazenada em memória para ser chamada futuramente)
     @staticmethod
     def _funcao(args):
-        name, var, code = args
-        name = f"{name}/{len(var)}"    # factorial/1
-        LogicEvalWriter.symbols[name] = {"vars": var, "code": code}
+
+        name, vars, code = args
+
+        LogicEvalWriter.c_code += f"int {name}("
+
+        i = 0
+
+        for var in vars:
+            if i == len(vars)-1:
+                LogicEvalWriter.c_code += f"int {var})"
+            else:
+                LogicEvalWriter.c_code += f"int {var},"
+            i+=1
+
+        LogicEvalWriter.c_code += "{\n\t"
+        LogicEvalWriter.eval(code)
+        LogicEvalWriter.c_code += f"return {args[-1][-1]['var']};\n\t"
+        LogicEvalWriter.c_code += "}\n\t"
+
 
     # Procedimento para escrever no escrever dados (variáveis, números, strings, etc.) no ecrã
     @staticmethod
@@ -161,7 +169,6 @@ class LogicEvalWriter:
     @staticmethod
     def _enquanto(*args):
         LogicEvalWriter.c_code += f"while({args[0]['args'][0]['var']} {args[0]['op']}  {args[0]['args'][1]['var']}) " + "{\n"
-        print(args[1])
         LogicEvalWriter.eval(args[1])
         LogicEvalWriter.c_code += "}\n"
 
@@ -169,15 +176,15 @@ class LogicEvalWriter:
     # Procedimento para interpretar o código da condição se (e senão)
     @staticmethod
     def _se(*args):
-        print(args)
+
         if len(args) == 2: # caso não tenha senão
             LogicEvalWriter.c_code += f"if ({args[0]})" + "{\n"
-            print(args[1])
+
             LogicEvalWriter.eval(args[1])
             LogicEvalWriter.c_code += "}\n"
         if len(args) == 3:
             LogicEvalWriter.c_code += f"if ({args[0]})" + "{\n"
-            print(args[1])
+
             LogicEvalWriter.eval(args[1])
             LogicEvalWriter.c_code += "}\n"
             LogicEvalWriter.c_code += "else {\n\t"
@@ -187,10 +194,7 @@ class LogicEvalWriter:
 
 
 
-           # if args[0]: # caso exp = true
-           #     return LogicEvalWriter.eval(args[1])
-           # else: # correr código do senão
-           #     return LogicEvalWriter.eval(args[2])
+
 
 
     # Procedimento para declarar variáveis
