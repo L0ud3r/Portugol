@@ -46,24 +46,8 @@ class LogicGrammar:
 
     # Método com outra via da regra inicial da gramática implementada, sem funções previamente declaradas
     def p_portugol2(self, p):
-        """portugol : inicio declarar_list code"""
+        """portugol : inicio code"""
         p[0] =  [p[1]] + [p[2]]
-
-    def p_declarar_list(self, p):
-        """ declarar_list : declarar
-                            | declarar_list ';' declarar"""
-        if len(p) == 2:
-            p[0] = [p[1]]
-        else:
-            p[0] = p[1]
-            p[0].append(p[3])
-
-    # Método com a regra de leitura de declaração de múltiplas variáveis
-    def p_declarar(self, p):
-        """ declarar : vartype ':' var_list """
-        p[0] = {"op": "declarar",
-                "args": p[3],
-                "data": [p[1]]}
 
     # Método com a regra de ler funções ou múltiplas funções
     def p_func_list(self, p):
@@ -139,6 +123,13 @@ class LogicGrammar:
     def p_comando4(self, p):
         """ comando : leia '(' var_list ')' """
         p[0] = {"op": "leia", "args":  p[3]}
+
+    # Método com a regra de leitura de declaração de múltiplas variáveis
+    def p_comando5(self, p):
+        """ comando : vartype ':' var_list """
+        p[0] = {"op": "declarar",
+                "args": p[3],
+                "data": [p[1]]}
 
     # Método com a regra de leitura do if() -> else() em Portugol
     def p_comando6(self, p):
