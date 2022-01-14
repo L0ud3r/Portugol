@@ -1,8 +1,6 @@
 # logic_eval_writer.py
 
-import math
 from pprint import PrettyPrinter
-from copy import deepcopy
 from symbol_table import SymbolTable
 
 
@@ -98,6 +96,8 @@ class LogicEvalWriter:
     @staticmethod
     def _call(args):
         name, values = args
+        print(name)
+        print(values)
         LogicEvalWriter.c_code += f"{name}("
         i = 0
         for value in values:
@@ -106,7 +106,6 @@ class LogicEvalWriter:
             else:
                 LogicEvalWriter.c_code += f"{value});\n\t"
             i+=1
-
 
 
     # Procedimento para declarar uma função
@@ -137,6 +136,7 @@ class LogicEvalWriter:
     @staticmethod
     def _escreva(*args):
         for arg in args:
+            print(arg)
             if arg in LogicEvalWriter.symbols:
                 LogicEvalWriter.c_code += f'printf("'
                 if LogicEvalWriter.symbols[arg][0] == "int":
@@ -207,7 +207,10 @@ class LogicEvalWriter:
     @staticmethod
     def _changeValue(var, value):
 
-        LogicEvalWriter.c_code += f"{var} = {LogicEvalWriter._return_value_of_var(value)};\n\t"
+        if LogicEvalWriter._return_value_of_var(value) is not None:
+            LogicEvalWriter.c_code += f"{var} = {LogicEvalWriter._return_value_of_var(value)};\n\t"
+        else:
+            LogicEvalWriter.c_code += f"{var} = {value};\n\t"
 
 
     # Procedimento para ler dados do input do utilizador para uma variável
