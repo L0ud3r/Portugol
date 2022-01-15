@@ -123,3 +123,3921 @@ portugol             : 0
 s                    : 6 7
 var_list             : 16 17 52 54
 
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . portugol
+    (1) portugol -> . func_list ; inicio code
+    (2) portugol -> . inicio code
+    (3) func_list -> . func
+    (4) func_list -> . func_list ; func
+    (5) func -> . funcao var ( args ) com_list ; fimfuncao
+
+    inicio          shift and go to state 3
+    funcao          shift and go to state 5
+
+    portugol                       shift and go to state 1
+    func_list                      shift and go to state 2
+    func                           shift and go to state 4
+
+state 1
+
+    (0) S' -> portugol .
+
+
+
+state 2
+
+    (1) portugol -> func_list . ; inicio code
+    (4) func_list -> func_list . ; func
+
+    ;               shift and go to state 6
+
+
+state 3
+
+    (2) portugol -> inicio . code
+    (6) code -> . s
+    (7) code -> . code ; s
+    (8) s -> . comando
+    (9) s -> . fim
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    fim             shift and go to state 10
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    code                           shift and go to state 7
+    s                              shift and go to state 8
+    comando                        shift and go to state 9
+    e                              shift and go to state 11
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 4
+
+    (3) func_list -> func .
+
+    ;               reduce using rule 3 (func_list -> func .)
+
+
+state 5
+
+    (5) func -> funcao . var ( args ) com_list ; fimfuncao
+
+    var             shift and go to state 30
+
+
+state 6
+
+    (1) portugol -> func_list ; . inicio code
+    (4) func_list -> func_list ; . func
+    (5) func -> . funcao var ( args ) com_list ; fimfuncao
+
+    inicio          shift and go to state 31
+    funcao          shift and go to state 5
+
+    func                           shift and go to state 32
+
+state 7
+
+    (2) portugol -> inicio code .
+    (7) code -> code . ; s
+
+    $end            reduce using rule 2 (portugol -> inicio code .)
+    ;               shift and go to state 33
+
+
+state 8
+
+    (6) code -> s .
+
+    ;               reduce using rule 6 (code -> s .)
+    $end            reduce using rule 6 (code -> s .)
+
+
+state 9
+
+    (8) s -> comando .
+
+    ;               reduce using rule 8 (s -> comando .)
+    $end            reduce using rule 8 (s -> comando .)
+
+
+state 10
+
+    (9) s -> fim .
+
+    ;               reduce using rule 9 (s -> fim .)
+    $end            reduce using rule 9 (s -> fim .)
+
+
+state 11
+
+    (12) comando -> e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    ;               reduce using rule 12 (comando -> e .)
+    $end            reduce using rule 12 (comando -> e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+
+state 12
+
+    (13) comando -> ciclo .
+
+    ;               reduce using rule 13 (comando -> ciclo .)
+    $end            reduce using rule 13 (comando -> ciclo .)
+
+
+state 13
+
+    (14) comando -> var . assign e
+    (24) e -> var .
+    (29) e -> var . ( e_list )
+    (30) e -> var . ( )
+
+    assign          shift and go to state 47
+    or              reduce using rule 24 (e -> var .)
+    and             reduce using rule 24 (e -> var .)
+    xor             reduce using rule 24 (e -> var .)
+    +               reduce using rule 24 (e -> var .)
+    -               reduce using rule 24 (e -> var .)
+    *               reduce using rule 24 (e -> var .)
+    /               reduce using rule 24 (e -> var .)
+    <               reduce using rule 24 (e -> var .)
+    leq             reduce using rule 24 (e -> var .)
+    >               reduce using rule 24 (e -> var .)
+    geq             reduce using rule 24 (e -> var .)
+    =               reduce using rule 24 (e -> var .)
+    dif             reduce using rule 24 (e -> var .)
+    ;               reduce using rule 24 (e -> var .)
+    $end            reduce using rule 24 (e -> var .)
+    (               shift and go to state 48
+
+
+state 14
+
+    (15) comando -> escreva . ( e_list )
+
+    (               shift and go to state 49
+
+
+state 15
+
+    (25) e -> ( . e )
+    (33) n -> ( . n )
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 50
+    n                              shift and go to state 51
+    b                              shift and go to state 19
+    f                              shift and go to state 24
+
+state 16
+
+    (16) comando -> leia . ( var_list )
+
+    (               shift and go to state 53
+
+
+state 17
+
+    (17) comando -> vartype . : var_list
+
+    :               shift and go to state 54
+
+
+state 18
+
+    (18) comando -> se . e entao com_list ; senao com_list ; fimse
+    (19) comando -> se . e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 55
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 19
+
+    (26) e -> b .
+
+    or              reduce using rule 26 (e -> b .)
+    and             reduce using rule 26 (e -> b .)
+    xor             reduce using rule 26 (e -> b .)
+    +               reduce using rule 26 (e -> b .)
+    -               reduce using rule 26 (e -> b .)
+    *               reduce using rule 26 (e -> b .)
+    /               reduce using rule 26 (e -> b .)
+    <               reduce using rule 26 (e -> b .)
+    leq             reduce using rule 26 (e -> b .)
+    >               reduce using rule 26 (e -> b .)
+    geq             reduce using rule 26 (e -> b .)
+    =               reduce using rule 26 (e -> b .)
+    dif             reduce using rule 26 (e -> b .)
+    ;               reduce using rule 26 (e -> b .)
+    $end            reduce using rule 26 (e -> b .)
+    )               reduce using rule 26 (e -> b .)
+    entao           reduce using rule 26 (e -> b .)
+    faca            reduce using rule 26 (e -> b .)
+    ,               reduce using rule 26 (e -> b .)
+    ate             reduce using rule 26 (e -> b .)
+
+
+state 20
+
+    (27) e -> n .
+
+    or              reduce using rule 27 (e -> n .)
+    and             reduce using rule 27 (e -> n .)
+    xor             reduce using rule 27 (e -> n .)
+    +               reduce using rule 27 (e -> n .)
+    -               reduce using rule 27 (e -> n .)
+    *               reduce using rule 27 (e -> n .)
+    /               reduce using rule 27 (e -> n .)
+    <               reduce using rule 27 (e -> n .)
+    leq             reduce using rule 27 (e -> n .)
+    >               reduce using rule 27 (e -> n .)
+    geq             reduce using rule 27 (e -> n .)
+    =               reduce using rule 27 (e -> n .)
+    dif             reduce using rule 27 (e -> n .)
+    ;               reduce using rule 27 (e -> n .)
+    $end            reduce using rule 27 (e -> n .)
+    entao           reduce using rule 27 (e -> n .)
+    )               reduce using rule 27 (e -> n .)
+    faca            reduce using rule 27 (e -> n .)
+    ,               reduce using rule 27 (e -> n .)
+    ate             reduce using rule 27 (e -> n .)
+
+
+state 21
+
+    (28) e -> string .
+
+    or              reduce using rule 28 (e -> string .)
+    and             reduce using rule 28 (e -> string .)
+    xor             reduce using rule 28 (e -> string .)
+    +               reduce using rule 28 (e -> string .)
+    -               reduce using rule 28 (e -> string .)
+    *               reduce using rule 28 (e -> string .)
+    /               reduce using rule 28 (e -> string .)
+    <               reduce using rule 28 (e -> string .)
+    leq             reduce using rule 28 (e -> string .)
+    >               reduce using rule 28 (e -> string .)
+    geq             reduce using rule 28 (e -> string .)
+    =               reduce using rule 28 (e -> string .)
+    dif             reduce using rule 28 (e -> string .)
+    ;               reduce using rule 28 (e -> string .)
+    $end            reduce using rule 28 (e -> string .)
+    )               reduce using rule 28 (e -> string .)
+    entao           reduce using rule 28 (e -> string .)
+    faca            reduce using rule 28 (e -> string .)
+    ,               reduce using rule 28 (e -> string .)
+    ate             reduce using rule 28 (e -> string .)
+
+
+state 22
+
+    (10) ciclo -> para . var de e ate e faca com_list ; fimpara
+
+    var             shift and go to state 56
+
+
+state 23
+
+    (11) ciclo -> enquanto . n faca com_list ; fimenquanto
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    (               shift and go to state 59
+    var             shift and go to state 52
+    string          shift and go to state 21
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    n                              shift and go to state 57
+    e                              shift and go to state 58
+    b                              shift and go to state 19
+    f                              shift and go to state 24
+
+state 24
+
+    (44) b -> f .
+
+    or              reduce using rule 44 (b -> f .)
+    and             reduce using rule 44 (b -> f .)
+    xor             reduce using rule 44 (b -> f .)
+    +               reduce using rule 44 (b -> f .)
+    -               reduce using rule 44 (b -> f .)
+    *               reduce using rule 44 (b -> f .)
+    /               reduce using rule 44 (b -> f .)
+    <               reduce using rule 44 (b -> f .)
+    leq             reduce using rule 44 (b -> f .)
+    >               reduce using rule 44 (b -> f .)
+    geq             reduce using rule 44 (b -> f .)
+    =               reduce using rule 44 (b -> f .)
+    dif             reduce using rule 44 (b -> f .)
+    ;               reduce using rule 44 (b -> f .)
+    $end            reduce using rule 44 (b -> f .)
+    )               reduce using rule 44 (b -> f .)
+    entao           reduce using rule 44 (b -> f .)
+    faca            reduce using rule 44 (b -> f .)
+    ,               reduce using rule 44 (b -> f .)
+    ate             reduce using rule 44 (b -> f .)
+
+
+state 25
+
+    (31) n -> nr .
+
+    or              reduce using rule 31 (n -> nr .)
+    and             reduce using rule 31 (n -> nr .)
+    xor             reduce using rule 31 (n -> nr .)
+    +               reduce using rule 31 (n -> nr .)
+    -               reduce using rule 31 (n -> nr .)
+    *               reduce using rule 31 (n -> nr .)
+    /               reduce using rule 31 (n -> nr .)
+    <               reduce using rule 31 (n -> nr .)
+    leq             reduce using rule 31 (n -> nr .)
+    >               reduce using rule 31 (n -> nr .)
+    geq             reduce using rule 31 (n -> nr .)
+    =               reduce using rule 31 (n -> nr .)
+    dif             reduce using rule 31 (n -> nr .)
+    ;               reduce using rule 31 (n -> nr .)
+    $end            reduce using rule 31 (n -> nr .)
+    )               reduce using rule 31 (n -> nr .)
+    entao           reduce using rule 31 (n -> nr .)
+    faca            reduce using rule 31 (n -> nr .)
+    ,               reduce using rule 31 (n -> nr .)
+    ate             reduce using rule 31 (n -> nr .)
+
+
+state 26
+
+    (32) n -> - . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 60
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 27
+
+    (48) f -> true .
+
+    or              reduce using rule 48 (f -> true .)
+    and             reduce using rule 48 (f -> true .)
+    xor             reduce using rule 48 (f -> true .)
+    +               reduce using rule 48 (f -> true .)
+    -               reduce using rule 48 (f -> true .)
+    *               reduce using rule 48 (f -> true .)
+    /               reduce using rule 48 (f -> true .)
+    <               reduce using rule 48 (f -> true .)
+    leq             reduce using rule 48 (f -> true .)
+    >               reduce using rule 48 (f -> true .)
+    geq             reduce using rule 48 (f -> true .)
+    =               reduce using rule 48 (f -> true .)
+    dif             reduce using rule 48 (f -> true .)
+    ;               reduce using rule 48 (f -> true .)
+    $end            reduce using rule 48 (f -> true .)
+    )               reduce using rule 48 (f -> true .)
+    entao           reduce using rule 48 (f -> true .)
+    faca            reduce using rule 48 (f -> true .)
+    ,               reduce using rule 48 (f -> true .)
+    ate             reduce using rule 48 (f -> true .)
+
+
+state 28
+
+    (49) f -> false .
+
+    or              reduce using rule 49 (f -> false .)
+    and             reduce using rule 49 (f -> false .)
+    xor             reduce using rule 49 (f -> false .)
+    +               reduce using rule 49 (f -> false .)
+    -               reduce using rule 49 (f -> false .)
+    *               reduce using rule 49 (f -> false .)
+    /               reduce using rule 49 (f -> false .)
+    <               reduce using rule 49 (f -> false .)
+    leq             reduce using rule 49 (f -> false .)
+    >               reduce using rule 49 (f -> false .)
+    geq             reduce using rule 49 (f -> false .)
+    =               reduce using rule 49 (f -> false .)
+    dif             reduce using rule 49 (f -> false .)
+    ;               reduce using rule 49 (f -> false .)
+    $end            reduce using rule 49 (f -> false .)
+    )               reduce using rule 49 (f -> false .)
+    entao           reduce using rule 49 (f -> false .)
+    faca            reduce using rule 49 (f -> false .)
+    ,               reduce using rule 49 (f -> false .)
+    ate             reduce using rule 49 (f -> false .)
+
+
+state 29
+
+    (50) f -> not . f
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    f                              shift and go to state 61
+
+state 30
+
+    (5) func -> funcao var . ( args ) com_list ; fimfuncao
+
+    (               shift and go to state 62
+
+
+state 31
+
+    (1) portugol -> func_list ; inicio . code
+    (6) code -> . s
+    (7) code -> . code ; s
+    (8) s -> . comando
+    (9) s -> . fim
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    fim             shift and go to state 10
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    code                           shift and go to state 63
+    s                              shift and go to state 8
+    comando                        shift and go to state 9
+    e                              shift and go to state 11
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 32
+
+    (4) func_list -> func_list ; func .
+
+    ;               reduce using rule 4 (func_list -> func_list ; func .)
+
+
+state 33
+
+    (7) code -> code ; . s
+    (8) s -> . comando
+    (9) s -> . fim
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    fim             shift and go to state 10
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    s                              shift and go to state 64
+    comando                        shift and go to state 9
+    e                              shift and go to state 11
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 34
+
+    (45) b -> e or . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 65
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 35
+
+    (46) b -> e and . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 66
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 36
+
+    (47) b -> e xor . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 67
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 37
+
+    (34) n -> e + . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 68
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 38
+
+    (35) n -> e - . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 69
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 39
+
+    (36) n -> e * . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 70
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 40
+
+    (37) n -> e / . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 71
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 41
+
+    (38) n -> e < . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 72
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 42
+
+    (39) n -> e leq . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 73
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 43
+
+    (40) n -> e > . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 74
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 44
+
+    (41) n -> e geq . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 75
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 45
+
+    (42) n -> e = . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 76
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 46
+
+    (43) n -> e dif . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 77
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 47
+
+    (14) comando -> var assign . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 78
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 48
+
+    (29) e -> var ( . e_list )
+    (30) e -> var ( . )
+    (22) e_list -> . e
+    (23) e_list -> . e_list , e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    )               shift and go to state 80
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e_list                         shift and go to state 79
+    e                              shift and go to state 81
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 49
+
+    (15) comando -> escreva ( . e_list )
+    (22) e_list -> . e
+    (23) e_list -> . e_list , e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e_list                         shift and go to state 82
+    e                              shift and go to state 81
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 50
+
+    (25) e -> ( e . )
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+
+    )               shift and go to state 83
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+
+
+state 51
+
+    (33) n -> ( n . )
+    (27) e -> n .
+
+  ! shift/reduce conflict for ) resolved as shift
+    )               shift and go to state 84
+    +               reduce using rule 27 (e -> n .)
+    -               reduce using rule 27 (e -> n .)
+    *               reduce using rule 27 (e -> n .)
+    /               reduce using rule 27 (e -> n .)
+    <               reduce using rule 27 (e -> n .)
+    leq             reduce using rule 27 (e -> n .)
+    >               reduce using rule 27 (e -> n .)
+    geq             reduce using rule 27 (e -> n .)
+    =               reduce using rule 27 (e -> n .)
+    dif             reduce using rule 27 (e -> n .)
+    or              reduce using rule 27 (e -> n .)
+    and             reduce using rule 27 (e -> n .)
+    xor             reduce using rule 27 (e -> n .)
+
+  ! )               [ reduce using rule 27 (e -> n .) ]
+
+
+state 52
+
+    (24) e -> var .
+    (29) e -> var . ( e_list )
+    (30) e -> var . ( )
+
+    )               reduce using rule 24 (e -> var .)
+    +               reduce using rule 24 (e -> var .)
+    -               reduce using rule 24 (e -> var .)
+    *               reduce using rule 24 (e -> var .)
+    /               reduce using rule 24 (e -> var .)
+    <               reduce using rule 24 (e -> var .)
+    leq             reduce using rule 24 (e -> var .)
+    >               reduce using rule 24 (e -> var .)
+    geq             reduce using rule 24 (e -> var .)
+    =               reduce using rule 24 (e -> var .)
+    dif             reduce using rule 24 (e -> var .)
+    or              reduce using rule 24 (e -> var .)
+    and             reduce using rule 24 (e -> var .)
+    xor             reduce using rule 24 (e -> var .)
+    entao           reduce using rule 24 (e -> var .)
+    ;               reduce using rule 24 (e -> var .)
+    $end            reduce using rule 24 (e -> var .)
+    faca            reduce using rule 24 (e -> var .)
+    ,               reduce using rule 24 (e -> var .)
+    ate             reduce using rule 24 (e -> var .)
+    (               shift and go to state 48
+
+
+state 53
+
+    (16) comando -> leia ( . var_list )
+    (51) var_list -> . var
+    (52) var_list -> . var_list , var
+
+    var             shift and go to state 86
+
+    var_list                       shift and go to state 85
+
+state 54
+
+    (17) comando -> vartype : . var_list
+    (51) var_list -> . var
+    (52) var_list -> . var_list , var
+
+    var             shift and go to state 86
+
+    var_list                       shift and go to state 87
+
+state 55
+
+    (18) comando -> se e . entao com_list ; senao com_list ; fimse
+    (19) comando -> se e . entao com_list ; fimse
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    entao           shift and go to state 88
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+
+state 56
+
+    (10) ciclo -> para var . de e ate e faca com_list ; fimpara
+
+    de              shift and go to state 89
+
+
+state 57
+
+    (11) ciclo -> enquanto n . faca com_list ; fimenquanto
+    (27) e -> n .
+
+    faca            shift and go to state 90
+    +               reduce using rule 27 (e -> n .)
+    -               reduce using rule 27 (e -> n .)
+    *               reduce using rule 27 (e -> n .)
+    /               reduce using rule 27 (e -> n .)
+    <               reduce using rule 27 (e -> n .)
+    leq             reduce using rule 27 (e -> n .)
+    >               reduce using rule 27 (e -> n .)
+    geq             reduce using rule 27 (e -> n .)
+    =               reduce using rule 27 (e -> n .)
+    dif             reduce using rule 27 (e -> n .)
+    or              reduce using rule 27 (e -> n .)
+    and             reduce using rule 27 (e -> n .)
+    xor             reduce using rule 27 (e -> n .)
+
+
+state 58
+
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+
+
+state 59
+
+    (33) n -> ( . n )
+    (25) e -> ( . e )
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    (               shift and go to state 59
+    var             shift and go to state 52
+    string          shift and go to state 21
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    n                              shift and go to state 51
+    e                              shift and go to state 50
+    b                              shift and go to state 19
+    f                              shift and go to state 24
+
+state 60
+
+    (32) n -> - e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 32 (n -> - e .)
+    and             reduce using rule 32 (n -> - e .)
+    xor             reduce using rule 32 (n -> - e .)
+    +               reduce using rule 32 (n -> - e .)
+    -               reduce using rule 32 (n -> - e .)
+    *               reduce using rule 32 (n -> - e .)
+    /               reduce using rule 32 (n -> - e .)
+    <               reduce using rule 32 (n -> - e .)
+    leq             reduce using rule 32 (n -> - e .)
+    >               reduce using rule 32 (n -> - e .)
+    geq             reduce using rule 32 (n -> - e .)
+    =               reduce using rule 32 (n -> - e .)
+    dif             reduce using rule 32 (n -> - e .)
+    ;               reduce using rule 32 (n -> - e .)
+    $end            reduce using rule 32 (n -> - e .)
+    )               reduce using rule 32 (n -> - e .)
+    entao           reduce using rule 32 (n -> - e .)
+    faca            reduce using rule 32 (n -> - e .)
+    ,               reduce using rule 32 (n -> - e .)
+    ate             reduce using rule 32 (n -> - e .)
+
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! +               [ shift and go to state 37 ]
+  ! -               [ shift and go to state 38 ]
+  ! *               [ shift and go to state 39 ]
+  ! /               [ shift and go to state 40 ]
+  ! <               [ shift and go to state 41 ]
+  ! leq             [ shift and go to state 42 ]
+  ! >               [ shift and go to state 43 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 61
+
+    (50) f -> not f .
+
+    or              reduce using rule 50 (f -> not f .)
+    and             reduce using rule 50 (f -> not f .)
+    xor             reduce using rule 50 (f -> not f .)
+    +               reduce using rule 50 (f -> not f .)
+    -               reduce using rule 50 (f -> not f .)
+    *               reduce using rule 50 (f -> not f .)
+    /               reduce using rule 50 (f -> not f .)
+    <               reduce using rule 50 (f -> not f .)
+    leq             reduce using rule 50 (f -> not f .)
+    >               reduce using rule 50 (f -> not f .)
+    geq             reduce using rule 50 (f -> not f .)
+    =               reduce using rule 50 (f -> not f .)
+    dif             reduce using rule 50 (f -> not f .)
+    ;               reduce using rule 50 (f -> not f .)
+    $end            reduce using rule 50 (f -> not f .)
+    )               reduce using rule 50 (f -> not f .)
+    entao           reduce using rule 50 (f -> not f .)
+    faca            reduce using rule 50 (f -> not f .)
+    ,               reduce using rule 50 (f -> not f .)
+    ate             reduce using rule 50 (f -> not f .)
+
+
+state 62
+
+    (5) func -> funcao var ( . args ) com_list ; fimfuncao
+    (53) args -> .
+    (54) args -> . var_list
+    (51) var_list -> . var
+    (52) var_list -> . var_list , var
+
+    )               reduce using rule 53 (args -> .)
+    var             shift and go to state 86
+
+    args                           shift and go to state 91
+    var_list                       shift and go to state 92
+
+state 63
+
+    (1) portugol -> func_list ; inicio code .
+    (7) code -> code . ; s
+
+    $end            reduce using rule 1 (portugol -> func_list ; inicio code .)
+    ;               shift and go to state 33
+
+
+state 64
+
+    (7) code -> code ; s .
+
+    ;               reduce using rule 7 (code -> code ; s .)
+    $end            reduce using rule 7 (code -> code ; s .)
+
+
+state 65
+
+    (45) b -> e or e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 45 (b -> e or e .)
+    xor             reduce using rule 45 (b -> e or e .)
+    leq             reduce using rule 45 (b -> e or e .)
+    geq             reduce using rule 45 (b -> e or e .)
+    =               reduce using rule 45 (b -> e or e .)
+    dif             reduce using rule 45 (b -> e or e .)
+    ;               reduce using rule 45 (b -> e or e .)
+    $end            reduce using rule 45 (b -> e or e .)
+    )               reduce using rule 45 (b -> e or e .)
+    entao           reduce using rule 45 (b -> e or e .)
+    faca            reduce using rule 45 (b -> e or e .)
+    ,               reduce using rule 45 (b -> e or e .)
+    ate             reduce using rule 45 (b -> e or e .)
+    and             shift and go to state 35
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    >               shift and go to state 43
+
+  ! and             [ reduce using rule 45 (b -> e or e .) ]
+  ! +               [ reduce using rule 45 (b -> e or e .) ]
+  ! -               [ reduce using rule 45 (b -> e or e .) ]
+  ! *               [ reduce using rule 45 (b -> e or e .) ]
+  ! /               [ reduce using rule 45 (b -> e or e .) ]
+  ! <               [ reduce using rule 45 (b -> e or e .) ]
+  ! >               [ reduce using rule 45 (b -> e or e .) ]
+  ! or              [ shift and go to state 34 ]
+  ! xor             [ shift and go to state 36 ]
+  ! leq             [ shift and go to state 42 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 66
+
+    (46) b -> e and e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 46 (b -> e and e .)
+    and             reduce using rule 46 (b -> e and e .)
+    xor             reduce using rule 46 (b -> e and e .)
+    leq             reduce using rule 46 (b -> e and e .)
+    geq             reduce using rule 46 (b -> e and e .)
+    =               reduce using rule 46 (b -> e and e .)
+    dif             reduce using rule 46 (b -> e and e .)
+    ;               reduce using rule 46 (b -> e and e .)
+    $end            reduce using rule 46 (b -> e and e .)
+    )               reduce using rule 46 (b -> e and e .)
+    entao           reduce using rule 46 (b -> e and e .)
+    faca            reduce using rule 46 (b -> e and e .)
+    ,               reduce using rule 46 (b -> e and e .)
+    ate             reduce using rule 46 (b -> e and e .)
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    >               shift and go to state 43
+
+  ! +               [ reduce using rule 46 (b -> e and e .) ]
+  ! -               [ reduce using rule 46 (b -> e and e .) ]
+  ! *               [ reduce using rule 46 (b -> e and e .) ]
+  ! /               [ reduce using rule 46 (b -> e and e .) ]
+  ! <               [ reduce using rule 46 (b -> e and e .) ]
+  ! >               [ reduce using rule 46 (b -> e and e .) ]
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! leq             [ shift and go to state 42 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 67
+
+    (47) b -> e xor e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 47 (b -> e xor e .)
+    xor             reduce using rule 47 (b -> e xor e .)
+    leq             reduce using rule 47 (b -> e xor e .)
+    geq             reduce using rule 47 (b -> e xor e .)
+    =               reduce using rule 47 (b -> e xor e .)
+    dif             reduce using rule 47 (b -> e xor e .)
+    ;               reduce using rule 47 (b -> e xor e .)
+    $end            reduce using rule 47 (b -> e xor e .)
+    )               reduce using rule 47 (b -> e xor e .)
+    entao           reduce using rule 47 (b -> e xor e .)
+    faca            reduce using rule 47 (b -> e xor e .)
+    ,               reduce using rule 47 (b -> e xor e .)
+    ate             reduce using rule 47 (b -> e xor e .)
+    and             shift and go to state 35
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    >               shift and go to state 43
+
+  ! and             [ reduce using rule 47 (b -> e xor e .) ]
+  ! +               [ reduce using rule 47 (b -> e xor e .) ]
+  ! -               [ reduce using rule 47 (b -> e xor e .) ]
+  ! *               [ reduce using rule 47 (b -> e xor e .) ]
+  ! /               [ reduce using rule 47 (b -> e xor e .) ]
+  ! <               [ reduce using rule 47 (b -> e xor e .) ]
+  ! >               [ reduce using rule 47 (b -> e xor e .) ]
+  ! or              [ shift and go to state 34 ]
+  ! xor             [ shift and go to state 36 ]
+  ! leq             [ shift and go to state 42 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 68
+
+    (34) n -> e + e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 34 (n -> e + e .)
+    and             reduce using rule 34 (n -> e + e .)
+    xor             reduce using rule 34 (n -> e + e .)
+    +               reduce using rule 34 (n -> e + e .)
+    -               reduce using rule 34 (n -> e + e .)
+    <               reduce using rule 34 (n -> e + e .)
+    leq             reduce using rule 34 (n -> e + e .)
+    >               reduce using rule 34 (n -> e + e .)
+    geq             reduce using rule 34 (n -> e + e .)
+    =               reduce using rule 34 (n -> e + e .)
+    dif             reduce using rule 34 (n -> e + e .)
+    ;               reduce using rule 34 (n -> e + e .)
+    $end            reduce using rule 34 (n -> e + e .)
+    )               reduce using rule 34 (n -> e + e .)
+    entao           reduce using rule 34 (n -> e + e .)
+    faca            reduce using rule 34 (n -> e + e .)
+    ,               reduce using rule 34 (n -> e + e .)
+    ate             reduce using rule 34 (n -> e + e .)
+    *               shift and go to state 39
+    /               shift and go to state 40
+
+  ! *               [ reduce using rule 34 (n -> e + e .) ]
+  ! /               [ reduce using rule 34 (n -> e + e .) ]
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! +               [ shift and go to state 37 ]
+  ! -               [ shift and go to state 38 ]
+  ! <               [ shift and go to state 41 ]
+  ! leq             [ shift and go to state 42 ]
+  ! >               [ shift and go to state 43 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 69
+
+    (35) n -> e - e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 35 (n -> e - e .)
+    and             reduce using rule 35 (n -> e - e .)
+    xor             reduce using rule 35 (n -> e - e .)
+    +               reduce using rule 35 (n -> e - e .)
+    -               reduce using rule 35 (n -> e - e .)
+    <               reduce using rule 35 (n -> e - e .)
+    leq             reduce using rule 35 (n -> e - e .)
+    >               reduce using rule 35 (n -> e - e .)
+    geq             reduce using rule 35 (n -> e - e .)
+    =               reduce using rule 35 (n -> e - e .)
+    dif             reduce using rule 35 (n -> e - e .)
+    ;               reduce using rule 35 (n -> e - e .)
+    $end            reduce using rule 35 (n -> e - e .)
+    )               reduce using rule 35 (n -> e - e .)
+    entao           reduce using rule 35 (n -> e - e .)
+    faca            reduce using rule 35 (n -> e - e .)
+    ,               reduce using rule 35 (n -> e - e .)
+    ate             reduce using rule 35 (n -> e - e .)
+    *               shift and go to state 39
+    /               shift and go to state 40
+
+  ! *               [ reduce using rule 35 (n -> e - e .) ]
+  ! /               [ reduce using rule 35 (n -> e - e .) ]
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! +               [ shift and go to state 37 ]
+  ! -               [ shift and go to state 38 ]
+  ! <               [ shift and go to state 41 ]
+  ! leq             [ shift and go to state 42 ]
+  ! >               [ shift and go to state 43 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 70
+
+    (36) n -> e * e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 36 (n -> e * e .)
+    and             reduce using rule 36 (n -> e * e .)
+    xor             reduce using rule 36 (n -> e * e .)
+    +               reduce using rule 36 (n -> e * e .)
+    -               reduce using rule 36 (n -> e * e .)
+    *               reduce using rule 36 (n -> e * e .)
+    /               reduce using rule 36 (n -> e * e .)
+    <               reduce using rule 36 (n -> e * e .)
+    leq             reduce using rule 36 (n -> e * e .)
+    >               reduce using rule 36 (n -> e * e .)
+    geq             reduce using rule 36 (n -> e * e .)
+    =               reduce using rule 36 (n -> e * e .)
+    dif             reduce using rule 36 (n -> e * e .)
+    ;               reduce using rule 36 (n -> e * e .)
+    $end            reduce using rule 36 (n -> e * e .)
+    )               reduce using rule 36 (n -> e * e .)
+    entao           reduce using rule 36 (n -> e * e .)
+    faca            reduce using rule 36 (n -> e * e .)
+    ,               reduce using rule 36 (n -> e * e .)
+    ate             reduce using rule 36 (n -> e * e .)
+
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! +               [ shift and go to state 37 ]
+  ! -               [ shift and go to state 38 ]
+  ! *               [ shift and go to state 39 ]
+  ! /               [ shift and go to state 40 ]
+  ! <               [ shift and go to state 41 ]
+  ! leq             [ shift and go to state 42 ]
+  ! >               [ shift and go to state 43 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 71
+
+    (37) n -> e / e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 37 (n -> e / e .)
+    and             reduce using rule 37 (n -> e / e .)
+    xor             reduce using rule 37 (n -> e / e .)
+    +               reduce using rule 37 (n -> e / e .)
+    -               reduce using rule 37 (n -> e / e .)
+    *               reduce using rule 37 (n -> e / e .)
+    /               reduce using rule 37 (n -> e / e .)
+    <               reduce using rule 37 (n -> e / e .)
+    leq             reduce using rule 37 (n -> e / e .)
+    >               reduce using rule 37 (n -> e / e .)
+    geq             reduce using rule 37 (n -> e / e .)
+    =               reduce using rule 37 (n -> e / e .)
+    dif             reduce using rule 37 (n -> e / e .)
+    ;               reduce using rule 37 (n -> e / e .)
+    $end            reduce using rule 37 (n -> e / e .)
+    )               reduce using rule 37 (n -> e / e .)
+    entao           reduce using rule 37 (n -> e / e .)
+    faca            reduce using rule 37 (n -> e / e .)
+    ,               reduce using rule 37 (n -> e / e .)
+    ate             reduce using rule 37 (n -> e / e .)
+
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! +               [ shift and go to state 37 ]
+  ! -               [ shift and go to state 38 ]
+  ! *               [ shift and go to state 39 ]
+  ! /               [ shift and go to state 40 ]
+  ! <               [ shift and go to state 41 ]
+  ! leq             [ shift and go to state 42 ]
+  ! >               [ shift and go to state 43 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 72
+
+    (38) n -> e < e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 38 (n -> e < e .)
+    and             reduce using rule 38 (n -> e < e .)
+    xor             reduce using rule 38 (n -> e < e .)
+    <               reduce using rule 38 (n -> e < e .)
+    leq             reduce using rule 38 (n -> e < e .)
+    >               reduce using rule 38 (n -> e < e .)
+    geq             reduce using rule 38 (n -> e < e .)
+    =               reduce using rule 38 (n -> e < e .)
+    dif             reduce using rule 38 (n -> e < e .)
+    ;               reduce using rule 38 (n -> e < e .)
+    $end            reduce using rule 38 (n -> e < e .)
+    )               reduce using rule 38 (n -> e < e .)
+    entao           reduce using rule 38 (n -> e < e .)
+    faca            reduce using rule 38 (n -> e < e .)
+    ,               reduce using rule 38 (n -> e < e .)
+    ate             reduce using rule 38 (n -> e < e .)
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+
+  ! +               [ reduce using rule 38 (n -> e < e .) ]
+  ! -               [ reduce using rule 38 (n -> e < e .) ]
+  ! *               [ reduce using rule 38 (n -> e < e .) ]
+  ! /               [ reduce using rule 38 (n -> e < e .) ]
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! <               [ shift and go to state 41 ]
+  ! leq             [ shift and go to state 42 ]
+  ! >               [ shift and go to state 43 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 73
+
+    (39) n -> e leq e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+  ! shift/reduce conflict for or resolved as shift
+  ! shift/reduce conflict for and resolved as shift
+  ! shift/reduce conflict for xor resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for leq resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for geq resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for dif resolved as shift
+    ;               reduce using rule 39 (n -> e leq e .)
+    $end            reduce using rule 39 (n -> e leq e .)
+    )               reduce using rule 39 (n -> e leq e .)
+    entao           reduce using rule 39 (n -> e leq e .)
+    faca            reduce using rule 39 (n -> e leq e .)
+    ,               reduce using rule 39 (n -> e leq e .)
+    ate             reduce using rule 39 (n -> e leq e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+  ! or              [ reduce using rule 39 (n -> e leq e .) ]
+  ! and             [ reduce using rule 39 (n -> e leq e .) ]
+  ! xor             [ reduce using rule 39 (n -> e leq e .) ]
+  ! +               [ reduce using rule 39 (n -> e leq e .) ]
+  ! -               [ reduce using rule 39 (n -> e leq e .) ]
+  ! *               [ reduce using rule 39 (n -> e leq e .) ]
+  ! /               [ reduce using rule 39 (n -> e leq e .) ]
+  ! <               [ reduce using rule 39 (n -> e leq e .) ]
+  ! leq             [ reduce using rule 39 (n -> e leq e .) ]
+  ! >               [ reduce using rule 39 (n -> e leq e .) ]
+  ! geq             [ reduce using rule 39 (n -> e leq e .) ]
+  ! =               [ reduce using rule 39 (n -> e leq e .) ]
+  ! dif             [ reduce using rule 39 (n -> e leq e .) ]
+
+
+state 74
+
+    (40) n -> e > e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    or              reduce using rule 40 (n -> e > e .)
+    and             reduce using rule 40 (n -> e > e .)
+    xor             reduce using rule 40 (n -> e > e .)
+    <               reduce using rule 40 (n -> e > e .)
+    leq             reduce using rule 40 (n -> e > e .)
+    >               reduce using rule 40 (n -> e > e .)
+    geq             reduce using rule 40 (n -> e > e .)
+    =               reduce using rule 40 (n -> e > e .)
+    dif             reduce using rule 40 (n -> e > e .)
+    ;               reduce using rule 40 (n -> e > e .)
+    $end            reduce using rule 40 (n -> e > e .)
+    )               reduce using rule 40 (n -> e > e .)
+    entao           reduce using rule 40 (n -> e > e .)
+    faca            reduce using rule 40 (n -> e > e .)
+    ,               reduce using rule 40 (n -> e > e .)
+    ate             reduce using rule 40 (n -> e > e .)
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+
+  ! +               [ reduce using rule 40 (n -> e > e .) ]
+  ! -               [ reduce using rule 40 (n -> e > e .) ]
+  ! *               [ reduce using rule 40 (n -> e > e .) ]
+  ! /               [ reduce using rule 40 (n -> e > e .) ]
+  ! or              [ shift and go to state 34 ]
+  ! and             [ shift and go to state 35 ]
+  ! xor             [ shift and go to state 36 ]
+  ! <               [ shift and go to state 41 ]
+  ! leq             [ shift and go to state 42 ]
+  ! >               [ shift and go to state 43 ]
+  ! geq             [ shift and go to state 44 ]
+  ! =               [ shift and go to state 45 ]
+  ! dif             [ shift and go to state 46 ]
+
+
+state 75
+
+    (41) n -> e geq e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+  ! shift/reduce conflict for or resolved as shift
+  ! shift/reduce conflict for and resolved as shift
+  ! shift/reduce conflict for xor resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for leq resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for geq resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for dif resolved as shift
+    ;               reduce using rule 41 (n -> e geq e .)
+    $end            reduce using rule 41 (n -> e geq e .)
+    )               reduce using rule 41 (n -> e geq e .)
+    entao           reduce using rule 41 (n -> e geq e .)
+    faca            reduce using rule 41 (n -> e geq e .)
+    ,               reduce using rule 41 (n -> e geq e .)
+    ate             reduce using rule 41 (n -> e geq e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+  ! or              [ reduce using rule 41 (n -> e geq e .) ]
+  ! and             [ reduce using rule 41 (n -> e geq e .) ]
+  ! xor             [ reduce using rule 41 (n -> e geq e .) ]
+  ! +               [ reduce using rule 41 (n -> e geq e .) ]
+  ! -               [ reduce using rule 41 (n -> e geq e .) ]
+  ! *               [ reduce using rule 41 (n -> e geq e .) ]
+  ! /               [ reduce using rule 41 (n -> e geq e .) ]
+  ! <               [ reduce using rule 41 (n -> e geq e .) ]
+  ! leq             [ reduce using rule 41 (n -> e geq e .) ]
+  ! >               [ reduce using rule 41 (n -> e geq e .) ]
+  ! geq             [ reduce using rule 41 (n -> e geq e .) ]
+  ! =               [ reduce using rule 41 (n -> e geq e .) ]
+  ! dif             [ reduce using rule 41 (n -> e geq e .) ]
+
+
+state 76
+
+    (42) n -> e = e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+  ! shift/reduce conflict for or resolved as shift
+  ! shift/reduce conflict for and resolved as shift
+  ! shift/reduce conflict for xor resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for leq resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for geq resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for dif resolved as shift
+    ;               reduce using rule 42 (n -> e = e .)
+    $end            reduce using rule 42 (n -> e = e .)
+    )               reduce using rule 42 (n -> e = e .)
+    entao           reduce using rule 42 (n -> e = e .)
+    faca            reduce using rule 42 (n -> e = e .)
+    ,               reduce using rule 42 (n -> e = e .)
+    ate             reduce using rule 42 (n -> e = e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+  ! or              [ reduce using rule 42 (n -> e = e .) ]
+  ! and             [ reduce using rule 42 (n -> e = e .) ]
+  ! xor             [ reduce using rule 42 (n -> e = e .) ]
+  ! +               [ reduce using rule 42 (n -> e = e .) ]
+  ! -               [ reduce using rule 42 (n -> e = e .) ]
+  ! *               [ reduce using rule 42 (n -> e = e .) ]
+  ! /               [ reduce using rule 42 (n -> e = e .) ]
+  ! <               [ reduce using rule 42 (n -> e = e .) ]
+  ! leq             [ reduce using rule 42 (n -> e = e .) ]
+  ! >               [ reduce using rule 42 (n -> e = e .) ]
+  ! geq             [ reduce using rule 42 (n -> e = e .) ]
+  ! =               [ reduce using rule 42 (n -> e = e .) ]
+  ! dif             [ reduce using rule 42 (n -> e = e .) ]
+
+
+state 77
+
+    (43) n -> e dif e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+  ! shift/reduce conflict for or resolved as shift
+  ! shift/reduce conflict for and resolved as shift
+  ! shift/reduce conflict for xor resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for leq resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for geq resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for dif resolved as shift
+    ;               reduce using rule 43 (n -> e dif e .)
+    $end            reduce using rule 43 (n -> e dif e .)
+    )               reduce using rule 43 (n -> e dif e .)
+    entao           reduce using rule 43 (n -> e dif e .)
+    faca            reduce using rule 43 (n -> e dif e .)
+    ,               reduce using rule 43 (n -> e dif e .)
+    ate             reduce using rule 43 (n -> e dif e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+  ! or              [ reduce using rule 43 (n -> e dif e .) ]
+  ! and             [ reduce using rule 43 (n -> e dif e .) ]
+  ! xor             [ reduce using rule 43 (n -> e dif e .) ]
+  ! +               [ reduce using rule 43 (n -> e dif e .) ]
+  ! -               [ reduce using rule 43 (n -> e dif e .) ]
+  ! *               [ reduce using rule 43 (n -> e dif e .) ]
+  ! /               [ reduce using rule 43 (n -> e dif e .) ]
+  ! <               [ reduce using rule 43 (n -> e dif e .) ]
+  ! leq             [ reduce using rule 43 (n -> e dif e .) ]
+  ! >               [ reduce using rule 43 (n -> e dif e .) ]
+  ! geq             [ reduce using rule 43 (n -> e dif e .) ]
+  ! =               [ reduce using rule 43 (n -> e dif e .) ]
+  ! dif             [ reduce using rule 43 (n -> e dif e .) ]
+
+
+state 78
+
+    (14) comando -> var assign e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    ;               reduce using rule 14 (comando -> var assign e .)
+    $end            reduce using rule 14 (comando -> var assign e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+
+state 79
+
+    (29) e -> var ( e_list . )
+    (23) e_list -> e_list . , e
+
+    )               shift and go to state 93
+    ,               shift and go to state 94
+
+
+state 80
+
+    (30) e -> var ( ) .
+
+    or              reduce using rule 30 (e -> var ( ) .)
+    and             reduce using rule 30 (e -> var ( ) .)
+    xor             reduce using rule 30 (e -> var ( ) .)
+    +               reduce using rule 30 (e -> var ( ) .)
+    -               reduce using rule 30 (e -> var ( ) .)
+    *               reduce using rule 30 (e -> var ( ) .)
+    /               reduce using rule 30 (e -> var ( ) .)
+    <               reduce using rule 30 (e -> var ( ) .)
+    leq             reduce using rule 30 (e -> var ( ) .)
+    >               reduce using rule 30 (e -> var ( ) .)
+    geq             reduce using rule 30 (e -> var ( ) .)
+    =               reduce using rule 30 (e -> var ( ) .)
+    dif             reduce using rule 30 (e -> var ( ) .)
+    ;               reduce using rule 30 (e -> var ( ) .)
+    $end            reduce using rule 30 (e -> var ( ) .)
+    )               reduce using rule 30 (e -> var ( ) .)
+    entao           reduce using rule 30 (e -> var ( ) .)
+    faca            reduce using rule 30 (e -> var ( ) .)
+    ,               reduce using rule 30 (e -> var ( ) .)
+    ate             reduce using rule 30 (e -> var ( ) .)
+
+
+state 81
+
+    (22) e_list -> e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    )               reduce using rule 22 (e_list -> e .)
+    ,               reduce using rule 22 (e_list -> e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+
+state 82
+
+    (15) comando -> escreva ( e_list . )
+    (23) e_list -> e_list . , e
+
+    )               shift and go to state 95
+    ,               shift and go to state 94
+
+
+state 83
+
+    (25) e -> ( e ) .
+
+    or              reduce using rule 25 (e -> ( e ) .)
+    and             reduce using rule 25 (e -> ( e ) .)
+    xor             reduce using rule 25 (e -> ( e ) .)
+    +               reduce using rule 25 (e -> ( e ) .)
+    -               reduce using rule 25 (e -> ( e ) .)
+    *               reduce using rule 25 (e -> ( e ) .)
+    /               reduce using rule 25 (e -> ( e ) .)
+    <               reduce using rule 25 (e -> ( e ) .)
+    leq             reduce using rule 25 (e -> ( e ) .)
+    >               reduce using rule 25 (e -> ( e ) .)
+    geq             reduce using rule 25 (e -> ( e ) .)
+    =               reduce using rule 25 (e -> ( e ) .)
+    dif             reduce using rule 25 (e -> ( e ) .)
+    ;               reduce using rule 25 (e -> ( e ) .)
+    $end            reduce using rule 25 (e -> ( e ) .)
+    )               reduce using rule 25 (e -> ( e ) .)
+    entao           reduce using rule 25 (e -> ( e ) .)
+    faca            reduce using rule 25 (e -> ( e ) .)
+    ,               reduce using rule 25 (e -> ( e ) .)
+    ate             reduce using rule 25 (e -> ( e ) .)
+
+
+state 84
+
+    (33) n -> ( n ) .
+
+    or              reduce using rule 33 (n -> ( n ) .)
+    and             reduce using rule 33 (n -> ( n ) .)
+    xor             reduce using rule 33 (n -> ( n ) .)
+    +               reduce using rule 33 (n -> ( n ) .)
+    -               reduce using rule 33 (n -> ( n ) .)
+    *               reduce using rule 33 (n -> ( n ) .)
+    /               reduce using rule 33 (n -> ( n ) .)
+    <               reduce using rule 33 (n -> ( n ) .)
+    leq             reduce using rule 33 (n -> ( n ) .)
+    >               reduce using rule 33 (n -> ( n ) .)
+    geq             reduce using rule 33 (n -> ( n ) .)
+    =               reduce using rule 33 (n -> ( n ) .)
+    dif             reduce using rule 33 (n -> ( n ) .)
+    ;               reduce using rule 33 (n -> ( n ) .)
+    $end            reduce using rule 33 (n -> ( n ) .)
+    )               reduce using rule 33 (n -> ( n ) .)
+    entao           reduce using rule 33 (n -> ( n ) .)
+    faca            reduce using rule 33 (n -> ( n ) .)
+    ,               reduce using rule 33 (n -> ( n ) .)
+    ate             reduce using rule 33 (n -> ( n ) .)
+
+
+state 85
+
+    (16) comando -> leia ( var_list . )
+    (52) var_list -> var_list . , var
+
+    )               shift and go to state 96
+    ,               shift and go to state 97
+
+
+state 86
+
+    (51) var_list -> var .
+
+    )               reduce using rule 51 (var_list -> var .)
+    ,               reduce using rule 51 (var_list -> var .)
+    ;               reduce using rule 51 (var_list -> var .)
+    $end            reduce using rule 51 (var_list -> var .)
+
+
+state 87
+
+    (17) comando -> vartype : var_list .
+    (52) var_list -> var_list . , var
+
+    ;               reduce using rule 17 (comando -> vartype : var_list .)
+    $end            reduce using rule 17 (comando -> vartype : var_list .)
+    ,               shift and go to state 97
+
+
+state 88
+
+    (18) comando -> se e entao . com_list ; senao com_list ; fimse
+    (19) comando -> se e entao . com_list ; fimse
+    (20) com_list -> . comando
+    (21) com_list -> . com_list ; comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 11
+    com_list                       shift and go to state 98
+    comando                        shift and go to state 99
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 89
+
+    (10) ciclo -> para var de . e ate e faca com_list ; fimpara
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 100
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 90
+
+    (11) ciclo -> enquanto n faca . com_list ; fimenquanto
+    (20) com_list -> . comando
+    (21) com_list -> . com_list ; comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    n                              shift and go to state 20
+    com_list                       shift and go to state 101
+    comando                        shift and go to state 99
+    e                              shift and go to state 11
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    f                              shift and go to state 24
+
+state 91
+
+    (5) func -> funcao var ( args . ) com_list ; fimfuncao
+
+    )               shift and go to state 102
+
+
+state 92
+
+    (54) args -> var_list .
+    (52) var_list -> var_list . , var
+
+    )               reduce using rule 54 (args -> var_list .)
+    ,               shift and go to state 97
+
+
+state 93
+
+    (29) e -> var ( e_list ) .
+
+    or              reduce using rule 29 (e -> var ( e_list ) .)
+    and             reduce using rule 29 (e -> var ( e_list ) .)
+    xor             reduce using rule 29 (e -> var ( e_list ) .)
+    +               reduce using rule 29 (e -> var ( e_list ) .)
+    -               reduce using rule 29 (e -> var ( e_list ) .)
+    *               reduce using rule 29 (e -> var ( e_list ) .)
+    /               reduce using rule 29 (e -> var ( e_list ) .)
+    <               reduce using rule 29 (e -> var ( e_list ) .)
+    leq             reduce using rule 29 (e -> var ( e_list ) .)
+    >               reduce using rule 29 (e -> var ( e_list ) .)
+    geq             reduce using rule 29 (e -> var ( e_list ) .)
+    =               reduce using rule 29 (e -> var ( e_list ) .)
+    dif             reduce using rule 29 (e -> var ( e_list ) .)
+    ;               reduce using rule 29 (e -> var ( e_list ) .)
+    $end            reduce using rule 29 (e -> var ( e_list ) .)
+    )               reduce using rule 29 (e -> var ( e_list ) .)
+    entao           reduce using rule 29 (e -> var ( e_list ) .)
+    faca            reduce using rule 29 (e -> var ( e_list ) .)
+    ,               reduce using rule 29 (e -> var ( e_list ) .)
+    ate             reduce using rule 29 (e -> var ( e_list ) .)
+
+
+state 94
+
+    (23) e_list -> e_list , . e
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 103
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 95
+
+    (15) comando -> escreva ( e_list ) .
+
+    ;               reduce using rule 15 (comando -> escreva ( e_list ) .)
+    $end            reduce using rule 15 (comando -> escreva ( e_list ) .)
+
+
+state 96
+
+    (16) comando -> leia ( var_list ) .
+
+    ;               reduce using rule 16 (comando -> leia ( var_list ) .)
+    $end            reduce using rule 16 (comando -> leia ( var_list ) .)
+
+
+state 97
+
+    (52) var_list -> var_list , . var
+
+    var             shift and go to state 104
+
+
+state 98
+
+    (18) comando -> se e entao com_list . ; senao com_list ; fimse
+    (19) comando -> se e entao com_list . ; fimse
+    (21) com_list -> com_list . ; comando
+
+    ;               shift and go to state 105
+
+
+state 99
+
+    (20) com_list -> comando .
+
+    ;               reduce using rule 20 (com_list -> comando .)
+
+
+state 100
+
+    (10) ciclo -> para var de e . ate e faca com_list ; fimpara
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    ate             shift and go to state 106
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+
+state 101
+
+    (11) ciclo -> enquanto n faca com_list . ; fimenquanto
+    (21) com_list -> com_list . ; comando
+
+    ;               shift and go to state 107
+
+
+state 102
+
+    (5) func -> funcao var ( args ) . com_list ; fimfuncao
+    (20) com_list -> . comando
+    (21) com_list -> . com_list ; comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    com_list                       shift and go to state 108
+    comando                        shift and go to state 99
+    e                              shift and go to state 11
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 103
+
+    (23) e_list -> e_list , e .
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    )               reduce using rule 23 (e_list -> e_list , e .)
+    ,               reduce using rule 23 (e_list -> e_list , e .)
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+
+state 104
+
+    (52) var_list -> var_list , var .
+
+    )               reduce using rule 52 (var_list -> var_list , var .)
+    ,               reduce using rule 52 (var_list -> var_list , var .)
+    ;               reduce using rule 52 (var_list -> var_list , var .)
+    $end            reduce using rule 52 (var_list -> var_list , var .)
+
+
+state 105
+
+    (18) comando -> se e entao com_list ; . senao com_list ; fimse
+    (19) comando -> se e entao com_list ; . fimse
+    (21) com_list -> com_list ; . comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    senao           shift and go to state 109
+    fimse           shift and go to state 110
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 11
+    comando                        shift and go to state 111
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 106
+
+    (10) ciclo -> para var de e ate . e faca com_list ; fimpara
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 52
+    (               shift and go to state 15
+    string          shift and go to state 21
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 112
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 107
+
+    (11) ciclo -> enquanto n faca com_list ; . fimenquanto
+    (21) com_list -> com_list ; . comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    fimenquanto     shift and go to state 113
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    n                              shift and go to state 20
+    comando                        shift and go to state 111
+    e                              shift and go to state 11
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    f                              shift and go to state 24
+
+state 108
+
+    (5) func -> funcao var ( args ) com_list . ; fimfuncao
+    (21) com_list -> com_list . ; comando
+
+    ;               shift and go to state 114
+
+
+state 109
+
+    (18) comando -> se e entao com_list ; senao . com_list ; fimse
+    (20) com_list -> . comando
+    (21) com_list -> . com_list ; comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 11
+    com_list                       shift and go to state 115
+    comando                        shift and go to state 99
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 110
+
+    (19) comando -> se e entao com_list ; fimse .
+
+    ;               reduce using rule 19 (comando -> se e entao com_list ; fimse .)
+    $end            reduce using rule 19 (comando -> se e entao com_list ; fimse .)
+
+
+state 111
+
+    (21) com_list -> com_list ; comando .
+
+    ;               reduce using rule 21 (com_list -> com_list ; comando .)
+
+
+state 112
+
+    (10) ciclo -> para var de e ate e . faca com_list ; fimpara
+    (45) b -> e . or e
+    (46) b -> e . and e
+    (47) b -> e . xor e
+    (34) n -> e . + e
+    (35) n -> e . - e
+    (36) n -> e . * e
+    (37) n -> e . / e
+    (38) n -> e . < e
+    (39) n -> e . leq e
+    (40) n -> e . > e
+    (41) n -> e . geq e
+    (42) n -> e . = e
+    (43) n -> e . dif e
+
+    faca            shift and go to state 116
+    or              shift and go to state 34
+    and             shift and go to state 35
+    xor             shift and go to state 36
+    +               shift and go to state 37
+    -               shift and go to state 38
+    *               shift and go to state 39
+    /               shift and go to state 40
+    <               shift and go to state 41
+    leq             shift and go to state 42
+    >               shift and go to state 43
+    geq             shift and go to state 44
+    =               shift and go to state 45
+    dif             shift and go to state 46
+
+
+state 113
+
+    (11) ciclo -> enquanto n faca com_list ; fimenquanto .
+
+    ;               reduce using rule 11 (ciclo -> enquanto n faca com_list ; fimenquanto .)
+    $end            reduce using rule 11 (ciclo -> enquanto n faca com_list ; fimenquanto .)
+
+
+state 114
+
+    (5) func -> funcao var ( args ) com_list ; . fimfuncao
+    (21) com_list -> com_list ; . comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    fimfuncao       shift and go to state 117
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    comando                        shift and go to state 111
+    e                              shift and go to state 11
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 115
+
+    (18) comando -> se e entao com_list ; senao com_list . ; fimse
+    (21) com_list -> com_list . ; comando
+
+    ;               shift and go to state 118
+
+
+state 116
+
+    (10) ciclo -> para var de e ate e faca . com_list ; fimpara
+    (20) com_list -> . comando
+    (21) com_list -> . com_list ; comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 11
+    com_list                       shift and go to state 119
+    comando                        shift and go to state 99
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 117
+
+    (5) func -> funcao var ( args ) com_list ; fimfuncao .
+
+    ;               reduce using rule 5 (func -> funcao var ( args ) com_list ; fimfuncao .)
+
+
+state 118
+
+    (18) comando -> se e entao com_list ; senao com_list ; . fimse
+    (21) com_list -> com_list ; . comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    fimse           shift and go to state 120
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 11
+    comando                        shift and go to state 111
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 119
+
+    (10) ciclo -> para var de e ate e faca com_list . ; fimpara
+    (21) com_list -> com_list . ; comando
+
+    ;               shift and go to state 121
+
+
+state 120
+
+    (18) comando -> se e entao com_list ; senao com_list ; fimse .
+
+    ;               reduce using rule 18 (comando -> se e entao com_list ; senao com_list ; fimse .)
+    $end            reduce using rule 18 (comando -> se e entao com_list ; senao com_list ; fimse .)
+
+
+state 121
+
+    (10) ciclo -> para var de e ate e faca com_list ; . fimpara
+    (21) com_list -> com_list ; . comando
+    (12) comando -> . e
+    (13) comando -> . ciclo
+    (14) comando -> . var assign e
+    (15) comando -> . escreva ( e_list )
+    (16) comando -> . leia ( var_list )
+    (17) comando -> . vartype : var_list
+    (18) comando -> . se e entao com_list ; senao com_list ; fimse
+    (19) comando -> . se e entao com_list ; fimse
+    (24) e -> . var
+    (25) e -> . ( e )
+    (26) e -> . b
+    (27) e -> . n
+    (28) e -> . string
+    (29) e -> . var ( e_list )
+    (30) e -> . var ( )
+    (10) ciclo -> . para var de e ate e faca com_list ; fimpara
+    (11) ciclo -> . enquanto n faca com_list ; fimenquanto
+    (44) b -> . f
+    (45) b -> . e or e
+    (46) b -> . e and e
+    (47) b -> . e xor e
+    (31) n -> . nr
+    (32) n -> . - e
+    (33) n -> . ( n )
+    (34) n -> . e + e
+    (35) n -> . e - e
+    (36) n -> . e * e
+    (37) n -> . e / e
+    (38) n -> . e < e
+    (39) n -> . e leq e
+    (40) n -> . e > e
+    (41) n -> . e geq e
+    (42) n -> . e = e
+    (43) n -> . e dif e
+    (48) f -> . true
+    (49) f -> . false
+    (50) f -> . not f
+
+    fimpara         shift and go to state 122
+    var             shift and go to state 13
+    escreva         shift and go to state 14
+    leia            shift and go to state 16
+    vartype         shift and go to state 17
+    se              shift and go to state 18
+    (               shift and go to state 15
+    string          shift and go to state 21
+    para            shift and go to state 22
+    enquanto        shift and go to state 23
+    nr              shift and go to state 25
+    -               shift and go to state 26
+    true            shift and go to state 27
+    false           shift and go to state 28
+    not             shift and go to state 29
+
+    e                              shift and go to state 11
+    comando                        shift and go to state 111
+    ciclo                          shift and go to state 12
+    b                              shift and go to state 19
+    n                              shift and go to state 20
+    f                              shift and go to state 24
+
+state 122
+
+    (10) ciclo -> para var de e ate e faca com_list ; fimpara .
+
+    ;               reduce using rule 10 (ciclo -> para var de e ate e faca com_list ; fimpara .)
+    $end            reduce using rule 10 (ciclo -> para var de e ate e faca com_list ; fimpara .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ) in state 51 resolved as shift
+WARNING: shift/reduce conflict for or in state 73 resolved as shift
+WARNING: shift/reduce conflict for and in state 73 resolved as shift
+WARNING: shift/reduce conflict for xor in state 73 resolved as shift
+WARNING: shift/reduce conflict for + in state 73 resolved as shift
+WARNING: shift/reduce conflict for - in state 73 resolved as shift
+WARNING: shift/reduce conflict for * in state 73 resolved as shift
+WARNING: shift/reduce conflict for / in state 73 resolved as shift
+WARNING: shift/reduce conflict for < in state 73 resolved as shift
+WARNING: shift/reduce conflict for leq in state 73 resolved as shift
+WARNING: shift/reduce conflict for > in state 73 resolved as shift
+WARNING: shift/reduce conflict for geq in state 73 resolved as shift
+WARNING: shift/reduce conflict for = in state 73 resolved as shift
+WARNING: shift/reduce conflict for dif in state 73 resolved as shift
+WARNING: shift/reduce conflict for or in state 75 resolved as shift
+WARNING: shift/reduce conflict for and in state 75 resolved as shift
+WARNING: shift/reduce conflict for xor in state 75 resolved as shift
+WARNING: shift/reduce conflict for + in state 75 resolved as shift
+WARNING: shift/reduce conflict for - in state 75 resolved as shift
+WARNING: shift/reduce conflict for * in state 75 resolved as shift
+WARNING: shift/reduce conflict for / in state 75 resolved as shift
+WARNING: shift/reduce conflict for < in state 75 resolved as shift
+WARNING: shift/reduce conflict for leq in state 75 resolved as shift
+WARNING: shift/reduce conflict for > in state 75 resolved as shift
+WARNING: shift/reduce conflict for geq in state 75 resolved as shift
+WARNING: shift/reduce conflict for = in state 75 resolved as shift
+WARNING: shift/reduce conflict for dif in state 75 resolved as shift
+WARNING: shift/reduce conflict for or in state 76 resolved as shift
+WARNING: shift/reduce conflict for and in state 76 resolved as shift
+WARNING: shift/reduce conflict for xor in state 76 resolved as shift
+WARNING: shift/reduce conflict for + in state 76 resolved as shift
+WARNING: shift/reduce conflict for - in state 76 resolved as shift
+WARNING: shift/reduce conflict for * in state 76 resolved as shift
+WARNING: shift/reduce conflict for / in state 76 resolved as shift
+WARNING: shift/reduce conflict for < in state 76 resolved as shift
+WARNING: shift/reduce conflict for leq in state 76 resolved as shift
+WARNING: shift/reduce conflict for > in state 76 resolved as shift
+WARNING: shift/reduce conflict for geq in state 76 resolved as shift
+WARNING: shift/reduce conflict for = in state 76 resolved as shift
+WARNING: shift/reduce conflict for dif in state 76 resolved as shift
+WARNING: shift/reduce conflict for or in state 77 resolved as shift
+WARNING: shift/reduce conflict for and in state 77 resolved as shift
+WARNING: shift/reduce conflict for xor in state 77 resolved as shift
+WARNING: shift/reduce conflict for + in state 77 resolved as shift
+WARNING: shift/reduce conflict for - in state 77 resolved as shift
+WARNING: shift/reduce conflict for * in state 77 resolved as shift
+WARNING: shift/reduce conflict for / in state 77 resolved as shift
+WARNING: shift/reduce conflict for < in state 77 resolved as shift
+WARNING: shift/reduce conflict for leq in state 77 resolved as shift
+WARNING: shift/reduce conflict for > in state 77 resolved as shift
+WARNING: shift/reduce conflict for geq in state 77 resolved as shift
+WARNING: shift/reduce conflict for = in state 77 resolved as shift
+WARNING: shift/reduce conflict for dif in state 77 resolved as shift

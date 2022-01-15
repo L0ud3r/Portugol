@@ -8,8 +8,6 @@ from logic_eval_interpreter import LogicEvalInterpreter
 from logic_eval_writer import LogicEvalWriter
 
 #TODO:
-# Gerar C
-# Menu opçao interpretar ou C
 # Remover debug prints (ANTES DE APRESENTAR!)
 # Relatório com Árvore abstrata de sintaxe
 # Mudar nome de certas classes e métodos
@@ -178,7 +176,7 @@ class LogicGrammar:
     def p_e3(self, p):
         """ e : b
               | n
-              | string """
+              | string"""
         p[0] = p[1]
 
     #  Método com regra de leitura de chamar uma função (com ou  sem parâmetros)

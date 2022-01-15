@@ -36,7 +36,7 @@ class LogicEvalWriter:
         "enquanto": lambda args: LogicEvalWriter._enquanto(*args), #done
         "se": lambda args: LogicEvalWriter._se(*args), #done
         "funcao": lambda args: LogicEvalWriter._funcao(args), #done
-        "call": lambda args: LogicEvalWriter._funcao2(*args), #done
+        "call": lambda args: LogicEvalWriter._call(args), #done
 
     }
     # Symbol Table (Tabela de Símbolos)
@@ -88,7 +88,7 @@ class LogicEvalWriter:
         i = 0
         for arg in args:
             if i < len(args)-1:
-                #args = varname or varnames, vartype
+                # args = varname or varnames, vartype
                 LogicEvalWriter.c_code += f"{vartype} {arg};\n\t"
                 LogicEvalWriter._assign(arg, vartype, None)
             i += 1
@@ -97,8 +97,6 @@ class LogicEvalWriter:
     # Função para chamar uma função
     @staticmethod
     def _call(args): #TODO: fix
-        print(args)
-
         name, values = args
         finalString = ""
         #LogicEvalWriter.c_code += f"{name}("
@@ -113,20 +111,15 @@ class LogicEvalWriter:
                 finalString += f"{value})"
             i+=1
 
+        #LogicEvalWriter.eval(args)
         return finalString
 
-    @staticmethod
-    def _funcao2(*args):
-        # print(args)
-        LogicEvalWriter.eval(LogicEvalWriter._call(args))
 
     # Procedimento para declarar uma função
     # (não é executada, apenas armazenada em memória para ser chamada futuramente)
     @staticmethod
     def _funcao(args):
-
         name, vars, code = args
-
         LogicEvalWriter.c_code += f"int {name}("
 
         i = 0
@@ -202,12 +195,6 @@ class LogicEvalWriter:
             LogicEvalWriter.eval(args[2])
             LogicEvalWriter.c_code += "}\n\t"
 
-
-
-
-
-
-
     # Procedimento para declarar variáveis
     @staticmethod
     def _assign(var, vartype, value):
@@ -215,8 +202,8 @@ class LogicEvalWriter:
 
     # Procedimento para atribuir valores a variáveis
     @staticmethod
-    def _changeValue(var, value):
-
+    def _changeValue(*args):
+        var, value = args
         LogicEvalWriter.c_code += f"{var} = {LogicEvalWriter.eval(value)};\n\t"
 
 
@@ -240,6 +227,7 @@ class LogicEvalWriter:
     #TODO: documentar
     @staticmethod
     def eval(ast):
+        print(type(ast))
         if type(ast) in (float, bool, str):
             ast2 = str(ast)
             if ast2 == "inicio":

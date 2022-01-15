@@ -24,7 +24,7 @@ def run_batch(filename, output):
 opcao = 0
 while opcao != 1 and opcao != 2:
     print("Selecione uma opcao")
-    opcao = int(input("Interpretar codigo: 1; \nGerar C: 2;\n>> "))
+    opcao = int(input("1: Interpretar codigo\n2: Gerar C:\n>> "))
     if opcao == 1:
         file_path = input("Nome do ficheiro:\n>> ")
         run_batch(file_path, "interpreter")

@@ -1,16 +1,8 @@
-funcao fatorial(min, max)
-    inteiro: res;
-    res <- min;
-    para i de min+1 ate max faca
-        res <- res * i;
-    fimpara;
-    res;
-fimfuncao;
-
 inicio
 
     inteiro: e;
-    fatorial(1,3);
+    e <- fatorial(1,3);
+    #e <- 3;
     escreva(e);
 
 fim
