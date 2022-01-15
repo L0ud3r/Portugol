@@ -42,15 +42,19 @@ class LogicEvalWriter:
     # Symbol Table (Tabela de Símbolos)
     symbols = SymbolTable()
 
+    # Abrir o ficheiro main.c
     f = open("main.c", "w")
     c_code = ""
 
+    # Recebe uma operação e chama a função write_to_file para escrever no ficheiro a operação
     @staticmethod
     def _write_operation_to_file(value1, op, value2):
         value1 = LogicEvalWriter._return_value_of_var(value1)
         value2 = LogicEvalWriter._return_value_of_var(value2)
         LogicEvalWriter._write_to_file(value1, op, value2)
 
+
+    # Escreve para o c.code os argumentos
     @staticmethod
     def _write_to_file(*args):
         for a in args:
@@ -224,7 +228,7 @@ class LogicEvalWriter:
                 LogicEvalWriter.c_code += f'", &{arg});\n\t'
 
 
-    #TODO: documentar
+    # Função que faz o eval da AST, recebe a mesma e consoante o tipo de dados é encaminhado para diferentes funções
     @staticmethod
     def eval(ast):
         print(type(ast))
@@ -246,7 +250,8 @@ class LogicEvalWriter:
             return ans
         raise Exception(f"Eval called with weird type: {type(ast)}")
 
-    #TODO: documentar
+
+    # Função que faz o eval de um dicionário
     @staticmethod
     def _eval_dict(ast):
         if "op" in ast:

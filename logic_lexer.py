@@ -5,6 +5,7 @@ import ply.lex as plex
 # Classe referente ao lexer e às linguagens utilizadas para ler o ficheiro em pseudocódigo Portugol
 class LogicLexer:
 
+    # Tokens por divisões
 
     start_end = ("inicio", "fim")
     bools = ("true", "false")
