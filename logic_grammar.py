@@ -7,11 +7,6 @@ from logic_lexer import LogicLexer
 from logic_eval_interpreter import LogicEvalInterpreter
 from logic_eval_writer import LogicEvalWriter
 
-#TODO:
-# Remover debug prints (ANTES DE APRESENTAR!)
-# Relatório com Árvore abstrata de sintaxe
-# Mudar nome de certas classes e métodos
-
 
 # Classe referente à gramática utilizada na interpretação do pseudocódigo em Portugol
 class LogicGrammar:
