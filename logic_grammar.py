@@ -40,7 +40,7 @@ class LogicGrammar:
     # Método com outra via da regra inicial da gramática implementada, sem funções previamente declaradas
     def p_portugol2(self, p):
         """portugol : inicio code"""
-        p[0] =  [p[1]] + [p[2]]
+        p[0] = [p[1]] + [p[2]]
 
     # Método com a regra de ler funções ou múltiplas funções
     def p_func_list(self, p):
@@ -88,7 +88,7 @@ class LogicGrammar:
         }
 
     # Método com a regra de leitura do ciclo while() em Portugol
-    def p_ciclo2(self,p):
+    def p_ciclo2(self, p):
         """ciclo : enquanto n faca com_list ';' fimenquanto"""
         p[0] = {
             "op": "enquanto",
@@ -262,11 +262,9 @@ class LogicGrammar:
     # Método de execução do Parse do texto no documento alvo (Exercução do funcionamento do Grammar)
     def parse(self, expression, output):
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
-        pp = PrettyPrinter()
-        pp.pprint(ans) #remover, apenas para debug!
+        # pp = PrettyPrinter()
+        # pp.pprint(ans)
         if output == "interpreter":
             return LogicEvalInterpreter.eval(ans)
         elif output == "writer":
             return LogicEvalWriter.eval(ans)
-
-

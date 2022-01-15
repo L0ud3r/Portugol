@@ -2,7 +2,6 @@
 
 import math
 from pprint import PrettyPrinter
-from copy import deepcopy
 from symbol_table import SymbolTable
 
 
@@ -14,7 +13,7 @@ class LogicEvalInterpreter:
         "and": lambda args: LogicEvalInterpreter._return_value_of_var(args[0]) and LogicEvalInterpreter._return_value_of_var(args[1]),
         "xor": lambda a: LogicEvalInterpreter._return_value_of_var(a[0]) ^ LogicEvalInterpreter._return_value_of_var(a[1]),
         "not": lambda a: not LogicEvalInterpreter._return_value_of_var(a[0]),
-        #
+
         "+": lambda args: LogicEvalInterpreter._return_value_of_var(args[0]) + LogicEvalInterpreter._return_value_of_var(args[1]),
         "-": lambda args: LogicEvalInterpreter._return_value_of_var(args[0]) - LogicEvalInterpreter._return_value_of_var(args[1]),
         "*": lambda args: LogicEvalInterpreter._return_value_of_var(args[0]) * LogicEvalInterpreter._return_value_of_var(args[1]),
@@ -51,7 +50,6 @@ class LogicEvalInterpreter:
             value = value[-1]
         return value
 
-
     # Procedimento para declarar uma variável
     # Presume-se que declarar uma variável é criá-la na memória mas não atribuir um valor
     @staticmethod
@@ -59,33 +57,35 @@ class LogicEvalInterpreter:
         i = 0
         for arg in args:
             if i < len(args)-1:
-                #args = varname, vartype, None
                 LogicEvalInterpreter._assign(arg, args[-1], None)
             i += 1
-
 
     # Função para chamar uma função
     @staticmethod
     def _call(args):
         name, values = args
-        name = f"{name}/{len(values)}" # funcao/0, funcao/1, etc. consoante numero de args
+        # funcao/0, funcao/1, etc. consoante numero de args
+        name = f"{name}/{len(values)}"
         if name in LogicEvalInterpreter.symbols:
             code = LogicEvalInterpreter.symbols[name]["code"]
             var_list = LogicEvalInterpreter.symbols[name]["vars"]
 
-            for var_name, value in zip(var_list, values): # definir parâmetros recebidos
+            # definir parâmetros recebidos
+            for var_name, value in zip(var_list, values):
                 LogicEvalInterpreter._assign(var_name, None, value)
                 LogicEvalInterpreter.symbols.re_set(var_name, LogicEvalInterpreter.eval(value))
 
-            result = LogicEvalInterpreter.eval(code) # avaliar código
+            # avaliar código
+            result = LogicEvalInterpreter.eval(code)
 
-            for var in var_list: # apagar variáveis "locais" ("locais", pois apenas são apagadas as dos parâmetros)
+            # apagar variáveis "locais" ("locais", pois apenas são apagadas as dos parâmetros)
+            for var in var_list:
                 del LogicEvalInterpreter.symbols[var]
             return result
 
         else:
-            raise Exception(f"Função {name} não está definida") # função não está definida
-
+            # função não está definida
+            raise Exception(f"Função {name} não está definida")
 
     # Procedimento para declarar uma função
     # (não é executada, apenas armazenada em memória para ser chamada futuramente)
@@ -98,18 +98,23 @@ class LogicEvalInterpreter:
     # Procedimento para escrever no escrever dados (variáveis, números, strings, etc.) no ecrã
     @staticmethod
     def _escreva(*args):
-        if type(args) == tuple or type(args) == list: # se tuplo ou lista
-            for x in args: # percorrer argumentos
-                if type(x) != tuple and type(x) != list: #caso já não seja tuplo nem lista
+        # se tuplo ou lista
+        if type(args) == tuple or type(args) == list:
+            # percorrer argumentos
+            for x in args:
+                # caso já não seja tuplo nem lista
+                if type(x) != tuple and type(x) != list:
                     print(x)
-                else: #caso ainda seja tuplo ou lista
+
+                # caso ainda seja tuplo ou lista
+                else:
                     x_in_list = list(x)
                     while isinstance(x_in_list, list):
                         x_in_list = x_in_list[-1]
                     print(x_in_list)
-        else: # caso não seja nem tuplo nem lista
+        # caso não seja nem tuplo nem lista
+        else:
             print(args)
-
 
     # Procedimento para interpretar o código do ciclo para (for)
     @staticmethod
@@ -123,80 +128,85 @@ class LogicEvalInterpreter:
             value += 1
             LogicEvalInterpreter._changeValue(var, value)
 
-
     # Procedimento para interpretar o código do ciclo enquanto (while)
     @staticmethod
     def _enquanto(*args):
-        while (LogicEvalInterpreter.eval(args[0])):
+        while LogicEvalInterpreter.eval(args[0]):
             LogicEvalInterpreter.eval(args[1])
-
 
     # Procedimento para interpretar o código da condição se (e senão)
     @staticmethod
     def _se(*args):
-        if len(args) == 2: # caso não tenha senão
-            if args[0]: # caso exp = true
+        # caso não tenha senão
+        if len(args) == 2:
+            # caso exp = true
+            if args[0]:
                 return LogicEvalInterpreter.eval(args[1])
-        if len(args) == 3: # caso tenha senão
-            if args[0]: # caso exp = true
+            # caso tenha senão
+        if len(args) == 3:
+            # caso exp = true
+            if args[0]:
                 return LogicEvalInterpreter.eval(args[1])
-            else: # correr código do senão
+            # correr código do senão
+            else:
                 return LogicEvalInterpreter.eval(args[2])
-
 
     # Procedimento para declarar variáveis
     @staticmethod
     def _assign(var, vartype, value):
         LogicEvalInterpreter.symbols[var] = [vartype, value]
 
-
     # Procedimento para atribuir valores a variáveis
     @staticmethod
     def _changeValue(var, value):
-        value = LogicEvalInterpreter._return_value_of_var(value) #se entrar uma lista em value (stack stuff)
+        # se entrar uma lista em value (stack stuff)
+        value = LogicEvalInterpreter._return_value_of_var(value)
         if var in LogicEvalInterpreter.symbols:
             var_type = LogicEvalInterpreter.symbols[var][0]
 
             # var_type pode ser inteiro, logico, caracter, real
 
             # verificações!
-            if (type(value) == str and var_type == "caracter"):
+            if type(value) == str and var_type == "caracter":
                 LogicEvalInterpreter.symbols[var][-1] = value
-            elif (type(value) == bool and var_type == "logico"):
-                LogicEvalInterpreter.symbols[var][-1] = value
-
-            elif(type(value) == float and var_type == "real"):
+            elif type(value) == bool and var_type == "logico":
                 LogicEvalInterpreter.symbols[var][-1] = value
 
-            elif (type(value) == float and var_type == "inteiro"):
-                if value.is_integer() == False:
-                    #2.5
+            elif type(value) == float and var_type == "real":
+                LogicEvalInterpreter.symbols[var][-1] = value
+
+            elif type(value) == float and var_type == "inteiro":
+                if value.is_integer() is False:
                     value = math.trunc(value)
-                    #2.0
                 LogicEvalInterpreter.symbols[var][-1] = value
 
             else:
-                raise Exception (f"Variável {var} é do tipo {var_type}. {type(value)} não é suportado.")
+                raise Exception(f"Variável {var} é do tipo {var_type}. {type(value)} não é suportado.")
         else:
             raise Exception(f"Variável {var} não existe.")
-
 
     # Procedimento para ler dados do input do utilizador para uma variável
     @staticmethod
     def _leia(*args):
-        for var in args: # Por cada variável em argumentos
-            if var in LogicEvalInterpreter.symbols: # Caso esteja em símbolos, lê o input
+        # Por cada variável em argumentos
+        for var in args:
+            # Caso esteja em símbolos, lê o input
+            if var in LogicEvalInterpreter.symbols:
                 value = input()
                 try:
-                    value = float(value) # passa para float caso consiga
-                except: # pode ser retirado?
-                    value = value # pode ser retirado?
+                    # passa para float caso consiga
+                    value = float(value)
+                    # da para tirar?
+                except:
+                    # da para tirar?
+                    value = value
                 LogicEvalInterpreter._changeValue(var, value)
-            else: # Não está em símbolos (não foi declarada)
-                raise Exception(f"Variável {var} não existe.") #caso nao queiramos que sejam declaradas variaveis automaticamente
+            # Não está em símbolos (não foi declarada)
+            else:
+                # caso nao queiramos que sejam declaradas variaveis automaticamente
+                raise Exception(f"Variável {var} não existe.")
 
-
-    #TODO: documentar
+    # TODO: documentar
     @staticmethod
     def eval(ast):
         if type(ast) in (float, bool, str):
@@ -210,7 +220,7 @@ class LogicEvalInterpreter:
             return ans
         raise Exception(f"Eval called with weird type: {type(ast)}")
 
-    #TODO: documentar
+    # TODO: documentar
     @staticmethod
     def _eval_dict(ast):
         if "op" in ast:
@@ -230,4 +240,3 @@ class LogicEvalInterpreter:
             raise Exception(f"Variável {ast['var']} não existe.")
         else:
             raise Exception("Weird dict on eval")
-

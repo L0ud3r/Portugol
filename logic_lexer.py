@@ -53,7 +53,7 @@ class LogicLexer:
         return t
 
     # Método com expressão regular capaz de ler o simbolo de lower or equal (leq) (menor ou igual)
-    def t_leq(self,t ):
+    def t_leq(self, t):
         r""""<="""
         return t
 

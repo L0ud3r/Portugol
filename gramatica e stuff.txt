@@ -24,9 +24,3 @@ f -> true | false | not f
 
 var_list -> var | var_list ',' var
 args: € | var_list
-
-
-
-
-
-
