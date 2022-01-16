@@ -112,6 +112,7 @@ class EvalWriter:
         #LogicEvalWriter.eval(args)
         return final_string
 
+
     # Procedimento para declarar uma função
     # (não é executada, apenas armazenada em memória para ser chamada futuramente)
     @staticmethod
