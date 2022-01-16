@@ -1,15 +1,15 @@
-# logic_grammar.py
+# grammar.py
 
 import ply.yacc as pyacc
 from pprint import PrettyPrinter
 
-from logic_lexer import LogicLexer
-from logic_eval_interpreter import LogicEvalInterpreter
-from logic_eval_writer import LogicEvalWriter
+from lexer import Lexer
+from eval_interpreter import EvalInterpreter
+from eval_writer import EvalWriter
 
 
 # Classe referente à gramática utilizada na interpretação do pseudocódigo em Portugol
-class LogicGrammar:
+class Grammar:
 
     # Lista de precedências com as operações por ordem de prioridade
     precedence = (
@@ -255,16 +255,16 @@ class LogicGrammar:
 
     # Método inicializador da classe com os seus atributos declarados
     def __init__(self):
-        self.lexer = LogicLexer()
+        self.lexer = Lexer()
         self.tokens = self.lexer.tokens
         self.yacc = pyacc.yacc(module=self)
 
     # Método de execução do Parse do texto no documento alvo (Exercução do funcionamento do Grammar)
     def parse(self, expression, output):
         ans = self.yacc.parse(lexer=self.lexer.lex, input=expression)
-        # pp = PrettyPrinter()
-        # pp.pprint(ans)
+        pp = PrettyPrinter() # ast
+        pp.pprint(ans) # ast
         if output == "interpreter":
-            return LogicEvalInterpreter.eval(ans)
+            return EvalInterpreter.eval(ans)
         elif output == "writer":
-            return LogicEvalWriter.eval(ans)
+            return EvalWriter.eval(ans)

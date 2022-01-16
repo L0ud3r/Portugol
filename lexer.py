@@ -1,9 +1,9 @@
-# logic_lexer.py
+# lexer.py
 import ply.lex as plex
 
 
 # Classe referente ao lexer e às linguagens utilizadas para ler o ficheiro em pseudocódigo Portugol
-class LogicLexer:
+class Lexer:
 
     # Tokens por divisões
 
