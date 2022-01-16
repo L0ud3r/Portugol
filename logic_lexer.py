@@ -68,10 +68,10 @@ class LogicLexer:
         r"""!="""
         return t
 
-    # Método com expressão regular capaz de ler o simbolo de ler todos os tipos de keywords presentes no lexer
+    # Método com expressão regular capaz de ler todos os tipos de keywords presentes no lexer
     def t_keywords(self, t):
         r"""[a-z]+"""
-        # No caso da palavra não estar nas keywords, estão assume-se como o nome de uma variável
+        # No caso da palavra não estar nas keywords, então assume-se como o nome de uma variável
         t.type = t.value if t.value in self.keywords else "var"
         return t
 
