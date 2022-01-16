@@ -215,7 +215,7 @@ class EvalWriter:
     # Função que faz o eval da AST, recebe a mesma e consoante o tipo de dados é encaminhado para diferentes funções
     @staticmethod
     def eval(ast):
-        print(type(ast))
+        #print(type(ast))
         if type(ast) in (float, bool, str):
             ast2 = str(ast)
             if ast2 == "inicio":

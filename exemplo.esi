@@ -1,15 +1,4 @@
-funcao fatorial(min, max)
-    inteiro: res;
-    res <- min;
-    para i de min+1 ate max faca
-        res <- res * i;
-    fimpara;
-    res;
-fimfuncao;
 
-funcao fatorial(x)
-    fatorial(1, x);
-fimfuncao;
 
 inicio
 
@@ -19,11 +8,7 @@ i <- 5;
 i <- fatorial(i);
 escreva(i);
 
-#inteiro: b;
-#b <- 0;
-
 fim
-eunaosoulido.xptoz@34
 
 
 
