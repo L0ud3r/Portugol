@@ -1,7 +1,0 @@
-inicio
-
-    inteiro: e;
-    e <- fatorial(1,3);
-    escreva(e);
-
-fim

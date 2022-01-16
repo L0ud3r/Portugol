@@ -116,13 +116,13 @@ class EvalWriter:
     # (não é executada, apenas armazenada em memória para ser chamada futuramente)
     @staticmethod
     def _funcao(args):
-        name, varrs, code = args
+        name, vars, code = args
         EvalWriter.c_code += f"int {name}("
 
         i = 0
 
-        for var in varrs:
-            if i == len(varrs)-1:
+        for var in vars:
+            if i == len(vars)-1:
                 EvalWriter.c_code += f"int {var})"
             else:
                 EvalWriter.c_code += f"int {var},"
