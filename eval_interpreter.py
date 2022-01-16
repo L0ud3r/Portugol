@@ -5,7 +5,7 @@ from pprint import PrettyPrinter
 from symbol_table import SymbolTable
 
 
-class EvalInterpreter:
+class   EvalInterpreter:
 
     # Tabela de operadores
     operators = {
@@ -196,9 +196,8 @@ class EvalInterpreter:
                 try:
                     # passa para float caso consiga
                     value = float(value)
-                    # da para tirar?
+                    # Except inútil? Como fixar?
                 except:
-                    # da para tirar?
                     value = value
                 EvalInterpreter._changeValue(var, value)
             # Não está em símbolos (não foi declarada)
