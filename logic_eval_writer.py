@@ -1,8 +1,5 @@
 # logic_eval_writer.py
 
-import math
-from pprint import PrettyPrinter
-from copy import deepcopy
 from symbol_table import SymbolTable
 
 
@@ -10,33 +7,33 @@ class LogicEvalWriter:
 
     # Tabela de operadores
     operators = {
-        "or": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "||" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "and": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "&&" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "xor": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "^" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "not": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "!" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        #
-        "+": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "+" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "-": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "-" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "*": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "*" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "/": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "/" +  str(LogicEvalWriter._return_value_of_var(args[1])),
+        "or": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "||" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "and": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "&&" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "xor": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "^" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "not": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "!" + str(LogicEvalWriter._return_value_of_var(args[1])),
 
-        "<": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "<" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "<=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "<=" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        ">": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + ">" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        ">=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + ">=" +  str(LogicEvalWriter._return_value_of_var(args[1])),
+        "+": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "+" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "-": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "-" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "*": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "*" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "/": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "/" + str(LogicEvalWriter._return_value_of_var(args[1])),
 
-        "=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "==" +  str(LogicEvalWriter._return_value_of_var(args[1])),
-        "!=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "!=" +  str(LogicEvalWriter._return_value_of_var(args[1])),
+        "<": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "<" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "<=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "<=" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        ">": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + ">" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        ">=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + ">=" + str(LogicEvalWriter._return_value_of_var(args[1])),
 
-        "declarar": lambda args: LogicEvalWriter._declarar(*args), #done
+        "=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "==" + str(LogicEvalWriter._return_value_of_var(args[1])),
+        "!=": lambda args: str(LogicEvalWriter._return_value_of_var(args[0])) + "!=" + str(LogicEvalWriter._return_value_of_var(args[1])),
+
+        "declarar": lambda args: LogicEvalWriter._declarar(*args),
         "assign": lambda args: LogicEvalWriter._changeValue(*args), #fix funcoes
-        "escreva": lambda args: LogicEvalWriter._escreva(*args), #done
-        "leia": lambda args: LogicEvalWriter._leia(*args), #done
-        "para": lambda args: LogicEvalWriter._para(*args), #done
-        "enquanto": lambda args: LogicEvalWriter._enquanto(*args), #done
-        "se": lambda args: LogicEvalWriter._se(*args), #done
-        "funcao": lambda args: LogicEvalWriter._funcao(args), #done
-        "call": lambda args: LogicEvalWriter._call(args), #done
+        "escreva": lambda args: LogicEvalWriter._escreva(*args),
+        "leia": lambda args: LogicEvalWriter._leia(*args),
+        "para": lambda args: LogicEvalWriter._para(*args),
+        "enquanto": lambda args: LogicEvalWriter._enquanto(*args),
+        "se": lambda args: LogicEvalWriter._se(*args),
+        "funcao": lambda args: LogicEvalWriter._funcao(args),
+        "call": lambda args: LogicEvalWriter._call(args),
 
     }
     # Symbol Table (Tabela de Símbolos)
@@ -53,15 +50,13 @@ class LogicEvalWriter:
         value2 = LogicEvalWriter._return_value_of_var(value2)
         LogicEvalWriter._write_to_file(value1, op, value2)
 
-
     # Escreve para o c.code os argumentos
     @staticmethod
     def _write_to_file(*args):
         for a in args:
             a = str(a)
             LogicEvalWriter.c_code += a
-        LogicEvalWriter.c_code+=";\n"
-
+        LogicEvalWriter.c_code += ";\n"
 
     # Função para retornar o valor de uma variável
     # Com a implementação da stack e dos vartypes, uma variável é guardada da seguinte forma
@@ -71,7 +66,6 @@ class LogicEvalWriter:
         while isinstance(value, list):
             value = value[-1]
         return value
-
 
     # Procedimento para declarar uma variável
     # Presume-se que declarar uma variável é criá-la na memória mas não atribuir um valor
@@ -97,49 +91,47 @@ class LogicEvalWriter:
                 LogicEvalWriter._assign(arg, vartype, None)
             i += 1
 
-
+    # TODO: fix
     # Função para chamar uma função
     @staticmethod
-    def _call(args): #TODO: fix
+    def _call(args):
         name, values = args
-        finalString = ""
+        final_string = ""
         #LogicEvalWriter.c_code += f"{name}("
-        finalString += f"{name}("
+        final_string += f"{name}("
         i = 0
         for value in values:
             if i < len(values)-1:
                 #LogicEvalWriter.c_code += f"{value},"
-                finalString += f"{value},"
+                final_string += f"{value},"
             else:
                 #LogicEvalWriter.c_code += f"{value});\n\t"
-                finalString += f"{value})"
-            i+=1
+                final_string += f"{value})"
+            i += 1
 
         #LogicEvalWriter.eval(args)
-        return finalString
-
+        return final_string
 
     # Procedimento para declarar uma função
     # (não é executada, apenas armazenada em memória para ser chamada futuramente)
     @staticmethod
     def _funcao(args):
-        name, vars, code = args
+        name, varrs, code = args
         LogicEvalWriter.c_code += f"int {name}("
 
         i = 0
 
-        for var in vars:
-            if i == len(vars)-1:
+        for var in varrs:
+            if i == len(varrs)-1:
                 LogicEvalWriter.c_code += f"int {var})"
             else:
                 LogicEvalWriter.c_code += f"int {var},"
-            i+=1
+            i += 1
 
         LogicEvalWriter.c_code += "{\n\t"
         LogicEvalWriter.eval(code)
         LogicEvalWriter.c_code += f"return {args[-1][-1]['var']};\n\t"
         LogicEvalWriter.c_code += "}\n\t"
-
 
     # Procedimento para escrever no escrever dados (variáveis, números, strings, etc.) no ecrã
     @staticmethod
@@ -159,8 +151,6 @@ class LogicEvalWriter:
             else:
                 LogicEvalWriter.c_code += f'printf("{arg}");\n\t'
 
-
-
     # Procedimento para interpretar o código do ciclo para (for)
     @staticmethod
     def _para(var, lower, higher, code):
@@ -170,9 +160,6 @@ class LogicEvalWriter:
         LogicEvalWriter.eval(code)
         LogicEvalWriter.c_code += "}\n"
 
-
-
-
     # Procedimento para interpretar o código do ciclo enquanto (while)
     @staticmethod
     def _enquanto(*args):
@@ -180,12 +167,11 @@ class LogicEvalWriter:
         LogicEvalWriter.eval(args[1])
         LogicEvalWriter.c_code += "}\n"
 
-
     # Procedimento para interpretar o código da condição se (e senão)
     @staticmethod
     def _se(*args):
-
-        if len(args) == 2: # caso não tenha senão
+        # caso não tenha senão
+        if len(args) == 2:
             LogicEvalWriter.c_code += f"if ({args[0]})" + "{\n"
 
             LogicEvalWriter.eval(args[1])
@@ -210,7 +196,6 @@ class LogicEvalWriter:
         var, value = args
         LogicEvalWriter.c_code += f"{var} = {LogicEvalWriter.eval(value)};\n\t"
 
-
     # Procedimento para ler dados do input do utilizador para uma variável
     @staticmethod
     def _leia(*args):
@@ -226,7 +211,6 @@ class LogicEvalWriter:
                 elif LogicEvalWriter.symbols[arg][0] == "char*":
                     LogicEvalWriter.c_code += "%s"
                 LogicEvalWriter.c_code += f'", &{arg});\n\t'
-
 
     # Função que faz o eval da AST, recebe a mesma e consoante o tipo de dados é encaminhado para diferentes funções
     @staticmethod
@@ -250,7 +234,6 @@ class LogicEvalWriter:
             return ans
         raise Exception(f"Eval called with weird type: {type(ast)}")
 
-
     # Função que faz o eval de um dicionário
     @staticmethod
     def _eval_dict(ast):
@@ -269,4 +252,3 @@ class LogicEvalWriter:
             return ast["var"]
         else:
             raise Exception("Weird dict on eval")
-
